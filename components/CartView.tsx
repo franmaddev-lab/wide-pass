@@ -4,6 +4,7 @@ import Link from 'next/link'
 import ProductArt from './ProductArt'
 import { setQty, useCart } from '@/lib/cart'
 import { FREE_SHIPPING_FROM, formatPrice, resolveLine, shippingFor } from '@/lib/catalog'
+import { charity, charityName } from '@/lib/site'
 
 export default function CartView() {
   const cart = useCart()
@@ -97,6 +98,10 @@ export default function CartView() {
             <dd>{formatPrice(subtotal + shipping)}</dd>
           </div>
         </dl>
+        <p className="mt-3 text-sm font-semibold">
+          ♥ {formatPrice(Math.round((subtotal * charity.percent) / 100))} of this order goes to{' '}
+          {charityName}.
+        </p>
         {shipping > 0 && (
           <p className="mt-3 text-sm text-muted">
             Add {formatPrice(FREE_SHIPPING_FROM - subtotal)} more for free shipping.

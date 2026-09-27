@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import BikeLogo from './BikeLogo'
 import SocialLinks from './SocialLinks'
+import { charity, charityName } from '@/lib/site'
 
 export default function Footer() {
   return (
@@ -44,7 +45,10 @@ export default function Footer() {
         </ul>
         <div className="space-y-3 text-sm">
           <SocialLinks variant="plain" />
-          <p className="text-paper/70">Free shipping on orders over £50. Ride safe, ride seen.</p>
+          <p className="text-paper/70">
+            Free shipping on orders over £50. {charity.percent}% of every sale goes to {charityName}
+            . Ride safe, ride seen.
+          </p>
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-paper/70">
             <li>
               <Link href="/legal/terms" className="hover:text-volt">

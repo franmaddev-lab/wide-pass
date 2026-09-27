@@ -4,6 +4,7 @@ import ItemCard from '@/components/ItemCard'
 import ProductArt from '@/components/ProductArt'
 import HeroSlogan from '@/components/HeroSlogan'
 import RealPhotos from '@/components/RealPhotos'
+import { charity, charityName } from '@/lib/site'
 import {
   COLLECTIONS,
   collections,
@@ -94,6 +95,9 @@ export default async function Home() {
           >
             Pick your slogan
           </Link>
+          <p className="mt-3 max-w-md text-center text-sm text-paper/70">
+            {charity.percent}% of every sale goes to {charityName}.
+          </p>
         </HeroSlogan>
       </section>
 

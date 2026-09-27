@@ -27,3 +27,14 @@ export const business = {
   companyNumber: 'Registered in England and Wales, company no. 00000000',
   vatNumber: '',
 }
+
+// Share of every sale given to charity. Shown on the home page, Us page, cart and footer.
+// TODO: pick the charity. Before naming one, UK law (Charities Act 1992, "commercial
+// participator") needs a written agreement with it, and the page must say how much goes.
+export const charity = {
+  percent: 5, // of the price of every item sold (before shipping)
+  name: '', // e.g. 'RoadPeace'; empty = "a UK cycling charity"
+  url: '',
+}
+
+export const charityName = charity.name || 'a UK cycling charity'

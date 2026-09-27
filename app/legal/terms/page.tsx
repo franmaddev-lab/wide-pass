@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import DraftNotice from '@/components/DraftNotice'
-import { business } from '@/lib/site'
+import { business, charity, charityName } from '@/lib/site'
 
 export const metadata: Metadata = { title: 'Terms — Wide Pass' }
 
@@ -40,6 +40,10 @@ export default function TermsPage() {
         <li>Prices are in pounds sterling and include VAT where it applies.</li>
         <li>Payment is taken by Stripe when you order. We never see or store your card details.</li>
         <li>If we’ve made an obvious pricing mistake, we’ll contact you before shipping.</li>
+        <li>
+          We donate {charity.percent}% of the price of every item sold (not including delivery) to{' '}
+          {charityName}. Donations are made from our revenue at least every three months.
+        </li>
       </ul>
 
       <h2>Delivery, cancelling and returns</h2>

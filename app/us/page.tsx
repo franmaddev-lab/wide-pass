@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { charity, charityName } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Us — Wide Pass',
@@ -184,6 +185,18 @@ export default function UsPage() {
         <p className="mt-4 text-sm text-muted">
           From the <Out href={HIGHWAY_CODE}>Highway Code</Out>, rules 163 and 239, and the hierarchy
           of road users (rule H1).
+        </p>
+      </section>
+
+      <section className="mt-12 rounded-2xl border-2 border-ink bg-volt p-6 sm:p-8">
+        <h2 className="font-display text-2xl uppercase sm:text-3xl">
+          {charity.percent}% goes back to the road
+        </h2>
+        <p className="mt-4 max-w-2xl">
+          {charity.percent}% of the price of everything you buy goes to{' '}
+          {charity.url ? <Out href={charity.url}>{charityName}</Out> : charityName}. So your vest
+          asks drivers for space and helps the people working to make roads safer. Not a bad deal
+          for a t-shirt.
         </p>
       </section>
 
