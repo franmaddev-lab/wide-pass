@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react'
 // The choice is remembered on this device. Remove once a font is picked.
 const FONTS = [
   { name: 'Archivo Black', variable: '' }, // the current font
-  { name: 'Titan One', variable: '--font-titan' },
-  { name: 'Luckiest Guy', variable: '--font-luckiest' },
-  { name: 'Lilita One', variable: '--font-lilita' },
-  { name: 'Bagel Fat One', variable: '--font-bagel' },
   { name: 'Bowlby One', variable: '--font-bowlby' },
+  { name: 'Rubik Black', variable: '--font-rubik' },
+  { name: 'Poppins Black', variable: '--font-poppins' },
+  { name: 'Paytone One', variable: '--font-paytone' },
+  { name: 'Unbounded Black', variable: '--font-unbounded' },
 ]
 const KEY = 'wp-trial-font'
 
