@@ -28,6 +28,7 @@ const HERO_IDS = [
   'waiting-at-home',
   'somebodys',
   'home-for-dinner',
+  'kids-ride-here',
   'powered-by',
   'a-person',
 ]

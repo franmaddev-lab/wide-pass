@@ -340,7 +340,28 @@ export const slogans: Slogan[] = [
     },
   },
   { id: 'loves-me', text: 'Somebody loves me. Drive like it.', collection: 'family' },
-  { id: 'kids-ride-here', text: 'Drive like your kids ride here', collection: 'family' },
+  {
+    id: 'kids-ride-here',
+    text: 'Drive like your {} rides here',
+    collection: 'family',
+    personalise: {
+      label: 'Who rides here?',
+      default: 'kid',
+      suggestions: ['kid', 'mum', 'dad', 'nonna', 'cat', 'sister', 'brother'],
+      more: [
+        'daughter',
+        'son',
+        'grandma',
+        'grandad',
+        'wife',
+        'husband',
+        'partner',
+        'best friend',
+        'dog',
+      ],
+      maxLength: 12,
+    },
+  },
 
   // Serious
   { id: 'pass-wide', text: 'Pass wide. Pass slow.', collection: 'serious' },
