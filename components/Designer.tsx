@@ -90,20 +90,17 @@ export default function Designer({
             sign={slogan.sign}
             className="mx-auto aspect-square h-[20vh] max-w-md md:h-auto md:w-full"
           />
-          <ShareButton
-            path={shareHref({
-              slogan: slogan.id,
-              custom: slogan.personalise && cleaned ? cleaned : undefined,
-              garment: garment.id,
-            })}
-            text={`“${text}” Make yours:`}
-            className="absolute top-2 left-2 md:top-3 md:left-3"
-          />
-          <FavouriteButton
-            item={`slogan:${slogan.id}`}
-            label={`“${sloganTemplate(slogan)}”`}
-            className="absolute top-2 right-2 md:top-3 md:right-3"
-          />
+          <div className="absolute top-2 right-2 flex gap-2 md:top-3 md:right-3">
+            <FavouriteButton item={`slogan:${slogan.id}`} label={`“${sloganTemplate(slogan)}”`} />
+            <ShareButton
+              path={shareHref({
+                slogan: slogan.id,
+                custom: slogan.personalise && cleaned ? cleaned : undefined,
+                garment: garment.id,
+              })}
+              text={`“${text}” Make yours:`}
+            />
+          </div>
         </div>
       </div>
 
