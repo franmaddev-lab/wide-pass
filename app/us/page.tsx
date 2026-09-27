@@ -11,10 +11,10 @@ const DFT_2025 =
   'https://www.gov.uk/government/statistics/reported-road-casualties-great-britain-vulnerable-road-user-factsheets/reported-road-casualties-great-britain-pedal-cycle-factsheet-2025'
 const DFT_2024 =
   'https://www.gov.uk/government/statistics/reported-road-casualties-great-britain-pedal-cyclist-factsheet-2024/reported-road-casualties-in-great-britain-pedal-cycle-factsheet-2024'
-const WHO =
-  'https://www.who.int/publications/i/item/cyclist-safety-an-information-resource-for-decision-makers-and-practitioners'
-const MONASH =
-  'https://lens.monash.edu/@technology/2019/03/27/1374089/dangerous-dehumanisation-of-cyclists'
+const NEAR_MISS =
+  'https://westminsterresearch.westminster.ac.uk/item/97129/investigating-the-rates-and-impacts-of-near-misses-and-related-incidents-among-uk-cyclists'
+const ATTITUDES =
+  'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/724855/british-social-attitudes-survey-2017.pdf'
 const HIGHWAY_CODE = 'https://www.gov.uk/guidance/the-highway-code/using-the-road-159-to-203'
 const HIGHWAY_CODE_2022 =
   'https://www.gov.uk/government/news/the-highway-code-8-changes-you-need-to-know-from-29-january-2022'
@@ -40,16 +40,16 @@ const NUMBERS = [
     href: DFT_2024,
   },
   {
-    big: '41,000',
-    what: 'cyclists killed on the world’s roads every year.',
-    source: 'World Health Organization',
-    href: WHO,
+    big: '1 a week',
+    what: '“very scary” near miss for the average UK rider. Close passes are almost a third of them.',
+    source: 'Near Miss Project, University of Westminster',
+    href: NEAR_MISS,
   },
   {
-    big: '55%',
-    what: 'of non-cyclists in one study rated cyclists as “not completely human”.',
-    source: 'Monash University & QUT, 2019',
-    href: MONASH,
+    big: '62%',
+    what: 'of adults in England say the roads are too dangerous for them to cycle on.',
+    source: 'British Social Attitudes survey, DfT',
+    href: ATTITUDES,
   },
   {
     big: '1.5 m',
@@ -132,11 +132,12 @@ export default function UsPage() {
         <h2 className="font-display text-2xl uppercase sm:text-3xl">Why print it on a vest?</h2>
         <div className="mt-4 max-w-2xl space-y-4">
           <p>
-            Because apparently “human being” wasn’t clear enough. In a{' '}
-            <Out href={MONASH}>2019 study</Out>, 55% of non-cyclists rated cyclists as not
-            completely human. People who thought that way were more likely to say they’d
-            deliberately driven close to a cyclist, cut one off or blocked one.
+            Because “cyclist” clearly isn’t doing the job. On UK roads the average rider has a “very
+            scary” near miss about <Out href={NEAR_MISS}>once a week</Out>, and close passes make up
+            almost a third of them. No wonder <Out href={ATTITUDES}>62% of adults in England</Out>{' '}
+            say the roads are too dangerous for them to cycle on.
           </p>
+          <p>It’s easy to squeeze past a cyclist. It’s much harder to squeeze past your sister.</p>
           <p>
             So we print the human part in capital letters. <strong>I COULD BE YOUR SISTER.</strong>{' '}
             It’s a joke. It’s also true. Every rider is somebody’s someone, and we’d like them all

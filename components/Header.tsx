@@ -16,11 +16,11 @@ export default function Header() {
           <Link href="/slogans" className="hover:underline">
             Slogans
           </Link>
-          <Link href="/suggest" className="hover:underline">
-            You
-          </Link>
           <Link href="/us" className="hover:underline">
             Us
+          </Link>
+          <Link href="/suggest" className="hover:underline">
+            You
           </Link>
           <FavouritesLink />
           <CartLink />
