@@ -136,7 +136,8 @@ export function getGarment(id: string | undefined) {
 export type Personalise = {
   label: string // question shown above the input
   default: string
-  suggestions: string[]
+  suggestions: string[] // quick picks shown straight away
+  more?: string[] // extra ideas behind a "See more" link
   maxLength: number
 }
 
@@ -159,6 +160,7 @@ export const slogans: Slogan[] = [
       label: 'Who could you be?',
       default: 'sister',
       suggestions: ['sister', 'brother', 'mum', 'dad', 'daughter', 'son', 'grandma', 'best friend'],
+      more: ['grandpa', 'nonna', 'nonno', 'aunt', 'uncle', 'cousin', 'niece', 'nephew', 'twin', 'wife', 'husband', 'partner', 'girlfriend', 'boyfriend', 'stepmum', 'stepdad', 'godmother', 'bestie', 'neighbour', 'teacher', 'nurse', 'doctor', 'colleague', 'barista', 'postie', 'coach', 'first love', 'childhood friend'],
       maxLength: 16,
     },
   },
@@ -170,6 +172,7 @@ export const slogans: Slogan[] = [
       label: 'Who’s waiting for you?',
       default: 'Someone',
       suggestions: ['Someone', 'My family', 'My kid', 'My dog', 'My cat'],
+      more: ['My mum', 'My dad', 'My partner', 'My wife', 'My husband', 'My twins', 'My nonna', 'My flatmate', 'My goldfish', 'My hamster', 'My plants', 'My sourdough', 'My sofa', 'Dinner'],
       maxLength: 14,
     },
   },
@@ -181,6 +184,7 @@ export const slogans: Slogan[] = [
       label: 'Whose are you?',
       default: 'mum',
       suggestions: ['mum', 'dad', 'kid', 'sister', 'brother', 'grandma', 'whole world'],
+      more: ['nonna', 'nonno', 'grandad', 'auntie', 'uncle', 'cousin', 'bestie', 'partner', 'other half', 'neighbour', 'teacher', 'hero', 'favourite', 'sunshine'],
       maxLength: 14,
     },
   },
@@ -192,6 +196,7 @@ export const slogans: Slogan[] = [
       label: 'Who wants you home?',
       default: 'Mum',
       suggestions: ['Mum', 'Nonna', 'My kids', 'My partner', 'The dog'],
+      more: ['Dad', 'Grandma', 'Grandad', 'Nonno', 'My wife', 'My husband', 'My twins', 'My flatmate', 'The cat', 'The kids', 'Everyone'],
       maxLength: 12,
     },
   },
@@ -219,6 +224,7 @@ export const slogans: Slogan[] = [
       label: 'What powers you?',
       default: 'pasta',
       suggestions: ['pasta', 'pizza', 'coffee', 'cake', 'croissants', 'spite'],
+      more: ['espresso', 'tiramisù', 'risotto', 'carbonara', 'gelato', 'biscotti', 'porridge', 'bananas', 'flapjacks', 'tea', 'bacon rolls', 'noodles', 'podcasts', 'sunshine', 'stubbornness', 'love'],
       maxLength: 14,
     },
   },
@@ -230,6 +236,7 @@ export const slogans: Slogan[] = [
       label: 'What do you brake for?',
       default: 'gelato',
       suggestions: ['gelato', 'espresso', 'cats', 'bakeries', 'sunsets'],
+      more: ['pizza', 'cake', 'coffee', 'ice cream', 'croissants', 'pastries', 'dogs', 'ducks', 'hedgehogs', 'squirrels', 'puddles', 'views', 'children', 'red lights'],
       maxLength: 12,
     },
   },
@@ -265,6 +272,7 @@ export const slogans: Slogan[] = [
       label: 'Who’s watching?',
       default: 'nonna',
       suggestions: ['nonna', 'mum', 'dad', 'dog', 'kids', 'grandpa'],
+      more: ['granny', 'grandad', 'nonno', 'auntie', 'cat', 'bestie', 'wife', 'husband', 'boss', 'teacher', 'neighbour', 'camera'],
       maxLength: 12,
     },
   },
@@ -276,6 +284,7 @@ export const slogans: Slogan[] = [
       label: 'What would you ride for?',
       default: 'gelato',
       suggestions: ['gelato', 'pizza', 'croissants', 'beer', 'tacos', 'love'],
+      more: ['coffee', 'cake', 'cheese', 'crisps', 'biscuits', 'ice cream', 'noodles', 'sushi', 'donuts', 'snacks', 'views', 'hugs'],
       maxLength: 12,
     },
   },

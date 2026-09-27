@@ -46,6 +46,7 @@ export default function Designer({
   const [colorName, setColorName] = useState(getGarment(initialGarment)!.colors[0].name)
   const [size, setSize] = useState('')
   const [status, setStatus] = useState<'idle' | 'added' | 'no-size'>('idle')
+  const [showMore, setShowMore] = useState(false)
 
   const garment = getGarment(garmentId)!
   const color = garment.colors.find((c) => c.name === colorName) ?? garment.colors[0]
@@ -122,18 +123,35 @@ export default function Designer({
                 Letters, numbers and simple punctuation only.
               </p>
             )}
-            <div className="mt-2 flex flex-wrap gap-2">
-              {slogan.personalise.suggestions.map((s) => (
+            <div id="word-ideas" className="mt-2 flex flex-wrap gap-2">
+              {[
+                ...slogan.personalise.suggestions,
+                ...(showMore ? (slogan.personalise.more ?? []) : []),
+              ].map((s) => (
                 <button
                   key={s}
                   type="button"
+                  aria-pressed={cleaned === s}
                   onClick={() => change(() => setCustom(s))}
-                  className="rounded-full border-2 border-ink bg-white px-3 py-1 text-sm font-semibold hover:bg-volt"
+                  className={`rounded-full border-2 border-ink px-3 py-1 text-sm font-semibold ${
+                    cleaned === s ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
+                  }`}
                 >
                   {s}
                 </button>
               ))}
             </div>
+            {slogan.personalise.more && (
+              <button
+                type="button"
+                onClick={() => setShowMore((v) => !v)}
+                aria-expanded={showMore}
+                aria-controls="word-ideas"
+                className="mt-3 text-sm font-semibold underline"
+              >
+                {showMore ? 'See fewer' : `See more (${slogan.personalise.more.length})`}
+              </button>
+            )}
           </div>
         )}
 

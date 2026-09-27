@@ -1,14 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import ItemCard from '@/components/ItemCard'
+import SloganCard from '@/components/SloganCard'
 import { likeCounts } from '@/lib/store'
 import {
   COLLECTIONS,
   collections,
-  collectionTag,
-  designHref,
-  formatPrice,
-  garments,
   getGarment,
   sloganTemplate,
   sloganText,
@@ -41,8 +37,6 @@ export default async function SlogansPage({
     typeof sp.sort === 'string' && sp.sort in SORTS ? (sp.sort as Sort) : 'featured'
   // Arriving from /shop with a garment already chosen
   const garment = getGarment(typeof sp.garment === 'string' ? sp.garment : undefined)
-  // Without a chosen garment, preview every slogan on the hi-vis vest
-  const shown = garment ?? getGarment('vest')!
   const likes = await likeCounts().catch(() => ({}) as Record<string, number>)
   const likesOf = (id: string) => likes[`slogan:${id}`] ?? 0
 
@@ -68,7 +62,6 @@ export default async function SlogansPage({
     const str = p.toString()
     return str ? `/slogans?${str}` : '/slogans'
   }
-  const from = Math.min(...garments.map((g) => g.price))
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -81,7 +74,7 @@ export default async function SlogansPage({
       <p className="mt-2 max-w-xl text-asphalt">
         {collection
           ? collections[collection].blurb
-          : 'Choose a slogan, then put it on a hi-vis vest or a tee. Some you can personalise.'}
+          : 'Choose a slogan, then swipe to see it on every piece of gear. Some you can personalise.'}
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
@@ -158,29 +151,9 @@ export default async function SlogansPage({
       </div>
 
       <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {list.map((s) => {
-          const c = shown.colors[0]
-          return (
-            <ItemCard
-              key={s.id}
-              href={designHref({ slogan: s.id, garment: garment?.id })}
-              art={shown.art}
-              text={sloganText(s)}
-              color={c.hex}
-              ink={c.ink}
-              sign={s.sign}
-              tag={{
-                label: collections[s.collection].label,
-                className: collectionTag[s.collection],
-              }}
-              title={`“${sloganTemplate(s)}”`}
-              subtitle={garment ? garment.name : 'Tank, tee, hi-vis & more'}
-              price={garment ? formatPrice(garment.price) : `from ${formatPrice(from)}`}
-              favourite={`slogan:${s.id}`}
-              likes={likesOf(s.id)}
-            />
-          )
-        })}
+        {list.map((s) => (
+          <SloganCard key={s.id} sloganId={s.id} likes={likesOf(s.id)} only={garment?.id} />
+        ))}
       </div>
     </div>
   )

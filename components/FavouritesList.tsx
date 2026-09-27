@@ -2,21 +2,9 @@
 
 import Link from 'next/link'
 import ItemCard from './ItemCard'
+import SloganCard from './SloganCard'
 import { useFavourites } from '@/lib/favourites'
-import {
-  collections,
-  collectionTag,
-  designHref,
-  formatPrice,
-  garments,
-  getGadget,
-  getSlogan,
-  sloganTemplate,
-  sloganText,
-} from '@/lib/catalog'
-
-const vest = garments.find((g) => g.id === 'vest')!
-const from = Math.min(...garments.map((g) => g.price))
+import { collections, collectionTag, formatPrice, getGadget, getSlogan } from '@/lib/catalog'
 
 export default function FavouritesList() {
   const favourites = useFavourites()
@@ -24,25 +12,7 @@ export default function FavouritesList() {
   const cards = favourites.flatMap((key) => {
     const [kind, id] = key.split(':')
     if (kind === 'slogan') {
-      const s = getSlogan(id)
-      if (!s) return []
-      const c = vest.colors[0]
-      return [
-        <ItemCard
-          key={key}
-          href={designHref({ slogan: s.id })}
-          art="vest"
-          text={sloganText(s)}
-          color={c.hex}
-          ink={c.ink}
-          sign={s.sign}
-          tag={{ label: collections[s.collection].label, className: collectionTag[s.collection] }}
-          title={`“${sloganTemplate(s)}”`}
-          subtitle="Tank, tee, hi-vis & more"
-          price={`from ${formatPrice(from)}`}
-          favourite={key}
-        />,
-      ]
+      return getSlogan(id) ? [<SloganCard key={key} sloganId={id} />] : []
     }
     const g = kind === 'gadget' ? getGadget(id) : undefined
     if (!g) return []
