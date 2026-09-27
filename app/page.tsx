@@ -10,6 +10,7 @@ import {
   collectionTag,
   designHref,
   formatPrice,
+  garments,
   getGarment,
   getSlogan,
   sloganText,
@@ -181,9 +182,14 @@ export default async function Home() {
       <RealPhotos className="mx-auto max-w-6xl px-4 pt-14" />
 
       <section className="mx-auto max-w-6xl px-4 pt-14">
-        <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
-          Pick your message
-        </h2>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
+            Pick your message
+          </h2>
+          <Link href="/slogans" className="font-semibold underline">
+            See all slogans
+          </Link>
+        </div>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {COLLECTIONS.map((c) => {
             const t = TILES[c]
@@ -210,6 +216,38 @@ export default async function Home() {
               </Link>
             )
           })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pt-14">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
+            Pick your gear
+          </h2>
+          <Link href="/shop" className="font-semibold underline">
+            Browse gear
+          </Link>
+        </div>
+        <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-6">
+          {garments.map((g) => (
+            <Link
+              key={g.id}
+              href={`/slogans?garment=${g.id}`}
+              className="flex flex-col items-center gap-2 rounded-2xl border-2 border-ink bg-white p-3 text-center transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] sm:p-5"
+            >
+              <ProductArt
+                art={g.art}
+                slogan=""
+                color={g.colors[0].hex}
+                ink={g.colors[0].ink}
+                className="size-16 sm:size-28"
+              />
+              <span className="font-display text-sm leading-tight uppercase sm:text-xl">
+                {g.name}
+              </span>
+              <span className="text-sm font-bold">{formatPrice(g.price)}</span>
+            </Link>
+          ))}
         </div>
       </section>
     </>
