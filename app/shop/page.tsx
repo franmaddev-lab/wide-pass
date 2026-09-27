@@ -71,6 +71,7 @@ export default function ShopPage() {
             title={g.name}
             subtitle={`“${g.slogan}”`}
             price={formatPrice(g.price)}
+            favourite={`gadget:${g.slug}`}
           />
         ))}
       </div>

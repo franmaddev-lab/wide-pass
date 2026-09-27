@@ -26,6 +26,16 @@ export default function Footer() {
               Gadgets
             </Link>
           </li>
+          <li>
+            <Link href="/suggest" className="hover:text-volt">
+              Suggest &amp; vote
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className="hover:text-volt">
+              Why we do this
+            </Link>
+          </li>
         </ul>
         <p className="text-sm text-paper/70">
           Free shipping on orders over €50. Ride safe, ride seen.

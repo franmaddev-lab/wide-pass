@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import FavouriteButton from './FavouriteButton'
 import ProductArt from './ProductArt'
 import { addToCart } from '@/lib/cart'
 import {
@@ -93,7 +94,7 @@ export default function Designer({
   return (
     <div className="grid gap-10 md:grid-cols-2">
       <div className="md:sticky md:top-20 md:self-start">
-        <div className="rounded-2xl border-2 border-ink bg-white p-8">
+        <div className="relative rounded-2xl border-2 border-ink bg-white p-8">
           <ProductArt
             art={garment.art}
             slogan={text}
@@ -101,6 +102,11 @@ export default function Designer({
             ink={color.ink}
             sign={slogan.sign}
             className="mx-auto aspect-square w-full max-w-md"
+          />
+          <FavouriteButton
+            item={`slogan:${slogan.id}`}
+            label={`“${sloganTemplate(slogan)}”`}
+            className="absolute top-3 right-3"
           />
         </div>
         <div className="mt-4 flex items-baseline justify-between gap-4">

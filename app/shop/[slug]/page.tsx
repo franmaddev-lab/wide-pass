@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import FavouriteButton from '@/components/FavouriteButton'
 import ProductPicker from '@/components/ProductPicker'
 import { formatPrice, gadgets, getGadget } from '@/lib/catalog'
 
@@ -39,7 +40,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <div className="mt-4 grid gap-10 md:grid-cols-2">
         <ProductPicker product={product}>
-          <h1 className="font-display text-4xl uppercase">{product.name}</h1>
+          <div className="flex items-start justify-between gap-4">
+            <h1 className="font-display text-4xl uppercase">{product.name}</h1>
+            <FavouriteButton item={`gadget:${product.slug}`} label={product.name} />
+          </div>
           <p className="mt-2 text-xl">“{product.slogan}”</p>
           <p className="mt-4 text-2xl font-bold">{formatPrice(product.price)}</p>
           <p className="mt-4 text-asphalt">{product.description}</p>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ItemCard from '@/components/ItemCard'
+import { likeCounts } from '@/lib/store'
 import {
   COLLECTIONS,
   collections,
@@ -17,6 +18,15 @@ import {
 export const metadata: Metadata = { title: 'Slogans — Wide Pass' }
 
 const vest = garments.find((g) => g.id === 'vest')!
+const position = new Map(slogans.map((s, i) => [s.id, i]))
+
+const SORTS = {
+  featured: 'Featured',
+  popular: 'Most popular',
+  new: 'Newest',
+  az: 'A–Z',
+} as const
+type Sort = keyof typeof SORTS
 
 export default async function SlogansPage({
   searchParams,
@@ -27,15 +37,28 @@ export default async function SlogansPage({
   const collection = COLLECTIONS.find((c) => c === sp.collection) as Collection | undefined
   const query = typeof sp.q === 'string' ? sp.q.trim().slice(0, 60) : ''
   const q = query.toLowerCase()
+  const sort: Sort =
+    typeof sp.sort === 'string' && sp.sort in SORTS ? (sp.sort as Sort) : 'featured'
+  const likes = await likeCounts().catch(() => ({}) as Record<string, number>)
+  const likesOf = (id: string) => likes[`slogan:${id}`] ?? 0
+
   const list = slogans.filter(
     (s) =>
       (!collection || s.collection === collection) &&
       (!q || sloganTemplate(s).toLowerCase().includes(q))
   )
-  const link = (c?: Collection) => {
+  const pos = (id: string) => position.get(id) ?? 0
+  if (sort === 'popular')
+    list.sort((a, b) => likesOf(b.id) - likesOf(a.id) || pos(a.id) - pos(b.id))
+  // Slogans are appended to the catalogue as they're added, so later = newer
+  if (sort === 'new') list.sort((a, b) => pos(b.id) - pos(a.id))
+  if (sort === 'az') list.sort((a, b) => sloganText(a).localeCompare(sloganText(b)))
+
+  const link = (next: { c?: Collection; sort?: Sort }) => {
     const p = new URLSearchParams()
-    if (c) p.set('collection', c)
+    if (next.c) p.set('collection', next.c)
     if (query) p.set('q', query)
+    if (next.sort && next.sort !== 'featured') p.set('sort', next.sort)
     const str = p.toString()
     return str ? `/slogans?${str}` : '/slogans'
   }
@@ -57,7 +80,7 @@ export default async function SlogansPage({
         {[undefined, ...COLLECTIONS].map((c) => (
           <Link
             key={c ?? 'all'}
-            href={link(c)}
+            href={link({ c, sort })}
             className={`rounded-full border-2 border-ink px-4 py-1.5 text-sm font-semibold ${
               c === collection ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
             }`}
@@ -65,10 +88,17 @@ export default async function SlogansPage({
             {c ? collections[c].label : 'Everything'}
           </Link>
         ))}
+        <Link
+          href="/favourites"
+          className="rounded-full border-2 border-ink bg-white px-4 py-1.5 text-sm font-semibold hover:bg-signal"
+        >
+          ♥ My favourites
+        </Link>
       </div>
 
       <form action="/slogans" className="mt-4 flex max-w-xl gap-2">
         {collection && <input type="hidden" name="collection" value={collection} />}
+        {sort !== 'featured' && <input type="hidden" name="sort" value={sort} />}
         <label htmlFor="q" className="sr-only">
           Search slogans
         </label>
@@ -88,25 +118,42 @@ export default async function SlogansPage({
         </button>
       </form>
 
-      <p className="mt-4 text-sm text-muted">
-        {list.length} {list.length === 1 ? 'slogan' : 'slogans'}
-        {query && (
-          <>
-            {' '}
-            for “{query}” ·{' '}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted">
+          {list.length} {list.length === 1 ? 'slogan' : 'slogans'}
+          {query && (
+            <>
+              {' '}
+              for “{query}” ·{' '}
+              <Link
+                href={collection ? `/slogans?collection=${collection}` : '/slogans'}
+                className="underline"
+              >
+                clear
+              </Link>
+            </>
+          )}
+        </p>
+        <nav aria-label="Sort slogans" className="flex flex-wrap items-center gap-1 text-sm">
+          <span className="mr-1 font-semibold">Sort:</span>
+          {(Object.keys(SORTS) as Sort[]).map((key) => (
             <Link
-              href={collection ? `/slogans?collection=${collection}` : '/slogans'}
-              className="underline"
+              key={key}
+              href={link({ c: collection, sort: key })}
+              aria-current={key === sort ? 'true' : undefined}
+              className={`rounded-full px-3 py-1 font-semibold ${
+                key === sort ? 'bg-ink text-volt' : 'hover:bg-volt'
+              }`}
             >
-              clear
+              {SORTS[key]}
             </Link>
-          </>
-        )}
-      </p>
+          ))}
+        </nav>
+      </div>
 
       <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {list.map((s, i) => {
-          const c = vest.colors[i % vest.colors.length]
+        {list.map((s) => {
+          const c = vest.colors[pos(s.id) % vest.colors.length]
           return (
             <ItemCard
               key={s.id}
@@ -124,6 +171,8 @@ export default async function SlogansPage({
               title={`“${sloganTemplate(s)}”`}
               subtitle="Vest or tee"
               price={`from ${formatPrice(from)}`}
+              favourite={`slogan:${s.id}`}
+              likes={likesOf(s.id)}
             />
           )
         })}

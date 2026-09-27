@@ -23,13 +23,15 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
 | Page | What it does |
 | --- | --- |
 | `/` | Hero, the two ways to shop, popular designs, the four collections |
-| `/slogans` | All slogans with search (`?q=`), filter with `?collection=family\|serious\|funny\|signs` |
+| `/slogans` | All slogans with search (`?q=`), sorting (`?sort=popular\|new\|az`), filter with `?collection=family\|serious\|funny\|signs` |
 | `/shop` | Vest and tee (each opens the designer), plus ready-made gadgets |
 | `/design` | Designer: gear, slogan, personalised text, colour, size. Presets via `?garment=vest&slogan=powered-by&text=coffee` |
 | `/shop/[slug]` | Gadget page (bell, stickers, tote…) |
 | `/cart` | Cart (saved in the browser's localStorage), free shipping over €50 |
 | `/checkout` | Shipping form; a server action re-checks and re-prices every line |
 | `/about` | The mission |
+| `/suggest` | Visitors suggest slogans and vote (one vote per browser); sort by most votes or newest |
+| `/favourites` | Everything the visitor has hearted (saved in their browser) |
 
 - **Garments, slogans and gadgets:** edit `lib/catalog.ts`. Prices are in euro cents.
   A slogan with `{}` in its text and a `personalise` block gets a fill-in-the-blank.
@@ -37,6 +39,24 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
   `lib/slogan-library.ts`. Add a line to a list and it appears on the site.
 - **Product images:** `components/ProductArt.tsx` draws each item with its slogan
   (or road sign) as SVG, so no photos are needed yet.
+
+## Votes, suggestions and favourite counts
+
+These need a small shared database. The app uses **Upstash Redis** over its REST API
+(no extra packages):
+
+1. In Vercel, open the project → **Storage** (or **Integrations**) → add **Upstash for Redis**
+   and connect it to this project. It sets `KV_REST_API_URL` and `KV_REST_API_TOKEN`
+   (`UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` also work).
+2. Redeploy.
+
+Without it the site still works, but ideas, votes and "Most popular" counts live in memory
+and reset whenever the server restarts (the suggest page says so).
+
+**Moderation:** set an `ADMIN_KEY` environment variable, then open
+`/suggest?key=<ADMIN_KEY>` to get a Delete button on every idea. Ideas are checked for
+length, characters and a short list of rude words, and each browser can post 5 a day.
+To turn a winning idea into a product, add it to `lib/slogan-library.ts`.
 
 ## Not done yet
 
