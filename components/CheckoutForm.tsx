@@ -47,7 +47,7 @@ export default function CheckoutForm({ payments }: { payments: boolean }) {
     return (
       <p className="mt-8">
         Your cart is empty.{' '}
-        <Link href="/shop" className="font-semibold underline">
+        <Link href="/slogans" className="font-semibold underline">
           Back to the shop
         </Link>
       </p>

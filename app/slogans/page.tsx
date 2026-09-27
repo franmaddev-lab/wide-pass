@@ -16,6 +16,14 @@ export const metadata: Metadata = { title: 'Slogans — Wide Pass' }
 
 const position = new Map(slogans.map((s, i) => [s.id, i]))
 
+// "Customisable" sits with the collections as a filter: slogans with a blank to fill in
+const CUSTOM = 'custom'
+const CUSTOM_LABEL = 'Customisable'
+const CUSTOM_BLURB = 'Fill in the blank with your own word: “I could be your ___”.'
+type Filter = Collection | typeof CUSTOM
+const FILTERS: Filter[] = [CUSTOM, ...COLLECTIONS]
+const filterLabel = (f: Filter) => (f === CUSTOM ? CUSTOM_LABEL : collections[f].label)
+
 const SORTS = {
   featured: 'Featured',
   popular: 'Most popular',
@@ -30,7 +38,7 @@ export default async function SlogansPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const sp = await searchParams
-  const collection = COLLECTIONS.find((c) => c === sp.collection) as Collection | undefined
+  const collection = FILTERS.find((c) => c === sp.collection)
   const query = typeof sp.q === 'string' ? sp.q.trim().slice(0, 60) : ''
   const q = query.toLowerCase()
   const sort: Sort =
@@ -42,7 +50,8 @@ export default async function SlogansPage({
 
   const list = slogans.filter(
     (s) =>
-      (!collection || s.collection === collection) &&
+      (!collection ||
+        (collection === CUSTOM ? Boolean(s.personalise) : s.collection === collection)) &&
       (!q || sloganTemplate(s).toLowerCase().includes(q))
   )
   const pos = (id: string) => position.get(id) ?? 0
@@ -52,7 +61,7 @@ export default async function SlogansPage({
   if (sort === 'new') list.sort((a, b) => pos(b.id) - pos(a.id))
   if (sort === 'az') list.sort((a, b) => sloganText(a).localeCompare(sloganText(b)))
 
-  const link = (next: { c?: Collection; sort?: Sort; q?: string }) => {
+  const link = (next: { c?: Filter; sort?: Sort; q?: string }) => {
     const p = new URLSearchParams()
     const search = next.q ?? query
     if (next.c) p.set('collection', next.c)
@@ -68,26 +77,19 @@ export default async function SlogansPage({
       <p className="text-sm font-bold tracking-widest uppercase">
         {garment ? `Pick your message for your ${garment.name.toLowerCase()}` : 'Pick your message'}
       </p>
-      <h1 className="mt-1 font-display text-4xl uppercase">
-        {collection ? collections[collection].label : 'Slogans'}
+      <h1 className="mt-1 font-display text-3xl uppercase min-[360px]:text-4xl">
+        {collection ? filterLabel(collection) : 'Slogans'}
       </h1>
       <p className="mt-2 max-w-xl text-asphalt">
-        {collection
-          ? collections[collection].blurb
-          : 'Choose the words, then what to print them on. Swipe a card to see it on all the gear.'}{' '}
-        {!garment && (
-          <>
-            Prefer to start with the gear?{' '}
-            <Link href="/shop" className="font-semibold underline">
-              Browse gear
-            </Link>
-            .
-          </>
-        )}
+        {collection === CUSTOM
+          ? CUSTOM_BLURB
+          : collection
+            ? collections[collection].blurb
+            : 'Choose the words, then what to print them on. Swipe a card to see it on all the gear.'}
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
-        {[undefined, ...COLLECTIONS].map((c) => (
+        {[undefined, ...FILTERS].map((c) => (
           <Link
             key={c ?? 'all'}
             href={link({ c, sort })}
@@ -95,7 +97,7 @@ export default async function SlogansPage({
               c === collection ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
             }`}
           >
-            {c ? collections[c].label : 'Everything'}
+            {c ? filterLabel(c) : 'Everything'}
           </Link>
         ))}
         <Link

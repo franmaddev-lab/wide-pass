@@ -202,12 +202,9 @@ export default function Designer({
           </div>
         </div>
 
-        <div className="flex items-start gap-3 md:block md:space-y-7">
-          <div className="shrink-0">
-            <Label>
-              Colour: <span className="md:hidden">{color.name.replace('Hi-vis ', '')}</span>
-              <span className="hidden md:inline">{color.name}</span>
-            </Label>
+        <div className="space-y-4 md:space-y-7">
+          <div>
+            <Label>Colour: {color.name}</Label>
             <div className="mt-1.5 flex flex-wrap items-center gap-2 md:mt-2">
               {garment.colors.map((c) => (
                 <button

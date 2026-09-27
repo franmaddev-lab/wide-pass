@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import SocialLinks from './SocialLinks'
-import { garments } from '@/lib/catalog'
 
 export default function Footer() {
   return (
@@ -13,13 +12,16 @@ export default function Footer() {
           </p>
         </div>
         <ul className="space-y-1 text-sm">
-          {garments.map((g) => (
-            <li key={g.id}>
-              <Link href={`/slogans?garment=${g.id}`} className="hover:text-volt">
-                {g.name}
-              </Link>
-            </li>
-          ))}
+          <li>
+            <Link href="/slogans" className="hover:text-volt">
+              All slogans
+            </Link>
+          </li>
+          <li>
+            <Link href="/slogans?collection=custom" className="hover:text-volt">
+              Customisable
+            </Link>
+          </li>
           <li>
             <Link href="/suggest" className="hover:text-volt">
               Suggest &amp; vote

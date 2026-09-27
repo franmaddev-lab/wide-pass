@@ -17,7 +17,7 @@ export default function CartView() {
       <div className="mt-8 rounded-2xl border-2 border-dashed border-ink p-10 text-center">
         <p className="text-lg">Your cart is empty. The road is not.</p>
         <Link
-          href="/shop"
+          href="/slogans"
           className="mt-4 inline-block rounded-full border-2 border-ink bg-volt px-6 py-3 font-bold"
         >
           Find your message

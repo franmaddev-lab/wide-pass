@@ -13,7 +13,6 @@ const LINKS = [
   { href: designHref({ slogan: 'i-could-be-your' }), label: 'Make yours: “I could be your ___”' },
   { href: '/slogans?sort=popular', label: 'Most loved designs' },
   { href: '/slogans', label: `All ${slogans.length} slogans` },
-  { href: '/shop', label: 'Pick your gear' },
   { href: '/suggest', label: 'Suggest & vote on new slogans' },
   { href: '/us', label: 'Why we do this' },
 ]

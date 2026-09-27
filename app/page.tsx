@@ -10,7 +10,6 @@ import {
   collectionTag,
   designHref,
   formatPrice,
-  garments,
   getGarment,
   getSlogan,
   sloganText,
@@ -88,23 +87,12 @@ export default async function Home() {
             Hi-vis vests, tees, rain jackets and more, with slogans (funny, serious, or your own
             words) that remind drivers there’s a person on that bike.
           </p>
-          <div className="mt-8 inline-flex flex-col items-center">
-            <p className="text-sm font-bold tracking-widest uppercase">Start with</p>
-            <div className="mt-3 grid grid-cols-2 gap-3">
-              <Link
-                href="/slogans"
-                className="w-full rounded-full border-2 border-paper bg-paper px-5 py-3 text-center font-display text-lg whitespace-nowrap text-ink uppercase hover:border-volt hover:bg-volt"
-              >
-                The slogan
-              </Link>
-              <Link
-                href="/shop"
-                className="w-full rounded-full border-2 border-paper bg-paper px-5 py-3 text-center font-display text-lg whitespace-nowrap text-ink uppercase hover:border-volt hover:bg-volt"
-              >
-                The gear
-              </Link>
-            </div>
-          </div>
+          <Link
+            href="/slogans"
+            className="mt-8 block w-full max-w-md rounded-full border-2 border-paper bg-paper px-4 py-3 text-center font-display text-lg text-ink uppercase hover:border-volt hover:bg-volt"
+          >
+            Pick your slogan
+          </Link>
         </HeroSlogan>
       </section>
 
@@ -175,6 +163,26 @@ export default async function Home() {
           See all slogans
         </Link>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
+          <Link
+            href="/slogans?collection=custom"
+            className="flex min-w-0 items-center justify-between gap-4 rounded-2xl border-2 border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] sm:col-span-2"
+          >
+            <div>
+              <p className="font-display text-xl uppercase min-[360px]:text-2xl sm:text-3xl">
+                Customisable
+              </p>
+              <p className="mt-2 max-w-xs opacity-90">
+                Fill in the blank with your own word: “I could be your ___”.
+              </p>
+            </div>
+            <ProductArt
+              art="vest"
+              slogan="I could be your ___"
+              color="#e8f525"
+              ink="#111111"
+              className="size-20 shrink-0 sm:size-28"
+            />
+          </Link>
           {COLLECTIONS.map((c) => {
             const t = TILES[c]
             return (
@@ -200,36 +208,6 @@ export default async function Home() {
               </Link>
             )
           })}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pt-14">
-        <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
-          Pick your gear
-        </h2>
-        <Link href="/shop" className="mt-1 inline-block font-semibold underline">
-          Browse gear
-        </Link>
-        <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-6">
-          {garments.map((g) => (
-            <Link
-              key={g.id}
-              href={`/slogans?garment=${g.id}`}
-              className="flex flex-col items-center gap-2 rounded-2xl border-2 border-ink bg-white p-3 text-center transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] sm:p-5"
-            >
-              <ProductArt
-                art={g.art}
-                slogan=""
-                color={g.colors[0].hex}
-                ink={g.colors[0].ink}
-                className="size-16 sm:size-28"
-              />
-              <span className="font-display text-sm leading-tight uppercase sm:text-xl">
-                {g.name}
-              </span>
-              <span className="text-sm font-bold">{formatPrice(g.price)}</span>
-            </Link>
-          ))}
         </div>
       </section>
     </>
