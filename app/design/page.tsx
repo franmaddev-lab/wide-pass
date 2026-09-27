@@ -15,7 +15,7 @@ export async function generateMetadata({
   const sp = await searchParams
   const slogan = getSlogan(one(sp.slogan))
   if (!slogan) return { title: 'Make it yours — Wide Pass' }
-  const garment = getGarment(one(sp.garment)) ?? getGarment('vest')!
+  const garment = getGarment(one(sp.garment)) ?? getGarment('tee')!
   const custom = cleanCustom(slogan, one(sp.text)?.slice(0, 40)) ?? undefined
   const text = sloganText(slogan, custom)
   const image = `/og?${new URLSearchParams({
@@ -48,7 +48,7 @@ export default async function DesignPage({ searchParams }: { searchParams: Searc
       {/* keyed so client-side navigation to another preset starts fresh */}
       <Designer
         key={`${garment}/${slogan}/${text ?? ''}`}
-        initialGarment={garment ?? 'vest'}
+        initialGarment={garment ?? 'tee'}
         sloganId={slogan}
         initialText={text}
       />

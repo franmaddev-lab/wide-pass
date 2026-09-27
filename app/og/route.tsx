@@ -14,7 +14,8 @@ const VOLT = '#e8f525'
 export async function GET(request: Request) {
   const params = new URL(request.url).searchParams
   const slogan = getSlogan(params.get('slogan') ?? undefined)
-  const garment = getGarment(params.get('garment') ?? undefined) ?? getGarment('vest')!
+  const garment =
+    getGarment(params.get('garment') ?? undefined) ?? getGarment(slogan ? 'tee' : 'vest')!
   const font = await readFile(join(process.cwd(), 'assets/ArchivoBlack-Regular.ttf'))
 
   let text = 'Every rider is somebody’s someone.'
