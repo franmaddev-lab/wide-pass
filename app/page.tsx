@@ -110,7 +110,7 @@ export default async function Home() {
               </Link>
               <Link
                 href="/shop"
-                className="rounded-full border-2 border-paper px-7 py-3 font-display text-lg uppercase hover:bg-paper hover:text-ink"
+                className="rounded-full border-2 border-volt bg-volt px-7 py-3 font-display text-lg text-ink uppercase hover:bg-white"
               >
                 The gear
               </Link>

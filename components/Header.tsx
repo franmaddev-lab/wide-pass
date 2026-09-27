@@ -17,7 +17,7 @@ export default function Header() {
             Slogans
           </Link>
           <Link href="/shop" className="hover:underline">
-            Shop
+            Gear
           </Link>
           <Link href="/suggest" className="hover:underline">
             You

@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <div className="mx-auto max-w-6xl px-4 py-10">
       <nav className="text-sm text-muted">
         <Link href="/shop" className="hover:underline">
-          Shop
+          Gear
         </Link>{' '}
         / Gadgets
       </nav>
