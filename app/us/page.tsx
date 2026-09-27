@@ -118,10 +118,10 @@ export default function UsPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12">
       <p className="text-sm font-bold tracking-widest uppercase">Us</p>
-      <h1 className="mt-1 font-display text-4xl leading-tight uppercase sm:text-5xl">
+      <h1 className="mt-1 font-display text-3xl leading-tight uppercase min-[360px]:text-4xl">
         Hi. We’re the people you overtake.
       </h1>
-      <p className="mt-6 max-w-2xl text-lg">
+      <p className="mt-4 max-w-2xl">
         Wide Pass is a small, independent shop run by people who ride bikes. We also drive, walk and
         sit in traffic muttering at nobody. So we know what a cyclist looks like through a
         windscreen: small, slow, in the way. And what they look like from the saddle: somebody’s
@@ -150,7 +150,7 @@ export default function UsPage() {
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {NUMBERS.map((n) => (
             <div key={n.big} className="flex flex-col rounded-2xl border-2 border-ink bg-white p-5">
-              <p className="font-display text-4xl uppercase">{n.big}</p>
+              <p className="font-display text-3xl uppercase">{n.big}</p>
               <p className="mt-2 flex-1">{n.what}</p>
               <p className="mt-3 text-sm text-muted">
                 Source: <Out href={n.href}>{n.source}</Out>
@@ -197,8 +197,8 @@ export default function UsPage() {
                 rel="noopener noreferrer"
                 className="block h-full rounded-2xl border-2 border-ink bg-white p-5 hover:bg-volt"
               >
-                <span className="font-bold">{l.title} ↗</span>
-                <span className="mt-1 block text-sm text-asphalt">{l.body}</span>
+                <span className="font-display text-lg uppercase">{l.title} ↗</span>
+                <span className="mt-2 block">{l.body}</span>
               </a>
             </li>
           ))}
@@ -208,13 +208,13 @@ export default function UsPage() {
       <div className="mt-12 grid gap-3 sm:grid-cols-2">
         <Link
           href="/slogans"
-          className="rounded-full border-2 border-ink bg-ink px-6 py-4 text-center font-display text-volt uppercase"
+          className="rounded-full border-2 border-ink bg-ink px-6 py-4 text-center font-display text-lg text-volt uppercase"
         >
           Wear the message
         </Link>
         <Link
           href="/suggest"
-          className="rounded-full border-2 border-ink bg-white px-6 py-4 text-center font-display uppercase hover:bg-volt"
+          className="rounded-full border-2 border-ink bg-white px-6 py-4 text-center font-display text-lg uppercase hover:bg-volt"
         >
           Got a better line?
         </Link>
