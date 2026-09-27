@@ -11,7 +11,6 @@ export default function ItemCard({
   ink,
   sign,
   tag,
-  badge,
   title,
   subtitle,
   price,
@@ -25,7 +24,6 @@ export default function ItemCard({
   ink: string
   sign?: SignPrint
   tag?: { label: string; className: string }
-  badge?: string
   title: string
   subtitle?: string
   price?: string
@@ -49,11 +47,6 @@ export default function ItemCard({
               className={`absolute top-3 left-3 rounded-full border border-ink px-2 py-0.5 text-xs font-bold uppercase ${tag.className}`}
             >
               {tag.label}
-            </span>
-          )}
-          {badge && (
-            <span className="absolute bottom-3 left-3 -rotate-2 rounded-md border-2 border-ink bg-white px-2 py-0.5 text-xs font-bold uppercase">
-              {badge}
             </span>
           )}
         </div>

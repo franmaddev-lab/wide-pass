@@ -121,8 +121,8 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4">
         <div className="flex items-end justify-between gap-4">
           <h2 className="font-display text-3xl uppercase">Popular designs</h2>
-          <Link href="/design" className="font-semibold underline">
-            Design your own
+          <Link href="/slogans" className="font-semibold underline">
+            See all slogans
           </Link>
         </div>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -143,7 +143,6 @@ export default function Home() {
                   label: collections[slogan.collection].label,
                   className: collectionTag[slogan.collection],
                 }}
-                badge={slogan.personalise ? 'Personalise it' : undefined}
                 title={`“${sloganText(slogan, p.custom)}”`}
                 subtitle={garment.name}
                 price={formatPrice(garment.price)}

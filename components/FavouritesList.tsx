@@ -37,7 +37,6 @@ export default function FavouritesList() {
           ink={c.ink}
           sign={s.sign}
           tag={{ label: collections[s.collection].label, className: collectionTag[s.collection] }}
-          badge={s.personalise ? 'Personalise it' : undefined}
           title={`“${sloganTemplate(s)}”`}
           subtitle="Vest or tee"
           price={`from ${formatPrice(from)}`}

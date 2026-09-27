@@ -12,12 +12,12 @@ export default function Footer() {
         </div>
         <ul className="space-y-1 text-sm">
           <li>
-            <Link href="/design?garment=vest" className="hover:text-volt">
+            <Link href="/slogans?garment=vest" className="hover:text-volt">
               Hi-vis vests
             </Link>
           </li>
           <li>
-            <Link href="/design?garment=tee" className="hover:text-volt">
+            <Link href="/slogans?garment=tee" className="hover:text-volt">
               T-shirts
             </Link>
           </li>

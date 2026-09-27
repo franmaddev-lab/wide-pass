@@ -13,10 +13,10 @@ npm run dev    # http://localhost:3000
 
 ## What's here
 
-There are two ways to shop, and both end on the same design page:
+There are two ways to shop, and both end on the same short design page:
 
 - **Slogan first:** `/slogans` → pick a message → choose vest or tee
-- **Gear first:** `/shop` → pick vest or tee → choose a message
+- **Gear first:** `/shop` → pick vest or tee → `/slogans?garment=…` → choose a message
 
 Some slogans have a blank the buyer fills in (“I could be your ___”, “Powered by ___”).
 
@@ -25,7 +25,7 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
 | `/` | Hero, the two ways to shop, popular designs, the four collections |
 | `/slogans` | All slogans with search (`?q=`), sorting (`?sort=popular\|new\|az`), filter with `?collection=family\|serious\|funny\|signs` |
 | `/shop` | Vest and tee (each opens the designer), plus ready-made gadgets |
-| `/design` | Designer: gear, slogan, personalised text, colour, size. Presets via `?garment=vest&slogan=powered-by&text=coffee` |
+| `/design` | After a slogan is picked: fill in the blank (if any), vest or tee, colour and size. Needs `?slogan=`; also takes `garment` and `text` |
 | `/shop/[slug]` | Gadget page (bell, stickers, tote…) |
 | `/cart` | Cart (saved in the browser's localStorage), free shipping over €50 |
 | `/checkout` | Shipping form; a server action re-checks and re-prices every line |

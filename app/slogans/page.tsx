@@ -9,6 +9,7 @@ import {
   designHref,
   formatPrice,
   garments,
+  getGarment,
   sloganTemplate,
   sloganText,
   slogans,
@@ -17,7 +18,6 @@ import {
 
 export const metadata: Metadata = { title: 'Slogans — Wide Pass' }
 
-const vest = garments.find((g) => g.id === 'vest')!
 const position = new Map(slogans.map((s, i) => [s.id, i]))
 
 const SORTS = {
@@ -39,6 +39,9 @@ export default async function SlogansPage({
   const q = query.toLowerCase()
   const sort: Sort =
     typeof sp.sort === 'string' && sp.sort in SORTS ? (sp.sort as Sort) : 'featured'
+  // Arriving from /shop with a vest or tee already chosen
+  const garment = getGarment(typeof sp.garment === 'string' ? sp.garment : undefined)
+  const shown = garment ?? garments[0]
   const likes = await likeCounts().catch(() => ({}) as Record<string, number>)
   const likesOf = (id: string) => likes[`slogan:${id}`] ?? 0
 
@@ -54,11 +57,13 @@ export default async function SlogansPage({
   if (sort === 'new') list.sort((a, b) => pos(b.id) - pos(a.id))
   if (sort === 'az') list.sort((a, b) => sloganText(a).localeCompare(sloganText(b)))
 
-  const link = (next: { c?: Collection; sort?: Sort }) => {
+  const link = (next: { c?: Collection; sort?: Sort; q?: string }) => {
     const p = new URLSearchParams()
+    const search = next.q ?? query
     if (next.c) p.set('collection', next.c)
-    if (query) p.set('q', query)
+    if (search) p.set('q', search)
     if (next.sort && next.sort !== 'featured') p.set('sort', next.sort)
+    if (garment) p.set('garment', garment.id)
     const str = p.toString()
     return str ? `/slogans?${str}` : '/slogans'
   }
@@ -66,7 +71,9 @@ export default async function SlogansPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <p className="text-sm font-bold tracking-widest uppercase">Step 1: pick a message</p>
+      <p className="text-sm font-bold tracking-widest uppercase">
+        {garment ? `Pick a message for your ${garment.name.toLowerCase()}` : 'Pick a message'}
+      </p>
       <h1 className="mt-1 font-display text-4xl uppercase">
         {collection ? collections[collection].label : 'All slogans'}
       </h1>
@@ -99,6 +106,7 @@ export default async function SlogansPage({
       <form action="/slogans" className="mt-4 flex max-w-xl gap-2">
         {collection && <input type="hidden" name="collection" value={collection} />}
         {sort !== 'featured' && <input type="hidden" name="sort" value={sort} />}
+        {garment && <input type="hidden" name="garment" value={garment.id} />}
         <label htmlFor="q" className="sr-only">
           Search slogans
         </label>
@@ -125,10 +133,7 @@ export default async function SlogansPage({
             <>
               {' '}
               for “{query}” ·{' '}
-              <Link
-                href={collection ? `/slogans?collection=${collection}` : '/slogans'}
-                className="underline"
-              >
+              <Link href={link({ c: collection, sort, q: '' })} className="underline">
                 clear
               </Link>
             </>
@@ -153,12 +158,12 @@ export default async function SlogansPage({
 
       <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((s) => {
-          const c = vest.colors[pos(s.id) % vest.colors.length]
+          const c = shown.colors[pos(s.id) % shown.colors.length]
           return (
             <ItemCard
               key={s.id}
-              href={designHref({ slogan: s.id })}
-              art="vest"
+              href={designHref({ slogan: s.id, garment: garment?.id })}
+              art={shown.art}
               text={sloganText(s)}
               color={c.hex}
               ink={c.ink}
@@ -167,10 +172,9 @@ export default async function SlogansPage({
                 label: collections[s.collection].label,
                 className: collectionTag[s.collection],
               }}
-              badge={s.personalise ? 'Personalise it' : undefined}
               title={`“${sloganTemplate(s)}”`}
-              subtitle="Vest or tee"
-              price={`from ${formatPrice(from)}`}
+              subtitle={garment ? garment.name : 'Vest or tee'}
+              price={garment ? formatPrice(garment.price) : `from ${formatPrice(from)}`}
               favourite={`slogan:${s.id}`}
               likes={likesOf(s.id)}
             />

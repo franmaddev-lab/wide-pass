@@ -5,7 +5,6 @@ import ProductArt from '@/components/ProductArt'
 import {
   collections,
   collectionTag,
-  designHref,
   formatPrice,
   gadgets,
   garments,
@@ -31,7 +30,7 @@ export default function ShopPage() {
         {garments.map((g) => (
           <Link
             key={g.id}
-            href={designHref({ garment: g.id })}
+            href={`/slogans?garment=${g.id}`}
             className="group flex items-center gap-6 rounded-2xl border-2 border-ink bg-volt p-6 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]"
           >
             <ProductArt
