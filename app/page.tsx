@@ -39,8 +39,8 @@ function randomHero() {
 
 const STEPS = [
   ['Say it', 'Pick your message: funny, serious, family or road signs.'],
-  ['Wear it', 'Pick your gear: hi-vis vest, tee, tank, long sleeve, rain jacket or bag cover.'],
   ['Make it yours', 'Fill in the blank: “I could be your ___”.'],
+  ['Wear it', 'Tank, tee or long sleeve. Or go hi-vis: vest, rain jacket or bag cover.'],
 ]
 
 // Ready-made designs shown as a starting point; each opens the designer preset

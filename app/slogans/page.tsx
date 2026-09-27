@@ -41,7 +41,8 @@ export default async function SlogansPage({
     typeof sp.sort === 'string' && sp.sort in SORTS ? (sp.sort as Sort) : 'featured'
   // Arriving from /shop with a garment already chosen
   const garment = getGarment(typeof sp.garment === 'string' ? sp.garment : undefined)
-  const shown = garment ?? garments[0]
+  // Without a chosen garment, preview every slogan on the hi-vis vest
+  const shown = garment ?? getGarment('vest')!
   const likes = await likeCounts().catch(() => ({}) as Record<string, number>)
   const likesOf = (id: string) => likes[`slogan:${id}`] ?? 0
 
@@ -173,7 +174,7 @@ export default async function SlogansPage({
                 className: collectionTag[s.collection],
               }}
               title={`“${sloganTemplate(s)}”`}
-              subtitle={garment ? garment.name : 'Vest, tee, tank & more'}
+              subtitle={garment ? garment.name : 'Tank, tee, hi-vis & more'}
               price={garment ? formatPrice(garment.price) : `from ${formatPrice(from)}`}
               favourite={`slogan:${s.id}`}
               likes={likesOf(s.id)}

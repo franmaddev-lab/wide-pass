@@ -38,7 +38,7 @@ export default function FavouritesList() {
           sign={s.sign}
           tag={{ label: collections[s.collection].label, className: collectionTag[s.collection] }}
           title={`“${sloganTemplate(s)}”`}
-          subtitle="Vest, tee, tank & more"
+          subtitle="Tank, tee, hi-vis & more"
           price={`from ${formatPrice(from)}`}
           favourite={key}
         />,

@@ -104,38 +104,6 @@ export default function Designer({
           </Link>
         </div>
 
-        <div>
-          <Label>Print it on</Label>
-          <div className="mt-2 grid grid-cols-3 gap-2">
-            {garments.map((g) => (
-              <button
-                key={g.id}
-                type="button"
-                aria-pressed={g.id === garmentId}
-                onClick={() =>
-                  change(() => {
-                    setGarmentId(g.id)
-                    if (!g.colors.some((c) => c.name === colorName)) setColorName(g.colors[0].name)
-                  })
-                }
-                className={`flex flex-col items-center gap-1 rounded-xl border-2 border-ink px-1 py-2 text-center ${
-                  g.id === garmentId ? 'bg-volt' : 'bg-white hover:bg-paper'
-                }`}
-              >
-                <ProductArt
-                  art={g.art}
-                  slogan=""
-                  color={g.colors[0].hex}
-                  ink={g.colors[0].ink}
-                  className="size-10 shrink-0"
-                />
-                <span className="text-xs leading-tight font-bold">{g.name}</span>
-                <span className="text-xs">{formatPrice(g.price)}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
         {slogan.personalise && (
           <div>
             <Label htmlFor="custom">{slogan.personalise.label}</Label>
@@ -168,6 +136,38 @@ export default function Designer({
             </div>
           </div>
         )}
+
+        <div>
+          <Label>Print it on</Label>
+          <div className="mt-2 grid grid-cols-3 gap-2">
+            {garments.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                aria-pressed={g.id === garmentId}
+                onClick={() =>
+                  change(() => {
+                    setGarmentId(g.id)
+                    if (!g.colors.some((c) => c.name === colorName)) setColorName(g.colors[0].name)
+                  })
+                }
+                className={`flex flex-col items-center gap-1 rounded-xl border-2 border-ink px-1 py-2 text-center ${
+                  g.id === garmentId ? 'bg-volt' : 'bg-white hover:bg-paper'
+                }`}
+              >
+                <ProductArt
+                  art={g.art}
+                  slogan=""
+                  color={g.colors[0].hex}
+                  ink={g.colors[0].ink}
+                  className="size-10 shrink-0"
+                />
+                <span className="text-xs leading-tight font-bold">{g.name}</span>
+                <span className="text-xs">{formatPrice(g.price)}</span>
+              </button>
+            ))}
+          </div>
+        </div>
 
         <div>
           <Label>Colour & size</Label>

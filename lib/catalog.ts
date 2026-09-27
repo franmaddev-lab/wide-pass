@@ -43,7 +43,8 @@ const APPAREL_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 const ONE_SIZE = ['One size']
 
 // ---------------------------------------------------------------------------
-// Garments: the blank "models" a slogan gets printed on
+// Garments: the blank "models" a slogan gets printed on.
+// Listed as shown in the shop: everyday wear first, then hi-vis gear.
 
 export type GarmentId = 'vest' | 'tank' | 'tee' | 'longsleeve' | 'jacket' | 'raincover'
 
@@ -59,17 +60,6 @@ export type Garment = {
 }
 
 export const garments: Garment[] = [
-  {
-    id: 'vest',
-    name: 'Hi-vis vest',
-    withArticle: 'a hi-vis vest',
-    art: 'vest',
-    price: 2900,
-    colors: HI_VIS,
-    sizes: APPAREL_SIZES,
-    description:
-      'Fluorescent vest with reflective strips front and back. Light, breathable, fits over a jacket or jersey.',
-  },
   {
     id: 'tank',
     name: 'Tank top',
@@ -100,6 +90,17 @@ export const garments: Garment[] = [
     colors: BLACK_WHITE,
     sizes: APPAREL_SIZES,
     description: 'For cool mornings and autumn commutes. Organic cotton, relaxed fit.',
+  },
+  {
+    id: 'vest',
+    name: 'Hi-vis vest',
+    withArticle: 'a hi-vis vest',
+    art: 'vest',
+    price: 2900,
+    colors: HI_VIS,
+    sizes: APPAREL_SIZES,
+    description:
+      'Fluorescent vest with reflective strips front and back. Light, breathable, fits over a jacket or jersey.',
   },
   {
     id: 'jacket',
