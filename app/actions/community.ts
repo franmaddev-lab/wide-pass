@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { COLLECTIONS, getGadget, getSlogan, sloganTemplate, slogans } from '@/lib/catalog'
+import { getGadget, getSlogan, sloganTemplate, slogans, suggestionCategories } from '@/lib/catalog'
 import {
   addSuggestion,
   countSuggestionBy,
@@ -69,8 +69,8 @@ export async function submitSuggestion(_prev: SuggestState, form: FormData): Pro
   if (!ALLOWED.test(text)) {
     return { status: 'error', message: 'Letters, numbers and normal punctuation only, please.' }
   }
-  if (!COLLECTIONS.includes(collection as (typeof COLLECTIONS)[number])) {
-    return { status: 'error', message: 'Pick a collection.' }
+  if (!suggestionCategories.some((c) => c.value === collection)) {
+    return { status: 'error', message: 'Pick a category.' }
   }
   const n = normalise(text)
   if (BLOCKED.some((w) => n.replace(/ /g, '').includes(w))) {

@@ -5,14 +5,14 @@ import FavouritesLink from './FavouritesLink'
 export default function Header() {
   return (
     <header className="sticky top-0 z-20 border-b-2 border-ink bg-volt">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-3 sm:px-4">
         <Link
           href="/"
-          className="shrink-0 font-display text-base tracking-tight uppercase sm:text-xl"
+          className="shrink-0 font-display text-sm tracking-tight uppercase min-[360px]:text-base sm:text-xl"
         >
           Wide&nbsp;Pass
         </Link>
-        <nav className="flex items-center gap-2.5 text-sm font-semibold sm:gap-6">
+        <nav className="flex items-center gap-1.5 text-xs font-semibold min-[360px]:gap-2 min-[360px]:text-[13px] sm:gap-6 sm:text-sm">
           <Link href="/slogans" className="hover:underline">
             Slogans
           </Link>
@@ -20,7 +20,7 @@ export default function Header() {
             Shop
           </Link>
           <Link href="/suggest" className="hover:underline">
-            Ideas
+            Suggest
           </Link>
           <FavouritesLink />
           <CartLink />

@@ -1,6 +1,6 @@
 # Wide Pass — cycling apparel with a message
 
-A small online shop for hi-vis vests, t-shirts and gadgets with funny and serious
+A small online shop for hi-vis vests, tank tops, t-shirts, long-sleeve shirts and backpack rain covers with funny and serious
 slogans (“I could be your sister”, “Pass wide. Pass slow.”, “Powered by pasta”)
 that remind drivers there is a person on that bike.
 
@@ -15,8 +15,8 @@ npm run dev    # http://localhost:3000
 
 There are two ways to shop, and both end on the same short design page:
 
-- **Slogan first:** `/slogans` → pick a message → choose vest or tee
-- **Gear first:** `/shop` → pick vest or tee → `/slogans?garment=…` → choose a message
+- **Slogan first:** `/slogans` → pick a message → choose what to print it on
+- **Gear first:** `/shop` → pick a garment → `/slogans?garment=…` → choose a message
 
 Some slogans have a blank the buyer fills in (“I could be your ___”, “Powered by ___”).
 
@@ -24,9 +24,9 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
 | --- | --- |
 | `/` | Hero, the two ways to shop, popular designs, the four collections |
 | `/slogans` | All slogans with search (`?q=`), sorting (`?sort=popular\|new\|az`), filter with `?collection=family\|serious\|funny\|signs` |
-| `/shop` | Vest and tee (each opens the designer), plus ready-made gadgets |
+| `/shop` | The five garments: hi-vis vest, tank top, t-shirt, long-sleeve shirt, rain cover |
 | `/design` | After a slogan is picked: fill in the blank (if any), vest or tee, colour and size. Needs `?slogan=`; also takes `garment` and `text` |
-| `/shop/[slug]` | Gadget page (bell, stickers, tote…) |
+| `/shop/[slug]` | Gadget pages (bell, stickers, tote…). Paused: no longer linked from the shop |
 | `/cart` | Cart (saved in the browser's localStorage), free shipping over €50 |
 | `/checkout` | Shipping form; a server action re-checks and re-prices every line |
 | `/about` | The mission |

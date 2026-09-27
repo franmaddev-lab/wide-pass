@@ -4,9 +4,9 @@ import { useActionState, useRef } from 'react'
 import { submitSuggestion, type SuggestState } from '@/app/actions/community'
 
 export default function SuggestForm({
-  collections,
+  categories,
 }: {
-  collections: { value: string; label: string }[]
+  categories: { value: string; label: string }[]
 }) {
   const formRef = useRef<HTMLFormElement>(null)
   const [state, action, pending] = useActionState(
@@ -39,9 +39,9 @@ export default function SuggestForm({
         />
       </div>
       <fieldset>
-        <legend className="font-bold">Which collection?</legend>
+        <legend className="font-bold">Category</legend>
         <div className="mt-2 flex flex-wrap gap-2">
-          {collections.map((c, i) => (
+          {categories.map((c, i) => (
             <label
               key={c.value}
               className="cursor-pointer rounded-full border-2 border-ink bg-white px-4 py-1.5 text-sm font-semibold has-[:checked]:bg-ink has-[:checked]:text-volt has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ink has-[:focus-visible]:ring-offset-2"
@@ -58,16 +58,19 @@ export default function SuggestForm({
           ))}
         </div>
       </fieldset>
-      <div className="flex flex-wrap items-center gap-4">
+      <div>
         <button
           type="submit"
           disabled={pending}
-          className="rounded-full border-2 border-ink bg-ink px-6 py-3 font-display uppercase text-volt disabled:opacity-60"
+          className="w-full rounded-full border-2 border-ink bg-ink px-6 py-5 font-display text-xl text-volt uppercase hover:bg-asphalt disabled:opacity-60"
         >
           {pending ? 'Posting…' : 'Post my idea'}
         </button>
         {state.status !== 'idle' && (
-          <p role={state.status === 'error' ? 'alert' : 'status'} className="font-semibold">
+          <p
+            role={state.status === 'error' ? 'alert' : 'status'}
+            className="mt-3 text-center font-semibold"
+          >
             {state.message}
           </p>
         )}

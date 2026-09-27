@@ -48,7 +48,7 @@ export default function RealPhotos({
           <p className="mb-3 text-asphalt">
             {list.length > 0
               ? 'More riders, more slogans, more videos:'
-              : 'See the vests and tees on real riders:'}
+              : 'See it all on real riders:'}
           </p>
           <SocialLinks />
         </div>

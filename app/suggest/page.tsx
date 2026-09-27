@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { deleteSuggestion } from '@/app/actions/community'
 import SuggestForm from '@/components/SuggestForm'
 import VoteButton from '@/components/VoteButton'
-import { COLLECTIONS, collections, collectionTag, type Collection } from '@/lib/catalog'
+import { suggestionCategories, suggestionCategoryLabel } from '@/lib/catalog'
 import { listSuggestions, persistent, votedBy } from '@/lib/store'
 import { currentVoter } from '@/lib/voter'
 
@@ -50,9 +50,7 @@ export default async function SuggestPage({
         favourites. The best ideas get printed.
       </p>
 
-      <SuggestForm
-        collections={COLLECTIONS.map((c) => ({ value: c, label: collections[c].label }))}
-      />
+      <SuggestForm categories={suggestionCategories} />
 
       {!persistent && (
         <p className="mt-6 rounded-xl border-2 border-dashed border-ink p-3 text-sm">
@@ -63,7 +61,7 @@ export default async function SuggestPage({
 
       <div className="mt-10 flex flex-wrap items-end justify-between gap-3">
         <h2 className="font-display text-2xl uppercase">
-          Ideas <span className="text-muted">({suggestions.length})</span>
+          Vote for your favourites <span className="text-muted">({suggestions.length})</span>
         </h2>
         <nav aria-label="Sort ideas" className="flex gap-1 text-sm">
           {(Object.keys(SORTS) as Sort[]).map((s) => (
@@ -88,7 +86,6 @@ export default async function SuggestPage({
       ) : (
         <ol className="mt-4 space-y-3">
           {suggestions.map((s, i) => {
-            const c = s.collection as Collection
             return (
               <li
                 key={s.id}
@@ -101,13 +98,9 @@ export default async function SuggestPage({
                 )}
                 <div className="min-w-0 flex-1">
                   <p className="text-lg font-semibold break-words">“{s.text}”</p>
-                  {collections[c] && (
-                    <span
-                      className={`mt-1 inline-block rounded-full border border-ink px-2 py-0.5 text-xs font-bold uppercase ${collectionTag[c]}`}
-                    >
-                      {collections[c].label}
-                    </span>
-                  )}
+                  <span className="mt-1 inline-block rounded-full border border-ink bg-white px-2 py-0.5 text-xs font-bold uppercase">
+                    {suggestionCategoryLabel(s.collection)}
+                  </span>
                 </div>
                 <VoteButton id={s.id} votes={s.votes} voted={voted.has(s.id)} />
                 {adminKey && (

@@ -64,8 +64,8 @@ export default function Home() {
               I could be your <span className="text-volt">sister.</span>
             </h1>
             <p className="mt-5 max-w-md text-lg">
-              Hi-vis vests and tees with slogans (funny, serious, or your own words) that remind
-              drivers there’s a person on that bike.
+              Hi-vis vests, tees, tanks and rain covers with slogans (funny, serious, or your own
+              words) that remind drivers there’s a person on that bike.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -78,7 +78,7 @@ export default function Home() {
                 href="/shop"
                 className="rounded-full border-2 border-paper px-6 py-3 font-bold hover:bg-paper hover:text-ink"
               >
-                Start with a vest or tee
+                Start with what you’ll wear
               </Link>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function Home() {
           {[
             ['1', 'Pick a message', 'Funny, serious, family or road signs.'],
             ['2', 'Make it yours', 'Fill in the blank: “I could be your ___”.'],
-            ['3', 'Pick your gear', 'Hi-vis vest or organic tee, any colour, any size.'],
+            ['3', 'Pick your gear', 'Vest, tank top, t-shirt, long sleeve or rain cover.'],
           ].map(([n, title, body]) => (
             <div key={n} className="flex gap-4 rounded-2xl border-2 border-ink bg-white p-5">
               <span className="grid size-10 shrink-0 place-items-center rounded-full bg-volt font-display">
@@ -167,7 +167,9 @@ export default function Home() {
                 className={`flex items-center justify-between gap-4 rounded-2xl border-2 border-ink p-6 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] ${t.className}`}
               >
                 <div>
-                  <p className="font-display text-3xl uppercase">{collections[c].label}</p>
+                  <p className="font-display text-2xl uppercase sm:text-3xl">
+                    {collections[c].label}
+                  </p>
                   <p className="mt-2 max-w-xs opacity-90">{collections[c].blurb}</p>
                 </div>
                 <ProductArt
@@ -176,7 +178,7 @@ export default function Home() {
                   color={t.color}
                   ink="#111111"
                   sign={t.sign}
-                  className="size-28 shrink-0"
+                  className="size-20 shrink-0 sm:size-28"
                 />
               </Link>
             )

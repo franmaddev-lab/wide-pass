@@ -90,9 +90,6 @@ export default function Designer({
             className="absolute top-3 right-3"
           />
         </div>
-        <div className="mt-6">
-          <RealPhotos garment={garment.id} title="Real photos" />
-        </div>
       </div>
 
       <div className="space-y-7">
@@ -142,7 +139,7 @@ export default function Designer({
 
         <div>
           <Label>Print it on</Label>
-          <div className="mt-2 grid grid-cols-2 gap-3">
+          <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-5">
             {garments.map((g) => (
               <button
                 key={g.id}
@@ -154,8 +151,8 @@ export default function Designer({
                     if (!g.colors.some((c) => c.name === colorName)) setColorName(g.colors[0].name)
                   })
                 }
-                className={`flex items-center gap-3 rounded-xl border-2 border-ink p-3 text-left ${
-                  g.id === garmentId ? 'bg-volt shadow-[4px_4px_0_var(--color-ink)]' : 'bg-white'
+                className={`flex flex-col items-center gap-1 rounded-xl border-2 border-ink px-1 py-2 text-center ${
+                  g.id === garmentId ? 'bg-volt' : 'bg-white hover:bg-paper'
                 }`}
               >
                 <ProductArt
@@ -163,12 +160,10 @@ export default function Designer({
                   slogan=""
                   color={g.colors[0].hex}
                   ink={g.colors[0].ink}
-                  className="size-12 shrink-0"
+                  className="size-10 shrink-0"
                 />
-                <span>
-                  <span className="block font-bold">{g.name}</span>
-                  <span className="text-sm">{formatPrice(g.price)}</span>
-                </span>
+                <span className="text-xs leading-tight font-bold">{g.name}</span>
+                <span className="text-xs">{formatPrice(g.price)}</span>
               </button>
             ))}
           </div>
@@ -233,6 +228,8 @@ export default function Designer({
           )}
         </div>
       </div>
+
+      <RealPhotos garment={garment.id} title="On the road" limit={2} className="md:col-span-2" />
     </div>
   )
 }

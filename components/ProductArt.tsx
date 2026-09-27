@@ -28,6 +28,18 @@ const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w: numbe
     path: 'M66 18 L56 22 Q58 60 44 76 L44 182 L156 182 L156 76 Q142 60 144 22 L134 18 Q118 64 100 64 Q82 64 66 18 Z',
     text: { x: 100, y: 118, w: 12 },
   },
+  tank: {
+    path: 'M74 18 L62 22 Q66 58 54 78 L54 182 L146 182 L146 78 Q134 58 138 22 L126 18 Q116 56 100 56 Q84 56 74 18 Z',
+    text: { x: 100, y: 116, w: 11 },
+  },
+  longsleeve: {
+    path: 'M70 22 L52 28 L24 60 L10 166 L32 170 L44 86 L50 78 L50 180 L150 180 L150 78 L156 86 L168 170 L190 166 L176 60 L148 28 L130 22 Q100 44 70 22 Z',
+    text: { x: 100, y: 108, w: 12 },
+  },
+  raincover: {
+    path: 'M50 28 Q100 14 150 28 Q170 34 170 60 L168 164 Q168 186 146 188 L54 188 Q32 186 32 164 L30 60 Q30 34 50 28 Z',
+    text: { x: 100, y: 102, w: 12 },
+  },
   tote: {
     path: 'M40 70 L160 70 L166 184 L34 184 Z M72 70 Q72 20 100 20 Q128 20 128 70 L118 70 Q118 32 100 32 Q82 32 82 70 Z',
     text: { x: 100, y: 128, w: 12 },
@@ -228,6 +240,19 @@ export default function ProductArt({
   return (
     <svg viewBox="0 0 200 200" role="img" aria-label={`${slogan}`} className={className}>
       <path d={shape.path} fill={color} stroke={INK} strokeWidth="2" fillRule="evenodd" />
+      {art === 'raincover' && (
+        <g>
+          <path
+            d="M40 40 Q100 26 160 40"
+            stroke="#1b1b1b"
+            strokeWidth="1.5"
+            strokeDasharray="3 3"
+            fill="none"
+            opacity="0.5"
+          />
+          <line x1="34" y1="160" x2="166" y2="160" stroke="#cfd3d8" strokeWidth="6" opacity="0.9" />
+        </g>
+      )}
       {art === 'vest' && (
         <g stroke="#cfd3d8" strokeWidth="5" opacity="0.9">
           <line x1="46" y1="158" x2="154" y2="158" />

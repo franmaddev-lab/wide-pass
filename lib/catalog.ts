@@ -1,5 +1,14 @@
 export type Collection = 'family' | 'serious' | 'funny' | 'signs'
-export type Art = 'vest' | 'tee' | 'sticker' | 'bell' | 'tote' | 'band'
+export type Art =
+  | 'vest'
+  | 'tank'
+  | 'tee'
+  | 'longsleeve'
+  | 'raincover'
+  | 'sticker'
+  | 'bell'
+  | 'tote'
+  | 'band'
 // A road-sign graphic printed in place of the slogan text
 export type SignPrint =
   | 'space' // blue sign: car, gap arrow, bike
@@ -25,10 +34,9 @@ const HI_VIS: Color[] = [
   { name: 'Hi-vis yellow', hex: '#e8f525', ink: '#111111' },
   { name: 'Hi-vis orange', hex: '#ff7a1a', ink: '#111111' },
 ]
-const TEE: Color[] = [
+const BLACK_WHITE: Color[] = [
   { name: 'Black', hex: '#1b1b1b', ink: '#e8f525' },
   { name: 'White', hex: '#f4f4f0', ink: '#1b1b1b' },
-  { name: 'Road grey', hex: '#6b6f76', ink: '#ffffff' },
 ]
 const APPAREL_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 const ONE_SIZE = ['One size']
@@ -36,12 +44,12 @@ const ONE_SIZE = ['One size']
 // ---------------------------------------------------------------------------
 // Garments: the blank "models" a slogan gets printed on
 
-export type GarmentId = 'vest' | 'tee'
+export type GarmentId = 'vest' | 'tank' | 'tee' | 'longsleeve' | 'raincover'
 
 export type Garment = {
   id: GarmentId
   name: string
-  withArticle: string // "a hi-vis vest", "an organic tee"
+  withArticle: string // "a hi-vis vest", "a t-shirt"
   art: Art
   price: number // euro cents
   colors: Color[]
@@ -62,15 +70,46 @@ export const garments: Garment[] = [
       'Fluorescent vest with reflective strips front and back. Light, breathable, fits over a jacket or jersey.',
   },
   {
+    id: 'tank',
+    name: 'Tank top',
+    withArticle: 'a tank top',
+    art: 'tank',
+    price: 2200,
+    colors: BLACK_WHITE,
+    sizes: APPAREL_SIZES,
+    description: 'Light, breathable tank top for hot rides. Big back print, nothing in the way.',
+  },
+  {
     id: 'tee',
-    name: 'Organic tee',
-    withArticle: 'an organic tee',
+    name: 'T-shirt',
+    withArticle: 'a t-shirt',
     art: 'tee',
     price: 2400,
-    colors: TEE,
+    colors: BLACK_WHITE,
     sizes: APPAREL_SIZES,
     description:
       'Organic cotton t-shirt with a soft screen print. For the ride and the café after.',
+  },
+  {
+    id: 'longsleeve',
+    name: 'Long-sleeve shirt',
+    withArticle: 'a long-sleeve shirt',
+    art: 'longsleeve',
+    price: 3200,
+    colors: BLACK_WHITE,
+    sizes: APPAREL_SIZES,
+    description: 'For cool mornings and autumn commutes. Organic cotton, relaxed fit.',
+  },
+  {
+    id: 'raincover',
+    name: 'Rain cover',
+    withArticle: 'a rain cover',
+    art: 'raincover',
+    price: 2500,
+    colors: HI_VIS,
+    sizes: ['15–25 L', '25–35 L'],
+    description:
+      'Waterproof hi-vis cover for your backpack, with a reflective strip. Your slogan stays visible when it pours.',
   },
 ]
 
@@ -267,7 +306,8 @@ export function sloganTemplate(slogan: Slogan) {
 }
 
 // ---------------------------------------------------------------------------
-// Gadgets: ready-made items with a fixed design
+// Gadgets: ready-made items with a fixed design.
+// Paused for now: not linked from the shop or menus, but their pages still work.
 
 export type Gadget = {
   slug: string
@@ -465,4 +505,15 @@ export const collectionTag: Record<Collection, string> = {
   serious: 'bg-white text-ink',
   funny: 'bg-white text-ink',
   signs: 'bg-white text-ink',
+}
+
+// Categories people can file a slogan suggestion under: the collections plus a
+// catch-all for ideas that don't fit (or when they're not sure)
+export const suggestionCategories: { value: string; label: string }[] = [
+  { value: 'general', label: 'General' },
+  ...COLLECTIONS.map((c) => ({ value: c, label: collections[c].label })),
+]
+
+export function suggestionCategoryLabel(value: string) {
+  return suggestionCategories.find((c) => c.value === value)?.label ?? 'General'
 }
