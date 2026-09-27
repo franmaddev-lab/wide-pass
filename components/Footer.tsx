@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import BikeLogo from './BikeLogo'
 import FontSwitcher from './FontSwitcher'
 import SocialLinks from './SocialLinks'
 
@@ -7,7 +8,10 @@ export default function Footer() {
     <footer className="mt-16 bg-ink text-paper">
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:grid-cols-3">
         <div>
-          <p className="font-display text-lg uppercase text-volt">Wide Pass</p>
+          <p className="flex items-center gap-2 font-display text-lg text-volt uppercase">
+            <BikeLogo className="size-7" />
+            Wide Pass
+          </p>
           <p className="mt-2 text-sm text-paper/70">
             Every rider is somebody. Wear the message, share the road.
           </p>

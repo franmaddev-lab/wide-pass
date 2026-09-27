@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import FavouriteButton from './FavouriteButton'
 import ProductArt from './ProductArt'
+import ShareButton from './ShareButton'
 import type { Art, SignPrint } from '@/lib/catalog'
 
 export default function ItemCard({
@@ -15,6 +16,7 @@ export default function ItemCard({
   subtitle,
   price,
   favourite,
+  share,
   likes,
 }: {
   href: string
@@ -28,6 +30,7 @@ export default function ItemCard({
   subtitle?: string
   price?: string
   favourite?: string // favourites key, shows the heart button
+  share?: { path: string; text: string } // shows the share button
   likes?: number
 }) {
   return (
@@ -63,8 +66,11 @@ export default function ItemCard({
           {price && <p className="font-bold whitespace-nowrap">{price}</p>}
         </div>
       </Link>
-      {favourite && (
-        <FavouriteButton item={favourite} label={title} className="absolute top-3 right-3" />
+      {(favourite || share) && (
+        <div className="absolute top-3 right-3 flex gap-2">
+          {favourite && <FavouriteButton item={favourite} label={title} />}
+          {share && <ShareButton path={share.path} text={share.text} />}
+        </div>
       )}
     </div>
   )

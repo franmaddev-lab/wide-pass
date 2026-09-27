@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import BikeLogo from './BikeLogo'
 import CartLink from './CartLink'
 import FavouritesLink from './FavouritesLink'
 
@@ -8,8 +9,9 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-3 sm:px-4">
         <Link
           href="/"
-          className="shrink-0 font-display text-sm tracking-tight uppercase min-[360px]:text-base sm:text-xl"
+          className="flex shrink-0 items-center gap-1 font-display text-sm tracking-tight uppercase min-[360px]:text-base sm:gap-1.5 sm:text-xl"
         >
+          <BikeLogo className="size-5 min-[360px]:size-6 sm:size-7" />
           Wide&nbsp;Pass
         </Link>
         <nav className="flex items-center gap-1.5 text-xs font-semibold min-[360px]:gap-2 min-[360px]:text-[13px] sm:gap-6 sm:text-sm">

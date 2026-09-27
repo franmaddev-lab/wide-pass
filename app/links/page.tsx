@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import BikeLogo from '@/components/BikeLogo'
 import SocialLinks from '@/components/SocialLinks'
 import { designHref, slogans } from '@/lib/catalog'
 
@@ -20,7 +21,8 @@ const LINKS = [
 export default function LinksPage() {
   return (
     <div className="mx-auto max-w-md px-4 py-10 text-center">
-      <p className="font-display text-3xl uppercase">Wide Pass</p>
+      <BikeLogo className="mx-auto size-16" />
+      <p className="mt-2 font-display text-3xl uppercase">Wide Pass</p>
       <p className="mt-2 text-asphalt">
         Every rider is somebody’s someone. Cycling gear that talks to drivers.
       </p>

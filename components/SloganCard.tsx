@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
 import ProductArt from './ProductArt'
+import ShareButton from './ShareButton'
 import {
   collections,
   collectionTag,
@@ -12,6 +13,7 @@ import {
   garments,
   getGarment,
   getSlogan,
+  shareHref,
   sloganTemplate,
   sloganText,
   type GarmentId,
@@ -83,11 +85,13 @@ export default function SloganCard({
       >
         {collections[slogan.collection].label}
       </span>
-      <FavouriteButton
-        item={`slogan:${slogan.id}`}
-        label={title}
-        className="absolute top-3 right-3"
-      />
+      <div className="absolute top-3 right-3 flex gap-2">
+        <FavouriteButton item={`slogan:${slogan.id}`} label={title} />
+        <ShareButton
+          path={shareHref({ slogan: slogan.id, garment: garment.id })}
+          text={`“${sloganTemplate(slogan)}” Make yours:`}
+        />
+      </div>
 
       {slides.length > 1 && (
         <>

@@ -12,6 +12,7 @@ import {
   formatPrice,
   getGarment,
   getSlogan,
+  shareHref,
   sloganText,
   slogans,
   type Art,
@@ -147,6 +148,11 @@ export default async function Home() {
                 title={`“${sloganText(slogan, p.custom)}”`}
                 subtitle={garment.name}
                 price={formatPrice(garment.price)}
+                favourite={`slogan:${p.slogan}`}
+                share={{
+                  path: shareHref({ slogan: p.slogan, custom: p.custom, garment: p.garment }),
+                  text: `“${sloganText(slogan, p.custom)}” Make yours:`,
+                }}
               />
             )
           })}
