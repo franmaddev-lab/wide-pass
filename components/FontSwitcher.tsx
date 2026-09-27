@@ -3,14 +3,15 @@
 import { useEffect, useState } from 'react'
 
 // TEMPORARY: tap to cycle the headline font and try each one across the whole site.
-// The choice is remembered on this device. Remove once a font is picked.
+// The choice is remembered on this device. A link with ?font=<key> (e.g. /?font=rubik)
+// picks a font directly. Remove once a font is picked.
 const FONTS = [
-  { name: 'Archivo Black', variable: '' }, // the current font
-  { name: 'Bowlby One', variable: '--font-bowlby' },
-  { name: 'Rubik Black', variable: '--font-rubik' },
-  { name: 'Poppins Black', variable: '--font-poppins' },
-  { name: 'Paytone One', variable: '--font-paytone' },
-  { name: 'Unbounded Black', variable: '--font-unbounded' },
+  { key: 'archivo', name: 'Archivo Black', variable: '' }, // the current font
+  { key: 'bowlby', name: 'Bowlby One', variable: '--font-bowlby' },
+  { key: 'rubik', name: 'Rubik Black', variable: '--font-rubik' },
+  { key: 'poppins', name: 'Poppins Black', variable: '--font-poppins' },
+  { key: 'paytone', name: 'Paytone One', variable: '--font-paytone' },
+  { key: 'unbounded', name: 'Unbounded Black', variable: '--font-unbounded' },
 ]
 const KEY = 'wp-trial-font'
 
@@ -24,14 +25,19 @@ export default function FontSwitcher() {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
+    const fromLink = FONTS.findIndex(
+      (f) => f.key === new URLSearchParams(window.location.search).get('font')
+    )
     let saved = 0
     try {
       saved = Number(localStorage.getItem(KEY)) || 0
+      if (fromLink >= 0) localStorage.setItem(KEY, String(fromLink))
     } catch {}
-    if (saved > 0 && saved < FONTS.length) {
-      apply(saved)
+    const i = fromLink >= 0 ? fromLink : saved
+    if (i > 0 && i < FONTS.length) {
+      apply(i)
       // eslint-disable-next-line react-hooks/set-state-in-effect -- sync with the saved choice after mount
-      setIndex(saved)
+      setIndex(i)
     }
   }, [])
 
