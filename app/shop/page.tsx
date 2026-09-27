@@ -30,8 +30,8 @@ export default function ShopPage() {
             <ProductArt
               art={g.art}
               slogan="Your message here"
-              color={g.colors[g.id === 'vest' ? 1 : 0].hex}
-              ink={g.colors[g.id === 'vest' ? 1 : 0].ink}
+              color={g.colors[0].hex}
+              ink={g.colors[0].ink}
               className="size-36 shrink-0"
             />
             <div>

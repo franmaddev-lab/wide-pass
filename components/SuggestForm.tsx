@@ -44,7 +44,7 @@ export default function SuggestForm({
           {collections.map((c, i) => (
             <label
               key={c.value}
-              className="cursor-pointer rounded-full border-2 border-ink bg-white px-4 py-1.5 text-sm font-semibold has-[:checked]:bg-ink has-[:checked]:text-volt has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-signal"
+              className="cursor-pointer rounded-full border-2 border-ink bg-white px-4 py-1.5 text-sm font-semibold has-[:checked]:bg-ink has-[:checked]:text-volt has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ink has-[:focus-visible]:ring-offset-2"
             >
               <input
                 type="radio"

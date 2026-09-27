@@ -114,7 +114,7 @@ export default async function SuggestPage({
                   <form action={deleteSuggestion}>
                     <input type="hidden" name="id" value={s.id} />
                     <input type="hidden" name="key" value={adminKey} />
-                    <button type="submit" className="text-sm font-semibold text-sign underline">
+                    <button type="submit" className="text-sm font-semibold underline">
                       Delete
                     </button>
                   </form>

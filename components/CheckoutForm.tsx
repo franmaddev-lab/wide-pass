@@ -86,7 +86,7 @@ export default function CheckoutForm() {
       </div>
 
       {state.status === 'error' && (
-        <p role="alert" className="font-semibold text-signal">
+        <p role="alert" className="font-bold">
           {state.message}
         </p>
       )}

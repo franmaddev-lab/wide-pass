@@ -461,8 +461,8 @@ export const collections: Record<Collection, { label: string; blurb: string }> =
 export const COLLECTIONS = Object.keys(collections) as Collection[]
 
 export const collectionTag: Record<Collection, string> = {
-  family: 'bg-signal text-ink',
-  serious: 'bg-ink text-paper',
-  funny: 'bg-volt text-ink',
-  signs: 'bg-sign text-white',
+  family: 'bg-white text-ink',
+  serious: 'bg-white text-ink',
+  funny: 'bg-white text-ink',
+  signs: 'bg-white text-ink',
 }

@@ -121,7 +121,7 @@ export default function Designer({
               className="mt-2 block w-full rounded-lg border-2 border-ink bg-white px-3 py-2 text-lg"
             />
             {invalid && (
-              <p id="custom-error" className="mt-1 text-sm font-semibold text-sign">
+              <p id="custom-error" className="mt-1 text-sm font-bold">
                 Letters, numbers and simple punctuation only.
               </p>
             )}
@@ -186,7 +186,7 @@ export default function Designer({
                 aria-pressed={c.name === color.name}
                 title={c.name}
                 className={`size-11 rounded-full border-2 border-ink ${
-                  c.name === color.name ? 'ring-4 ring-signal' : ''
+                  c.name === color.name ? 'ring-4 ring-ink ring-offset-2' : ''
                 }`}
                 style={{ background: c.hex }}
               />
@@ -219,7 +219,7 @@ export default function Designer({
             Add to cart
           </button>
           {status === 'no-size' && (
-            <p role="alert" className="mt-3 font-semibold text-sign">
+            <p role="alert" className="mt-3 font-bold">
               Pick a size first.
             </p>
           )}

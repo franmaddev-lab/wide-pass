@@ -20,7 +20,7 @@ export default function FavouriteButton({
       aria-label={on ? `Remove ${label} from favourites` : `Add ${label} to favourites`}
       title={on ? 'Saved to favourites' : 'Save to favourites'}
       className={`grid size-11 place-items-center rounded-full border-2 border-ink transition ${
-        on ? 'bg-signal' : 'bg-white hover:bg-volt'
+        on ? 'bg-volt' : 'bg-white hover:bg-volt'
       } ${className}`}
     >
       <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true">

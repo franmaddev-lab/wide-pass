@@ -97,7 +97,7 @@ export default async function SlogansPage({
         ))}
         <Link
           href="/favourites"
-          className="rounded-full border-2 border-ink bg-white px-4 py-1.5 text-sm font-semibold hover:bg-signal"
+          className="rounded-full border-2 border-ink bg-white px-4 py-1.5 text-sm font-semibold hover:bg-volt"
         >
           ♥ My favourites
         </Link>
@@ -158,7 +158,7 @@ export default async function SlogansPage({
 
       <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((s) => {
-          const c = shown.colors[pos(s.id) % shown.colors.length]
+          const c = shown.colors[0]
           return (
             <ItemCard
               key={s.id}

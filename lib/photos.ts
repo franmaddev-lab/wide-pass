@@ -17,27 +17,27 @@ export type Photo = {
 // photos above them) and delete these entries plus their files.
 export const photos: Photo[] = [
   {
-    src: '/photos/vest-road-sister.png',
-    alt: 'Illustration: a driver’s view of a cyclist ahead in an orange “I could be your sister” vest',
+    src: '/photos/vest-road-sister-v2.png',
+    alt: 'Illustration: a driver’s view of a cyclist ahead in a yellow “I could be your sister” vest',
     garment: 'vest',
   },
   {
-    src: '/photos/tee-flatlay-pasta.png',
+    src: '/photos/tee-flatlay-pasta-v2.png',
     alt: 'Illustration: black “Powered by pasta. Zero emissions.” tee laid out with a helmet, espresso and sunglasses',
     garment: 'tee',
   },
   {
-    src: '/photos/vest-night-slow.png',
+    src: '/photos/vest-night-slow-v2.png',
     alt: 'Illustration: cyclist at night in a yellow “Slow down. It’s only a few seconds.” vest, reflective strips lit by headlights',
     garment: 'vest',
   },
   {
-    src: '/photos/tee-hanger-traffic.png',
+    src: '/photos/tee-hanger-traffic-v2.png',
     alt: 'Illustration: white “I’m not in your way. I am traffic.” tee on a hanger',
     garment: 'tee',
   },
   {
-    src: '/photos/vest-hanger-passwide.png',
+    src: '/photos/vest-hanger-passwide-v2.png',
     alt: 'Illustration: yellow “Pass wide. Pass slow.” vest on a hanger with a Wide Pass tag',
     garment: 'vest',
   },

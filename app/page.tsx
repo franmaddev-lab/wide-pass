@@ -20,7 +20,7 @@ import {
 // Ready-made designs shown as a starting point; each opens the designer preset
 const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number }[] = [
   { garment: 'vest', slogan: 'i-could-be-your', custom: 'sister', color: 0 },
-  { garment: 'vest', slogan: 'jealous-calves', color: 1 },
+  { garment: 'vest', slogan: 'jealous-calves', color: 0 },
   { garment: 'vest', slogan: 'give-space', color: 0 },
   { garment: 'tee', slogan: 'powered-by', custom: 'pasta', color: 0 },
 ]
@@ -33,12 +33,12 @@ const TILES: Record<
     art: 'vest',
     text: 'I could be your dad',
     color: '#e8f525',
-    className: 'bg-signal text-ink',
+    className: 'bg-white text-ink',
   },
   serious: {
     art: 'vest',
     text: 'Pass wide. Pass slow.',
-    color: '#ff7a1a',
+    color: '#e8f525',
     className: 'bg-ink text-paper',
   },
   funny: { art: 'tee', text: 'Powered by pasta', color: '#f4f4f0', className: 'bg-volt text-ink' },
@@ -47,21 +47,21 @@ const TILES: Record<
     text: 'Give me space',
     color: '#e8f525',
     sign: 'space',
-    className: 'bg-asphalt text-paper',
+    className: 'bg-white text-ink',
   },
 }
 
 export default function Home() {
   return (
     <>
-      <section className="border-b-2 border-ink bg-volt">
+      <section className="border-b-2 border-ink bg-ink text-paper">
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 md:grid-cols-2 md:py-20">
           <div>
-            <p className="text-sm font-bold tracking-widest uppercase">
+            <p className="text-sm font-bold tracking-widest text-volt uppercase">
               Cycling apparel with a message
             </p>
             <h1 className="mt-3 font-display text-5xl leading-[0.95] uppercase sm:text-6xl">
-              I could be your sister.
+              I could be your <span className="text-volt">sister.</span>
             </h1>
             <p className="mt-5 max-w-md text-lg">
               Hi-vis vests and tees with slogans (funny, serious, or your own words) that remind
@@ -70,13 +70,13 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/slogans"
-                className="rounded-full border-2 border-ink bg-ink px-6 py-3 font-bold text-volt hover:bg-asphalt"
+                className="rounded-full border-2 border-volt bg-volt px-6 py-3 font-bold text-ink hover:bg-white"
               >
                 Start with a slogan
               </Link>
               <Link
                 href="/shop"
-                className="rounded-full border-2 border-ink px-6 py-3 font-bold hover:bg-ink hover:text-volt"
+                className="rounded-full border-2 border-paper px-6 py-3 font-bold hover:bg-paper hover:text-ink"
               >
                 Start with a vest or tee
               </Link>
@@ -85,14 +85,14 @@ export default function Home() {
           <ProductArt
             art="vest"
             slogan="I could be your sister"
-            color="#ff7a1a"
+            color="#e8f525"
             ink="#111111"
-            className="mx-auto w-full max-w-sm drop-shadow-[8px_8px_0_var(--color-ink)]"
+            className="mx-auto w-full max-w-sm"
           />
         </div>
       </section>
 
-      <section className="overflow-hidden border-b-2 border-ink bg-ink py-3 text-paper">
+      <section className="overflow-hidden border-b-2 border-ink bg-volt py-3 text-ink">
         <p className="font-display text-lg tracking-wide whitespace-nowrap uppercase">
           Pass wide · Pass slow · I am traffic · Give me space · Someone is waiting for me at home ·
           Ding ding, be kind · Slow down · Pass wide · Pass slow

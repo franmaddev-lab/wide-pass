@@ -56,7 +56,7 @@ export default function ProductPicker({
                 aria-label={c.name}
                 aria-pressed={c.name === color.name}
                 className={`size-10 rounded-full border-2 border-ink ${
-                  c.name === color.name ? 'ring-4 ring-signal' : ''
+                  c.name === color.name ? 'ring-4 ring-ink ring-offset-2' : ''
                 }`}
                 style={{ background: c.hex }}
               />
@@ -112,7 +112,7 @@ export default function ProductPicker({
           Add to cart
         </button>
         {error && (
-          <p role="alert" className="mt-3 font-semibold text-signal">
+          <p role="alert" className="mt-3 font-bold">
             {error}
           </p>
         )}

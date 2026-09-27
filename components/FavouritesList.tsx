@@ -21,12 +21,12 @@ const from = Math.min(...garments.map((g) => g.price))
 export default function FavouritesList() {
   const favourites = useFavourites()
 
-  const cards = favourites.flatMap((key, i) => {
+  const cards = favourites.flatMap((key) => {
     const [kind, id] = key.split(':')
     if (kind === 'slogan') {
       const s = getSlogan(id)
       if (!s) return []
-      const c = vest.colors[i % vest.colors.length]
+      const c = vest.colors[0]
       return [
         <ItemCard
           key={key}
