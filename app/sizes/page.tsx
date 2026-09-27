@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { garments } from '@/lib/catalog'
-import { apparelChart, fitNotes, raincoverChart } from '@/lib/sizes'
+import { apparelChart, fitNotes } from '@/lib/sizes'
 
 export const metadata: Metadata = { title: 'Size guide — Wide Pass' }
 
@@ -35,7 +35,6 @@ function Chart({ chart }: { chart: { headers: string[]; rows: string[][] } }) {
 }
 
 export default function SizesPage() {
-  const tops = garments.filter((g) => g.id !== 'raincover')
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
       <h1 className="font-display text-4xl uppercase">Size guide</h1>
@@ -43,19 +42,15 @@ export default function SizesPage() {
         Measure around the fullest part of your chest, under your arms, with the tape level.
       </p>
 
-      <h2 className="mt-10 font-display text-2xl uppercase">Tops, vests &amp; jackets</h2>
+      <h2 className="mt-10 font-display text-2xl uppercase">Tops &amp; vests</h2>
       <Chart chart={apparelChart} />
       <ul className="mt-4 space-y-2">
-        {tops.map((g) => (
+        {garments.map((g) => (
           <li key={g.id}>
             <strong>{g.name}:</strong> {fitNotes[g.id]}
           </li>
         ))}
       </ul>
-
-      <h2 className="mt-10 font-display text-2xl uppercase">Bag rain cover</h2>
-      <Chart chart={raincoverChart} />
-      <p className="mt-4">{fitNotes.raincover}</p>
 
       <p className="mt-10">
         Still unsure? Unworn, un-personalised items can be swapped. See{' '}

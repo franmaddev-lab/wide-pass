@@ -59,7 +59,7 @@ export type Garment = {
   description: string
 }
 
-export const garments: Garment[] = [
+const allGarments: Garment[] = [
   {
     id: 'tank',
     name: 'Tank top',
@@ -125,6 +125,11 @@ export const garments: Garment[] = [
       'Waterproof hi-vis cover for your backpack, with a reflective strip. Your slogan stays visible when it pours.',
   },
 ]
+
+// What's on sale right now: only the items with real product photos.
+// Add 'jacket' or 'raincover' back here to sell them again.
+const ON_SALE: GarmentId[] = ['tank', 'tee', 'longsleeve', 'vest']
+export const garments = allGarments.filter((g) => ON_SALE.includes(g.id))
 
 export function getGarment(id: string | undefined) {
   return garments.find((g) => g.id === id)

@@ -20,9 +20,9 @@ import {
 } from '@/lib/catalog'
 
 // All the yellow hi-vis gear first (the vest is the default preview), then the black items
-const HI_VIS_IDS = ['vest', 'jacket', 'raincover']
+const HI_VIS_IDS = ['vest']
 const SLIDES = [
-  ...HI_VIS_IDS.map((id) => getGarment(id)!),
+  ...HI_VIS_IDS.map((id) => getGarment(id)).filter((g) => g !== undefined),
   ...garments.filter((g) => !HI_VIS_IDS.includes(g.id)),
 ]
 

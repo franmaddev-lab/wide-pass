@@ -301,6 +301,7 @@ export default function ProductArt({
   ink,
   sign,
   className,
+  drawing = false,
 }: {
   art: Art
   slogan: string
@@ -308,8 +309,9 @@ export default function ProductArt({
   ink: string
   sign?: SignPrint
   className?: string
+  drawing?: boolean // force the flat drawing even when a photo exists
 }) {
-  const photo = slogan && sign !== 'set' ? PHOTOS[`${art}:${color}`] : undefined
+  const photo = !drawing && slogan && sign !== 'set' ? PHOTOS[`${art}:${color}`] : undefined
   if (photo) {
     return (
       <PhotoArt
