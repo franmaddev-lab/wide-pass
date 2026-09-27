@@ -1,7 +1,15 @@
 export type Collection = 'family' | 'serious' | 'funny' | 'signs'
 export type Art = 'vest' | 'tee' | 'sticker' | 'bell' | 'tote' | 'band'
 // A road-sign graphic printed in place of the slogan text
-export type SignPrint = 'round' | 'triangle' | 'octagon' | 'set'
+export type SignPrint =
+  | 'space' // blue sign: car, gap arrow, bike
+  | 'cyclist' // warning triangle with a cyclist
+  | 'heart' // warning triangle with a heart
+  | 'eye' // warning triangle with an eye
+  | 'octagon' // red octagon reading SLOW DOWN
+  | 'no-phone' // prohibition sign over a phone
+  | 'no-horn' // prohibition sign over a horn
+  | 'set' // several signs, for the sticker pack
 export type Color = { name: string; hex: string; ink: string }
 
 const HI_VIS: Color[] = [
@@ -81,6 +89,7 @@ export type Slogan = {
 }
 
 export const slogans: Slogan[] = [
+  // Family
   {
     id: 'i-could-be-your',
     text: 'I could be your {}',
@@ -103,10 +112,43 @@ export const slogans: Slogan[] = [
       maxLength: 14,
     },
   },
+  {
+    id: 'somebodys',
+    text: 'I’m somebody’s {}',
+    collection: 'family',
+    personalise: {
+      label: 'Whose are you?',
+      default: 'mum',
+      suggestions: ['mum', 'dad', 'kid', 'sister', 'brother', 'grandma', 'whole world'],
+      maxLength: 14,
+    },
+  },
+  {
+    id: 'home-for-dinner',
+    text: '{} wants me home for dinner',
+    collection: 'family',
+    personalise: {
+      label: 'Who wants you home?',
+      default: 'Mum',
+      suggestions: ['Mum', 'Nonna', 'My kids', 'My partner', 'The dog'],
+      maxLength: 12,
+    },
+  },
+  { id: 'loves-me', text: 'Somebody loves me. Drive like it.', collection: 'family' },
+  { id: 'kids-ride-here', text: 'Drive like your kids ride here', collection: 'family' },
+
+  // Serious
   { id: 'pass-wide', text: 'Pass wide. Pass slow.', collection: 'serious' },
   { id: 'i-am-traffic', text: 'I’m not in your way. I am traffic.', collection: 'serious' },
-  { id: 'space-life', text: '1.5 m of space = 1 life', collection: 'serious' },
   { id: 'share-the-road', text: 'Share the road', collection: 'serious' },
+  { id: 'not-worth-it', text: 'Your hurry is not worth my life', collection: 'serious' },
+  { id: 'few-seconds', text: 'Slow down. It’s only a few seconds.', collection: 'serious' },
+  { id: 'same-rights', text: 'Same road. Same rights.', collection: 'serious' },
+  { id: 'a-person', text: 'Not a cyclist. A person.', collection: 'serious' },
+  { id: 'wait-then-pass', text: 'No space? Wait. Then pass wide.', collection: 'serious' },
+  { id: 'get-home', text: 'We’re all just trying to get home', collection: 'serious' },
+
+  // Funny
   { id: 'jealous-calves', text: 'Honk if you’re jealous of my calves', collection: 'funny' },
   {
     id: 'powered-by',
@@ -120,14 +162,38 @@ export const slogans: Slogan[] = [
     },
   },
   {
+    id: 'brake-for',
+    text: 'I brake for {}',
+    collection: 'funny',
+    personalise: {
+      label: 'What do you brake for?',
+      default: 'gelato',
+      suggestions: ['gelato', 'espresso', 'cats', 'bakeries', 'sunsets'],
+      maxLength: 12,
+    },
+  },
+  {
     id: 'legs-engine',
     text: 'My legs are my engine. Please don’t scratch the paint.',
     collection: 'funny',
   },
   { id: 'coffee-not-cars', text: 'I stop for coffee, not for cars', collection: 'funny' },
-  { id: 'keep-distance', text: 'Keep 1.5 m', collection: 'signs', sign: 'round' },
-  { id: 'cyclist-ahead', text: 'Cyclist ahead', collection: 'signs', sign: 'triangle' },
-  { id: 'slow-down', text: 'Slow down', collection: 'signs', sign: 'octagon' },
+  { id: 'sightseeing', text: 'I’m not slow. I’m sightseeing.', collection: 'funny' },
+  { id: 'one-less-car', text: 'One less car. You’re welcome.', collection: 'funny' },
+  { id: 'saving-planet', text: 'Stuck behind me? I’m saving the planet.', collection: 'funny' },
+  { id: 'other-car', text: 'My other car is also a bike', collection: 'funny' },
+  { id: 'just-wave', text: 'Honk if you love cyclists. Actually, just wave.', collection: 'funny' },
+  { id: 'traffic-jam', text: 'Faster than your traffic jam', collection: 'funny' },
+  { id: 'may-stop', text: 'Warning: may stop for coffee at any moment', collection: 'funny' },
+
+  // Road signs: every sign carries a caption, so it reads without knowing the rules
+  { id: 'give-space', text: 'Give me space', collection: 'signs', sign: 'space' },
+  { id: 'cyclist-ahead', text: 'Cyclist ahead. Slow down.', collection: 'signs', sign: 'cyclist' },
+  { id: 'human-on-board', text: 'Human on board', collection: 'signs', sign: 'heart' },
+  { id: 'slow-down', text: 'It only costs you seconds', collection: 'signs', sign: 'octagon' },
+  { id: 'eyes-on-road', text: 'Eyes on the road', collection: 'signs', sign: 'no-phone' },
+  { id: 'no-honk', text: 'No need to honk. I see you.', collection: 'signs', sign: 'no-horn' },
+  { id: 'look-twice', text: 'Look twice. Save a life.', collection: 'signs', sign: 'eye' },
 ]
 
 export function getSlogan(id: string | undefined) {
@@ -196,7 +262,7 @@ export const gadgets: Gadget[] = [
     colors: [{ name: 'Mixed', hex: '#e8f525', ink: '#111111' }],
     sizes: ONE_SIZE,
     description:
-      'Eight weatherproof stickers shaped like road signs: 1.5 m, cyclist ahead, slow down and more.',
+      'Eight weatherproof road-sign stickers: give me space, cyclist ahead, slow down, eyes on the road and more.',
   },
   {
     slug: 'ding-ding-be-kind-bell',

@@ -20,7 +20,7 @@ import {
 const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number }[] = [
   { garment: 'vest', slogan: 'i-could-be-your', custom: 'sister', color: 0 },
   { garment: 'vest', slogan: 'jealous-calves', color: 1 },
-  { garment: 'vest', slogan: 'keep-distance', color: 0 },
+  { garment: 'vest', slogan: 'give-space', color: 0 },
   { garment: 'tee', slogan: 'powered-by', custom: 'pasta', color: 0 },
 ]
 
@@ -43,9 +43,9 @@ const TILES: Record<
   funny: { art: 'tee', text: 'Powered by pasta', color: '#f4f4f0', className: 'bg-volt text-ink' },
   signs: {
     art: 'vest',
-    text: 'Keep 1.5 m',
+    text: 'Give me space',
     color: '#e8f525',
-    sign: 'round',
+    sign: 'space',
     className: 'bg-asphalt text-paper',
   },
 }
@@ -93,7 +93,7 @@ export default function Home() {
 
       <section className="overflow-hidden border-b-2 border-ink bg-ink py-3 text-paper">
         <p className="font-display text-lg tracking-wide whitespace-nowrap uppercase">
-          Pass wide · Pass slow · I am traffic · Keep 1.5 m · Someone is waiting for me at home ·
+          Pass wide · Pass slow · I am traffic · Give me space · Someone is waiting for me at home ·
           Ding ding, be kind · Slow down · Pass wide · Pass slow
         </p>
       </section>

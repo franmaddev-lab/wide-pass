@@ -47,72 +47,153 @@ const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w: numbe
 }
 
 const SIGN_RED = '#c8102e'
+const SIGN_BLUE = '#1d4f91'
+const INK = '#1b1b1b'
 const FONT = 'var(--font-archivo), system-ui, sans-serif'
 
-// Road-sign graphics drawn centred on (cx, cy) with outer radius r
-function Sign({
-  kind,
-  cx,
-  cy,
-  r,
-}: {
-  kind: Exclude<SignPrint, 'set'>
-  cx: number
-  cy: number
-  r: number
-}) {
-  if (kind === 'round') {
-    return (
-      <g>
-        <circle cx={cx} cy={cy} r={r} fill="#ffffff" stroke="#1b1b1b" strokeWidth="1.5" />
-        <circle cx={cx} cy={cy} r={r * 0.82} fill="none" stroke={SIGN_RED} strokeWidth={r * 0.28} />
-        <text
-          x={cx}
-          y={cy + r * 0.17}
-          textAnchor="middle"
-          fontFamily={FONT}
-          fontSize={r * 0.48}
-          fill="#1b1b1b"
-        >
-          1.5m
-        </text>
-      </g>
-    )
+type SignKind = Exclude<SignPrint, 'set'>
+
+// Each sign is drawn in a 100×100 box, then scaled to radius r around (cx, cy)
+function SignBody({ kind }: { kind: SignKind }) {
+  const triangle = (
+    <path
+      d="M50 6 L96 88 L4 88 Z"
+      fill="#ffffff"
+      stroke={SIGN_RED}
+      strokeWidth="9"
+      strokeLinejoin="round"
+    />
+  )
+  const prohibition = (children: React.ReactNode) => (
+    <g>
+      <circle cx="50" cy="50" r="46" fill="#ffffff" />
+      {children}
+      <circle cx="50" cy="50" r="41" fill="none" stroke={SIGN_RED} strokeWidth="10" />
+      <line x1="21" y1="21" x2="79" y2="79" stroke={SIGN_RED} strokeWidth="10" />
+    </g>
+  )
+
+  switch (kind) {
+    case 'space':
+      return (
+        <g>
+          <rect
+            x="3"
+            y="14"
+            width="94"
+            height="72"
+            rx="8"
+            fill={SIGN_BLUE}
+            stroke="#ffffff"
+            strokeWidth="3"
+          />
+          {/* car */}
+          <path d="M10 64 L10 54 L17 54 L23 45 L36 45 L42 54 L46 56 L46 64 Z" fill="#ffffff" />
+          <circle cx="18" cy="65" r="5" fill={SIGN_BLUE} stroke="#ffffff" strokeWidth="3" />
+          <circle cx="38" cy="65" r="5" fill={SIGN_BLUE} stroke="#ffffff" strokeWidth="3" />
+          {/* gap arrow */}
+          <g
+            stroke="#ffffff"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          >
+            <line x1="50" y1="34" x2="66" y2="34" />
+            <path d="M54 29 L49 34 L54 39 M62 29 L67 34 L62 39" />
+          </g>
+          {/* bike */}
+          <g
+            stroke="#ffffff"
+            strokeWidth="3"
+            fill="none"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          >
+            <circle cx="70" cy="64" r="7" />
+            <circle cx="90" cy="64" r="7" />
+            <path d="M70 64 L77 54 L87 54 L90 64 M77 54 L81 64 L87 54 M82 48 L78 54" />
+          </g>
+          <circle cx="85" cy="44" r="3.5" fill="#ffffff" />
+        </g>
+      )
+    case 'cyclist':
+      return (
+        <g>
+          {triangle}
+          <g fill="none" stroke={INK} strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
+            <circle cx="36" cy="72" r="9" />
+            <circle cx="64" cy="72" r="9" />
+            <path d="M36 72 L46 58 L60 58 L64 72 M46 58 L52 72 L60 58 M53 50 L48 58" />
+          </g>
+          <circle cx="56" cy="46" r="4" fill={INK} />
+        </g>
+      )
+    case 'heart':
+      return (
+        <g>
+          {triangle}
+          <path
+            d="M50 78 C30 64 30 48 40 46 C45 45 49 48 50 52 C51 48 55 45 60 46 C70 48 70 64 50 78 Z"
+            fill={SIGN_RED}
+          />
+        </g>
+      )
+    case 'eye':
+      return (
+        <g>
+          {triangle}
+          <path d="M28 64 Q50 44 72 64 Q50 84 28 64 Z" fill="none" stroke={INK} strokeWidth="4" />
+          <circle cx="50" cy="64" r="7" fill={INK} />
+        </g>
+      )
+    case 'octagon':
+      return (
+        <g>
+          <path
+            d="M30 4 L70 4 L96 30 L96 70 L70 96 L30 96 L4 70 L4 30 Z"
+            fill={SIGN_RED}
+            stroke="#ffffff"
+            strokeWidth="4"
+          />
+          <text textAnchor="middle" fontFamily={FONT} fontSize="21" fill="#ffffff">
+            <tspan x="50" y="47">
+              SLOW
+            </tspan>
+            <tspan x="50" y="70">
+              DOWN
+            </tspan>
+          </text>
+        </g>
+      )
+    case 'no-phone':
+      return prohibition(
+        <g>
+          <rect x="37" y="24" width="26" height="52" rx="5" fill={INK} />
+          <rect x="41" y="31" width="18" height="34" rx="1" fill="#ffffff" />
+        </g>
+      )
+    case 'no-horn':
+      return prohibition(
+        <g fill={INK}>
+          <path d="M24 42 L40 42 L64 26 L64 74 L40 58 L24 58 Z" />
+          <path
+            d="M70 38 Q78 50 70 62"
+            fill="none"
+            stroke={INK}
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+        </g>
+      )
   }
-  if (kind === 'octagon') {
-    const k = r * 0.41
-    const d = `M${cx - k} ${cy - r} L${cx + k} ${cy - r} L${cx + r} ${cy - k} L${cx + r} ${cy + k} L${cx + k} ${cy + r} L${cx - k} ${cy + r} L${cx - r} ${cy + k} L${cx - r} ${cy - k} Z`
-    return (
-      <g>
-        <path d={d} fill={SIGN_RED} stroke="#ffffff" strokeWidth={r * 0.08} />
-        <text textAnchor="middle" fontFamily={FONT} fontSize={r * 0.4} fill="#ffffff">
-          <tspan x={cx} y={cy - r * 0.05}>
-            SLOW
-          </tspan>
-          <tspan x={cx} y={cy + r * 0.42}>
-            DOWN
-          </tspan>
-        </text>
-      </g>
-    )
-  }
-  // triangle with a cyclist pictogram
-  const s = r / 40
+}
+
+function Sign({ kind, cx, cy, r }: { kind: SignKind; cx: number; cy: number; r: number }) {
+  const s = (r * 2) / 100
   return (
-    <g transform={`translate(${cx - 50 * s} ${cy - 50 * s}) scale(${s})`}>
-      <path
-        d="M50 8 L94 86 L6 86 Z"
-        fill="#ffffff"
-        stroke={SIGN_RED}
-        strokeWidth="9"
-        strokeLinejoin="round"
-      />
-      <g fill="none" stroke="#1b1b1b" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
-        <circle cx="36" cy="70" r="9" />
-        <circle cx="64" cy="70" r="9" />
-        <path d="M36 70 L46 56 L60 56 L64 70 M46 56 L52 70 L60 56 M53 48 L48 56" />
-      </g>
-      <circle cx="56" cy="44" r="4" fill="#1b1b1b" />
+    <g transform={`translate(${cx - r} ${cy - r}) scale(${s})`}>
+      <SignBody kind={kind} />
     </g>
   )
 }
@@ -133,14 +214,20 @@ export default function ProductArt({
   className?: string
 }) {
   const shape = SHAPES[art]
-  const lines = wrap(slogan, shape.text.w)
-  const size = art === 'band' ? 9 : lines.length > 4 ? 9 : 11
-  const start = shape.text.y - ((lines.length - 1) * size * 1.15) / 2
   const { x, y } = shape.text
+
+  // Signs sit above a small caption (the slogan) so they explain themselves
+  const signed = sign && sign !== 'set'
+  const lines = wrap(slogan, signed ? 16 : shape.text.w)
+  const size = signed ? 8.5 : art === 'band' ? 9 : lines.length > 4 ? 9 : 11
+  const signR = 23
+  const signY = y - 20
+  const textY = signed ? signY + signR + 14 : y
+  const start = textY - ((lines.length - 1) * size * 1.15) / 2
 
   return (
     <svg viewBox="0 0 200 200" role="img" aria-label={`${slogan}`} className={className}>
-      <path d={shape.path} fill={color} stroke="#1b1b1b" strokeWidth="2" fillRule="evenodd" />
+      <path d={shape.path} fill={color} stroke={INK} strokeWidth="2" fillRule="evenodd" />
       {art === 'vest' && (
         <g stroke="#cfd3d8" strokeWidth="5" opacity="0.9">
           <line x1="46" y1="158" x2="154" y2="158" />
@@ -149,28 +236,30 @@ export default function ProductArt({
       )}
       {sign === 'set' ? (
         <g>
-          <Sign kind="round" cx={70} cy={76} r={26} />
-          <Sign kind="triangle" cx={130} cy={78} r={28} />
-          <Sign kind="octagon" cx={100} cy={132} r={28} />
+          <Sign kind="space" cx={70} cy={74} r={26} />
+          <Sign kind="cyclist" cx={130} cy={74} r={26} />
+          <Sign kind="no-phone" cx={72} cy={128} r={22} />
+          <Sign kind="octagon" cx={128} cy={128} r={24} />
         </g>
-      ) : sign ? (
-        <Sign kind={sign} cx={x} cy={y - 4} r={art === 'tee' ? 30 : 28} />
       ) : (
-        <text
-          x={x}
-          textAnchor="middle"
-          fill={ink}
-          fontFamily={FONT}
-          fontWeight={800}
-          fontSize={size}
-          letterSpacing="0.3"
-        >
-          {lines.map((l, i) => (
-            <tspan key={i} x={x} y={start + i * size * 1.15 + size / 3}>
-              {l}
-            </tspan>
-          ))}
-        </text>
+        <>
+          {signed && <Sign kind={sign} cx={x} cy={signY} r={signR} />}
+          <text
+            x={x}
+            textAnchor="middle"
+            fill={ink}
+            fontFamily={FONT}
+            fontWeight={800}
+            fontSize={size}
+            letterSpacing="0.3"
+          >
+            {lines.map((l, i) => (
+              <tspan key={i} x={x} y={start + i * size * 1.15 + size / 3}>
+                {l}
+              </tspan>
+            ))}
+          </text>
+        </>
       )}
     </svg>
   )
