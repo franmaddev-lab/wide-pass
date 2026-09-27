@@ -49,10 +49,10 @@ const STEPS = [
 
 // Ready-made designs shown as a starting point; each opens the designer preset
 const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number }[] = [
-  { garment: 'vest', slogan: 'i-could-be-your', custom: 'sister', color: 0 },
-  { garment: 'vest', slogan: 'jealous-calves', color: 0 },
-  { garment: 'vest', slogan: 'give-space', color: 0 },
-  { garment: 'vest', slogan: 'powered-by', custom: 'pasta', color: 0 },
+  { garment: 'tee', slogan: 'i-could-be-your', custom: 'sister', color: 0 },
+  { garment: 'tee', slogan: 'jealous-calves', color: 0 },
+  { garment: 'tee', slogan: 'give-space', color: 0 },
+  { garment: 'tee', slogan: 'powered-by', custom: 'pasta', color: 0 },
 ]
 
 const TILES: Record<

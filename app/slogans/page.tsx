@@ -66,15 +66,24 @@ export default async function SlogansPage({
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <p className="text-sm font-bold tracking-widest uppercase">
-        {garment ? `Pick a message for your ${garment.name.toLowerCase()}` : 'Pick a message'}
+        {garment ? `Pick your message for your ${garment.name.toLowerCase()}` : 'Pick your message'}
       </p>
       <h1 className="mt-1 font-display text-4xl uppercase">
-        {collection ? collections[collection].label : 'All slogans'}
+        {collection ? collections[collection].label : 'Slogans'}
       </h1>
       <p className="mt-2 max-w-xl text-asphalt">
         {collection
           ? collections[collection].blurb
-          : 'Choose a slogan, then swipe to see it on every piece of gear. Some you can personalise.'}
+          : 'Choose the words, then what to print them on. Swipe a card to see it on all the gear.'}{' '}
+        {!garment && (
+          <>
+            Prefer to start with the gear?{' '}
+            <Link href="/shop" className="font-semibold underline">
+              Browse gear
+            </Link>
+            .
+          </>
+        )}
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
