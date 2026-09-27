@@ -14,28 +14,16 @@ import {
   getGarment,
   getSlogan,
   sloganText,
+  slogans,
   type Art,
   type Collection,
   type GarmentId,
   type SignPrint,
 } from '@/lib/catalog'
 
-// The hero headline rotates through these on every visit
-const HERO: { slogan: string; custom?: string }[] = [
-  { slogan: 'i-could-be-your', custom: 'sister' },
-  { slogan: 'pass-wide' },
-  { slogan: 'give-space' },
-  { slogan: 'loves-me' },
-  { slogan: 'a-person' },
-  { slogan: 'not-worth-it' },
-  { slogan: 'same-rights' },
-  { slogan: 'jealous-calves' },
-  { slogan: 'powered-by', custom: 'pasta' },
-  { slogan: 'i-could-be-your', custom: 'mum' },
-  { slogan: 'somebodys', custom: 'mum' },
-  { slogan: 'brake-for', custom: 'gelato' },
-  { slogan: 'is-watching', custom: 'nonna' },
-]
+// The hero headline picks one of the slogans with a blank on every visit, so it
+// can animate ("I could be your ___" types through sister, brother, mum…)
+const HERO = slogans.filter((s) => s.personalise)
 
 // Called after connection(), so it runs once per request rather than at build time
 function randomHero() {
@@ -95,7 +83,7 @@ export default async function Home() {
   return (
     <>
       <section className="border-b-2 border-ink bg-ink text-paper">
-        <HeroSlogan sloganId={pick.slogan} custom={pick.custom}>
+        <HeroSlogan sloganId={pick.id}>
           <p className="mt-5 max-w-md text-lg">
             Hi-vis vests, tees, rain jackets and more, with slogans (funny, serious, or your own
             words) that remind drivers there’s a person on that bike.
