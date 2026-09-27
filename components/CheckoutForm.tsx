@@ -21,7 +21,7 @@ async function submit(prev: CheckoutState, form: FormData) {
   return result
 }
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ payments }: { payments: boolean }) {
   const cart = useCart()
   const [state, action, pending] = useActionState(submit, { status: 'idle' })
 
@@ -34,7 +34,7 @@ export default function CheckoutForm() {
           email {state.email} when it ships.
         </p>
         <p className="mt-3">Now go ride, and be seen.</p>
-        <Link href="/shop" className="mt-6 inline-block font-semibold underline">
+        <Link href="/slogans" className="mt-6 inline-block font-semibold underline">
           Keep shopping
         </Link>
       </div>
@@ -57,18 +57,19 @@ export default function CheckoutForm() {
   return (
     <form action={action} className="mt-8 space-y-4">
       <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-      {FIELDS.map((f) => (
-        <label key={f.name} className="block">
-          <span className="text-sm font-bold uppercase">{f.label}</span>
-          <input
-            name={f.name}
-            type={f.type ?? 'text'}
-            autoComplete={f.autoComplete}
-            required
-            className="mt-1 block w-full rounded-lg border-2 border-ink bg-white px-3 py-2"
-          />
-        </label>
-      ))}
+      {!payments &&
+        FIELDS.map((f) => (
+          <label key={f.name} className="block">
+            <span className="text-sm font-bold uppercase">{f.label}</span>
+            <input
+              name={f.name}
+              type={f.type ?? 'text'}
+              autoComplete={f.autoComplete}
+              required
+              className="mt-1 block w-full rounded-lg border-2 border-ink bg-white px-3 py-2"
+            />
+          </label>
+        ))}
 
       <div className="rounded-2xl border-2 border-ink bg-white p-4">
         <div className="flex justify-between">
@@ -91,14 +92,27 @@ export default function CheckoutForm() {
         </p>
       )}
 
-      <p className="text-sm text-muted">Demo store: no payment is taken yet.</p>
+      {payments ? (
+        <p className="text-sm text-muted">
+          You’ll add your delivery address and pay on Stripe’s secure page: card, Apple Pay or
+          Google Pay.
+        </p>
+      ) : (
+        <p className="text-sm text-muted">Demo store: no payment is taken yet.</p>
+      )}
 
       <button
         type="submit"
         disabled={pending}
         className="w-full rounded-full border-2 border-ink bg-ink px-6 py-4 font-display text-lg text-volt uppercase disabled:opacity-60"
       >
-        {pending ? 'Placing order…' : 'Place order'}
+        {pending
+          ? payments
+            ? 'Opening secure payment…'
+            : 'Placing order…'
+          : payments
+            ? `Pay securely · ${formatPrice(subtotal + shippingFor(subtotal))}`
+            : 'Place order'}
       </button>
     </form>
   )

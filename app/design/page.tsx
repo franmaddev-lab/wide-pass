@@ -1,17 +1,40 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import Designer from '@/components/Designer'
-import { getGarment, getSlogan } from '@/lib/catalog'
+import { cleanCustom, getGarment, getSlogan, sloganText } from '@/lib/catalog'
 
-export const metadata: Metadata = { title: 'Make it yours — Wide Pass' }
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+const one = (v: string | string[] | undefined) => (typeof v === 'string' ? v : undefined)
 
-export default async function DesignPage({
+// Each design gets its own link preview, so a shared link shows the actual slogan
+export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
+  searchParams: SearchParams
+}): Promise<Metadata> {
   const sp = await searchParams
-  const one = (v: string | string[] | undefined) => (typeof v === 'string' ? v : undefined)
+  const slogan = getSlogan(one(sp.slogan))
+  if (!slogan) return { title: 'Make it yours — Wide Pass' }
+  const garment = getGarment(one(sp.garment)) ?? getGarment('vest')!
+  const custom = cleanCustom(slogan, one(sp.text)?.slice(0, 40)) ?? undefined
+  const text = sloganText(slogan, custom)
+  const image = `/og?${new URLSearchParams({
+    slogan: slogan.id,
+    garment: garment.id,
+    ...(slogan.personalise && custom ? { text: custom } : {}),
+  })}`
+  const title = `“${text}” on ${garment.withArticle}`
+  const description = 'Cycling gear that reminds drivers there’s a person on that bike. Make yours.'
+  return {
+    title: `${title} — Wide Pass`,
+    description,
+    openGraph: { title, description, images: [{ url: image, width: 1200, height: 630 }] },
+    twitter: { card: 'summary_large_image', title, description, images: image },
+  }
+}
+
+export default async function DesignPage({ searchParams }: { searchParams: SearchParams }) {
+  const sp = await searchParams
 
   const garment = getGarment(one(sp.garment))?.id
   const slogan = getSlogan(one(sp.slogan))?.id

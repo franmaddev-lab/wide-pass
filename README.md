@@ -18,20 +18,20 @@ There are two ways to shop, and both end on the same short design page:
 - **Slogan first:** `/slogans` → pick a message → choose what to print it on
 - **Gear first:** `/shop` → pick a garment → `/slogans?garment=…` → choose a message
 
-Some slogans have a blank the buyer fills in (“I could be your ___”, “Powered by ___”).
+Some slogans have a blank the buyer fills in (“I could be your **_”, “Powered by _**”).
 
-| Page | What it does |
-| --- | --- |
-| `/` | Hero, the two ways to shop, popular designs, the four collections |
-| `/slogans` | All slogans with search (`?q=`), sorting (`?sort=popular\|new\|az`), filter with `?collection=family\|serious\|funny\|signs` |
-| `/shop` | The six garments: hi-vis vest, tank top, t-shirt, long-sleeve shirt, rain jacket, bag rain cover |
-| `/design` | After a slogan is picked: fill in the blank (if any), vest or tee, colour and size. Needs `?slogan=`; also takes `garment` and `text` |
-| `/shop/[slug]` | Gadget pages (bell, stickers, tote…). Paused: no longer linked from the shop |
-| `/cart` | Cart (saved in the browser's localStorage), free shipping over £50 |
-| `/checkout` | Shipping form; a server action re-checks and re-prices every line |
-| `/about` | The mission |
-| `/suggest` | Visitors suggest slogans and vote (one vote per browser); sort by most votes or newest |
-| `/favourites` | Everything the visitor has hearted (saved in their browser) |
+| Page           | What it does                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`            | Hero, the two ways to shop, popular designs, the four collections                                                                     |
+| `/slogans`     | All slogans with search (`?q=`), sorting (`?sort=popular\|new\|az`), filter with `?collection=family\|serious\|funny\|signs`          |
+| `/shop`        | The six garments: hi-vis vest, tank top, t-shirt, long-sleeve shirt, rain jacket, bag rain cover                                      |
+| `/design`      | After a slogan is picked: fill in the blank (if any), vest or tee, colour and size. Needs `?slogan=`; also takes `garment` and `text` |
+| `/shop/[slug]` | Gadget pages (bell, stickers, tote…). Paused: no longer linked from the shop                                                          |
+| `/cart`        | Cart (saved in the browser's localStorage), free shipping over £50                                                                    |
+| `/checkout`    | Shipping form; a server action re-checks and re-prices every line                                                                     |
+| `/about`       | The mission                                                                                                                           |
+| `/suggest`     | Visitors suggest slogans and vote (one vote per browser); sort by most votes or newest                                                |
+| `/favourites`  | Everything the visitor has hearted (saved in their browser)                                                                           |
 
 - **Garments, slogans and gadgets:** edit `lib/catalog.ts`. Prices are in pence (GBP).
   A slogan with `{}` in its text and a `personalise` block gets a fill-in-the-blank.
@@ -76,3 +76,24 @@ To turn a winning idea into a product, add it to `lib/slogan-library.ts`.
 - **Orders:** orders aren't stored or emailed anywhere yet.
 - **Stock and fulfilment:** a print-on-demand service (Printful, Printify, etc.)
   could print and ship vests and tees without you holding stock.
+
+## Payments (Stripe)
+
+Set `STRIPE_SECRET_KEY` in Vercel → Settings → Environment Variables (`sk_test_…` to try it,
+`sk_live_…` for real money). Without it, checkout runs in demo mode and takes no payment.
+Apple Pay and Google Pay appear on Stripe's checkout page once switched on in
+Stripe → Settings → Payment methods. Orders (items, slogan text, size, colour, address) show up
+in the Stripe dashboard under Payments.
+
+## Sharing
+
+- Every design has its own link preview image (`/og`), so shared links show the slogan.
+- Short share links: `/s/<slogan>/<word>?on=<garment>`, e.g. `/s/i-could-be-your/mum`.
+- Link-in-bio page for Instagram/TikTok: `/links`.
+- Set `NEXT_PUBLIC_SITE_URL` when you move to your own domain.
+
+## Before launch
+
+- Fill in `business` in `lib/site.ts` (name, address, email) and the social URLs.
+- Replace the size chart in `lib/sizes.ts` with your supplier's.
+- Have the draft pages under `/legal` checked, then remove `DraftNotice`.

@@ -5,12 +5,15 @@ import { useState } from 'react'
 import FavouriteButton from './FavouriteButton'
 import ProductArt from './ProductArt'
 import RealPhotos from './RealPhotos'
+import ShareButton from './ShareButton'
+import SizeChart from './SizeChart'
 import { addToCart } from '@/lib/cart'
 import {
   cleanCustom,
   formatPrice,
   garments,
   getGarment,
+  shareHref,
   getSlogan,
   sloganTemplate,
   sloganText,
@@ -47,6 +50,7 @@ export default function Designer({
   const [size, setSize] = useState('')
   const [status, setStatus] = useState<'idle' | 'added' | 'no-size'>('idle')
   const [showMore, setShowMore] = useState(false)
+  const [showSizes, setShowSizes] = useState(false)
 
   const garment = getGarment(garmentId)!
   const color = garment.colors.find((c) => c.name === colorName) ?? garment.colors[0]
@@ -85,6 +89,15 @@ export default function Designer({
             ink={color.ink}
             sign={slogan.sign}
             className="mx-auto aspect-square h-[20vh] max-w-md md:h-auto md:w-full"
+          />
+          <ShareButton
+            path={shareHref({
+              slogan: slogan.id,
+              custom: slogan.personalise && cleaned ? cleaned : undefined,
+              garment: garment.id,
+            })}
+            text={`“${text}” Make yours:`}
+            className="absolute top-2 left-2 md:top-3 md:left-3"
           />
           <FavouriteButton
             item={`slogan:${slogan.id}`}
@@ -214,7 +227,18 @@ export default function Designer({
           </div>
 
           <div>
-            <Label>Size{size ? `: ${size}` : ''}</Label>
+            <div className="flex items-baseline gap-2">
+              <Label>Size{size ? `: ${size}` : ''}</Label>
+              <button
+                type="button"
+                onClick={() => setShowSizes((v) => !v)}
+                aria-expanded={showSizes}
+                aria-controls="size-chart"
+                className="text-xs font-semibold underline"
+              >
+                {showSizes ? 'Hide guide' : 'Size guide'}
+              </button>
+            </div>
             <div className="mt-1.5 flex flex-wrap gap-1 md:mt-2 md:gap-2">
               {garment.sizes.map((s) => (
                 <button
@@ -232,6 +256,8 @@ export default function Designer({
             </div>
           </div>
         </div>
+
+        {showSizes && <SizeChart id="size-chart" garment={garment.id} />}
 
         {/* On phones this bar is pinned to the bottom of the screen */}
         <div className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-ink bg-paper px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:static md:border-0 md:p-0">

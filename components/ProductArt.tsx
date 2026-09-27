@@ -19,7 +19,7 @@ function wrap(text: string, maxChars: number) {
   return out
 }
 
-const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w: number } }> = {
+export const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w: number } }> = {
   tee: {
     path: 'M70 22 L52 28 L18 52 L32 80 L50 70 L50 180 L150 180 L150 70 L168 80 L182 52 L148 28 L130 22 Q100 44 70 22 Z',
     text: { x: 100, y: 105, w: 12 },

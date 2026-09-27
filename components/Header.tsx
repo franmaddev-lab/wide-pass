@@ -22,6 +22,9 @@ export default function Header() {
           <Link href="/suggest" className="hover:underline">
             You
           </Link>
+          <Link href="/us" className="hover:underline">
+            Us
+          </Link>
           <FavouritesLink />
           <CartLink />
         </nav>

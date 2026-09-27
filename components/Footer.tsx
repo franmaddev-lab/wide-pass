@@ -26,14 +26,36 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/about" className="hover:text-volt">
-              Why we do this
+            <Link href="/us" className="hover:text-volt">
+              Us: why we do this
+            </Link>
+          </li>
+          <li>
+            <Link href="/sizes" className="hover:text-volt">
+              Size guide
             </Link>
           </li>
         </ul>
         <div className="space-y-3 text-sm">
           <SocialLinks variant="plain" />
           <p className="text-paper/70">Free shipping on orders over £50. Ride safe, ride seen.</p>
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 text-paper/70">
+            <li>
+              <Link href="/legal/terms" className="hover:text-volt">
+                Terms
+              </Link>
+            </li>
+            <li>
+              <Link href="/legal/returns" className="hover:text-volt">
+                Delivery &amp; returns
+              </Link>
+            </li>
+            <li>
+              <Link href="/legal/privacy" className="hover:text-volt">
+                Privacy
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>
