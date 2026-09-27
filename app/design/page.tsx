@@ -21,7 +21,7 @@ export default async function DesignPage({
   if (!slogan) redirect(garment ? `/slogans?garment=${garment}` : '/slogans')
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
+    <div className="mx-auto max-w-6xl px-4 pt-2 pb-10 md:py-10">
       {/* keyed so client-side navigation to another preset starts fresh */}
       <Designer
         key={`${garment}/${slogan}/${text ?? ''}`}

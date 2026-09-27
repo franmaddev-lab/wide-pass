@@ -100,7 +100,7 @@ export default function HeroSlogan({
         <p className="text-sm font-bold tracking-widest text-volt uppercase">
           Cycling apparel with a message
         </p>
-        <h1 className="mt-3 font-display text-4xl leading-[0.95] break-words uppercase min-[360px]:text-5xl sm:text-6xl">
+        <h1 className="mt-3 font-display text-4xl leading-[0.95] break-words uppercase min-[360px]:text-[2.5rem] sm:text-6xl">
           {/* while typing, keep the sentence steady for screen readers */}
           <span className="sr-only">{typing ? fullText : artText}</span>
           <span aria-hidden="true">{headline}</span>

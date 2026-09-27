@@ -74,16 +74,17 @@ export default function Designer({
   }
 
   return (
-    <div className="grid gap-10 md:grid-cols-2">
-      <div className="md:sticky md:top-20 md:self-start">
-        <div className="relative rounded-2xl border-2 border-ink bg-white p-8">
+    <div className="grid gap-6 md:grid-cols-2 md:gap-10">
+      {/* Pinned under the header so the preview stays in view while choosing */}
+      <div className="sticky top-[58px] z-10 -mx-4 self-start bg-paper px-4 pt-2 pb-3 md:top-20 md:mx-0 md:p-0">
+        <div className="relative rounded-2xl border-2 border-ink bg-white p-3 md:p-8">
           <ProductArt
             art={garment.art}
             slogan={text}
             color={color.hex}
             ink={color.ink}
             sign={slogan.sign}
-            className="mx-auto aspect-square w-full max-w-md"
+            className="mx-auto aspect-square h-[30vh] max-w-md md:h-auto md:w-full"
           />
           <FavouriteButton
             item={`slogan:${slogan.id}`}
@@ -93,10 +94,10 @@ export default function Designer({
         </div>
       </div>
 
-      <div className="space-y-7">
+      <div className="space-y-5 md:space-y-7">
         <div>
-          <h1 className="font-display text-3xl uppercase sm:text-4xl">“{text}”</h1>
-          <p className="mt-2 text-2xl font-bold">{formatPrice(garment.price)}</p>
+          <h1 className="font-display text-xl uppercase sm:text-4xl">“{text}”</h1>
+          <p className="mt-1 text-lg font-bold sm:mt-2 sm:text-2xl">{formatPrice(garment.price)}</p>
         </div>
 
         {slogan.personalise && (
@@ -202,7 +203,7 @@ export default function Designer({
         </div>
 
         <div>
-          <Label>Size</Label>
+          <Label>Size{size ? `: ${size}` : ''}</Label>
           <div className="mt-2 flex flex-wrap gap-2">
             {garment.sizes.map((s) => (
               <button

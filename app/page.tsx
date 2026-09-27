@@ -144,14 +144,12 @@ export default async function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
-            Popular designs
-          </h2>
-          <Link href="/slogans" className="font-semibold underline">
-            See all slogans
-          </Link>
-        </div>
+        <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
+          Popular designs
+        </h2>
+        <Link href="/slogans" className="mt-1 inline-block font-semibold underline">
+          See all slogans
+        </Link>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {POPULAR.map((p) => {
             const garment = getGarment(p.garment)!
@@ -182,14 +180,12 @@ export default async function Home() {
       <RealPhotos className="mx-auto max-w-6xl px-4 pt-14" />
 
       <section className="mx-auto max-w-6xl px-4 pt-14">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
-            Pick your message
-          </h2>
-          <Link href="/slogans" className="font-semibold underline">
-            See all slogans
-          </Link>
-        </div>
+        <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
+          Pick your message
+        </h2>
+        <Link href="/slogans" className="mt-1 inline-block font-semibold underline">
+          See all slogans
+        </Link>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {COLLECTIONS.map((c) => {
             const t = TILES[c]
@@ -220,14 +216,12 @@ export default async function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-14">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
-            Pick your gear
-          </h2>
-          <Link href="/shop" className="font-semibold underline">
-            Browse gear
-          </Link>
-        </div>
+        <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
+          Pick your gear
+        </h2>
+        <Link href="/shop" className="mt-1 inline-block font-semibold underline">
+          Browse gear
+        </Link>
         <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-6">
           {garments.map((g) => (
             <Link
