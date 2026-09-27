@@ -39,7 +39,7 @@ function randomHero() {
 
 const STEPS = [
   ['Say it', 'Pick your message: funny, serious, family or road signs.'],
-  ['Wear it', 'Pick your gear: vest, tank top, t-shirt, long sleeve or rain cover.'],
+  ['Wear it', 'Pick your gear: hi-vis vest, tee, tank, long sleeve, rain jacket or bag cover.'],
   ['Make it yours', 'Fill in the blank: “I could be your ___”.'],
 ]
 
@@ -53,7 +53,7 @@ const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: num
 
 const TILES: Record<
   Collection,
-  { art: Art; text: string; color: string; sign?: SignPrint; className: string }
+  { art: Art; text: string; color: string; ink?: string; sign?: SignPrint; className: string }
 > = {
   family: {
     art: 'vest',
@@ -65,9 +65,15 @@ const TILES: Record<
     art: 'vest',
     text: 'Pass wide. Pass slow.',
     color: '#e8f525',
-    className: 'bg-ink text-paper',
+    className: 'bg-white text-ink',
   },
-  funny: { art: 'tee', text: 'Powered by pasta', color: '#f4f4f0', className: 'bg-volt text-ink' },
+  funny: {
+    art: 'tee',
+    text: 'Powered by pasta',
+    color: '#1b1b1b',
+    ink: '#e8f525',
+    className: 'bg-white text-ink',
+  },
   signs: {
     art: 'vest',
     text: 'Give me space',
@@ -94,27 +100,29 @@ export default async function Home() {
             <p className="text-sm font-bold tracking-widest text-volt uppercase">
               Cycling apparel with a message
             </p>
-            <h1 className="mt-3 font-display text-5xl leading-[0.95] uppercase sm:text-6xl">
+            <h1 className="mt-3 font-display text-4xl leading-[0.95] break-words uppercase min-[360px]:text-5xl sm:text-6xl">
               {words.join(' ')} <span className="text-volt">{lastWord}</span>
             </h1>
             <p className="mt-5 max-w-md text-lg">
-              Hi-vis vests, tees, tanks and rain covers with slogans (funny, serious, or your own
+              Hi-vis vests, tees, rain jackets and more, with slogans (funny, serious, or your own
               words) that remind drivers there’s a person on that bike.
             </p>
-            <p className="mt-8 text-sm font-bold tracking-widest uppercase">Start with</p>
-            <div className="mt-3 flex flex-wrap gap-3">
-              <Link
-                href="/slogans"
-                className="rounded-full border-2 border-volt bg-volt px-7 py-3 font-display text-lg text-ink uppercase hover:bg-white"
-              >
-                The slogan
-              </Link>
-              <Link
-                href="/shop"
-                className="rounded-full border-2 border-paper px-7 py-3 font-display text-lg uppercase hover:bg-paper hover:text-ink"
-              >
-                The gear
-              </Link>
+            <div className="mt-8 inline-flex flex-col items-center">
+              <p className="text-sm font-bold tracking-widest uppercase">Start with</p>
+              <div className="mt-3 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/slogans"
+                  className="rounded-full border-2 border-volt bg-volt px-7 py-3 font-display text-lg text-ink uppercase hover:bg-white"
+                >
+                  The slogan
+                </Link>
+                <Link
+                  href="/shop"
+                  className="rounded-full border-2 border-paper px-7 py-3 font-display text-lg uppercase hover:bg-paper hover:text-ink"
+                >
+                  The gear
+                </Link>
+              </div>
             </div>
           </div>
           <Link
@@ -218,7 +226,7 @@ export default async function Home() {
                   art={t.art}
                   slogan={t.text}
                   color={t.color}
-                  ink="#111111"
+                  ink={t.ink ?? '#111111'}
                   sign={t.sign}
                   className="size-20 shrink-0 sm:size-28"
                 />

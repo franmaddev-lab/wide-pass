@@ -4,6 +4,7 @@ export type Art =
   | 'tank'
   | 'tee'
   | 'longsleeve'
+  | 'jacket'
   | 'raincover'
   | 'sticker'
   | 'bell'
@@ -44,7 +45,7 @@ const ONE_SIZE = ['One size']
 // ---------------------------------------------------------------------------
 // Garments: the blank "models" a slogan gets printed on
 
-export type GarmentId = 'vest' | 'tank' | 'tee' | 'longsleeve' | 'raincover'
+export type GarmentId = 'vest' | 'tank' | 'tee' | 'longsleeve' | 'jacket' | 'raincover'
 
 export type Garment = {
   id: GarmentId
@@ -101,9 +102,20 @@ export const garments: Garment[] = [
     description: 'For cool mornings and autumn commutes. Organic cotton, relaxed fit.',
   },
   {
+    id: 'jacket',
+    name: 'Rain jacket',
+    withArticle: 'a rain jacket',
+    art: 'jacket',
+    price: 4500,
+    colors: HI_VIS,
+    sizes: APPAREL_SIZES,
+    description:
+      'Waterproof hi-vis jacket with reflective strips. The slogan goes big on the back, where drivers look.',
+  },
+  {
     id: 'raincover',
-    name: 'Rain cover',
-    withArticle: 'a rain cover',
+    name: 'Bag rain cover',
+    withArticle: 'a bag rain cover',
     art: 'raincover',
     price: 2500,
     colors: HI_VIS,

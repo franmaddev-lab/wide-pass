@@ -36,6 +36,10 @@ const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w: numbe
     path: 'M70 22 L52 28 L24 60 L10 166 L32 170 L44 86 L50 78 L50 180 L150 180 L150 78 L156 86 L168 170 L190 166 L176 60 L148 28 L130 22 Q100 44 70 22 Z',
     text: { x: 100, y: 108, w: 12 },
   },
+  jacket: {
+    path: 'M80 14 Q100 4 120 14 L150 28 L178 62 L190 166 L168 170 L156 92 L152 86 L152 184 L48 184 L48 86 L44 92 L32 170 L10 166 L22 62 L50 28 Z',
+    text: { x: 100, y: 104, w: 12 },
+  },
   raincover: {
     path: 'M50 28 Q100 14 150 28 Q170 34 170 60 L168 164 Q168 186 146 188 L54 188 Q32 186 32 164 L30 60 Q30 34 50 28 Z',
     text: { x: 100, y: 102, w: 12 },
@@ -251,6 +255,14 @@ export default function ProductArt({
             opacity="0.5"
           />
           <line x1="34" y1="160" x2="166" y2="160" stroke="#cfd3d8" strokeWidth="6" opacity="0.9" />
+        </g>
+      )}
+      {art === 'jacket' && (
+        <g stroke="#cfd3d8" strokeWidth="5" opacity="0.9">
+          <line x1="50" y1="160" x2="150" y2="160" />
+          <line x1="50" y1="172" x2="150" y2="172" />
+          <line x1="14" y1="140" x2="30" y2="142" />
+          <line x1="186" y1="140" x2="170" y2="142" />
         </g>
       )}
       {art === 'vest' && (

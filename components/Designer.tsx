@@ -106,7 +106,7 @@ export default function Designer({
 
         <div>
           <Label>Print it on</Label>
-          <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-5">
+          <div className="mt-2 grid grid-cols-3 gap-2">
             {garments.map((g) => (
               <button
                 key={g.id}

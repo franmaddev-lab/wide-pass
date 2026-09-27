@@ -10,7 +10,7 @@ const body = Inter({ variable: '--font-inter', subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Wide Pass — cycling apparel with a message',
   description:
-    'Hi-vis vests, t-shirts, tank tops and rain covers with funny and serious slogans that remind drivers there is a person on that bike.',
+    'Hi-vis vests, t-shirts, tank tops, rain jackets and bag covers with funny and serious slogans that remind drivers there is a person on that bike.',
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

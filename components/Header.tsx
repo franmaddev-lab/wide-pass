@@ -20,7 +20,7 @@ export default function Header() {
             Shop
           </Link>
           <Link href="/suggest" className="hover:underline">
-            Suggest
+            You
           </Link>
           <FavouritesLink />
           <CartLink />
