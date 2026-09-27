@@ -74,30 +74,32 @@ export default function Designer({
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 md:gap-10">
+    <div className="grid gap-4 pb-24 md:grid-cols-2 md:gap-10 md:pb-0">
       {/* Pinned under the header so the preview stays in view while choosing */}
-      <div className="sticky top-[58px] z-10 -mx-4 self-start bg-paper px-4 pt-2 pb-3 md:top-20 md:mx-0 md:p-0">
-        <div className="relative rounded-2xl border-2 border-ink bg-white p-3 md:p-8">
+      <div className="sticky top-[58px] z-10 -mx-4 self-start bg-paper px-4 pt-2 pb-2 md:top-20 md:mx-0 md:p-0">
+        <div className="relative rounded-2xl border-2 border-ink bg-white p-2 md:p-8">
           <ProductArt
             art={garment.art}
             slogan={text}
             color={color.hex}
             ink={color.ink}
             sign={slogan.sign}
-            className="mx-auto aspect-square h-[30vh] max-w-md md:h-auto md:w-full"
+            className="mx-auto aspect-square h-[20vh] max-w-md md:h-auto md:w-full"
           />
           <FavouriteButton
             item={`slogan:${slogan.id}`}
             label={`“${sloganTemplate(slogan)}”`}
-            className="absolute top-3 right-3"
+            className="absolute top-2 right-2 md:top-3 md:right-3"
           />
         </div>
       </div>
 
-      <div className="space-y-5 md:space-y-7">
-        <div>
-          <h1 className="font-display text-xl uppercase sm:text-4xl">“{text}”</h1>
-          <p className="mt-1 text-lg font-bold sm:mt-2 sm:text-2xl">{formatPrice(garment.price)}</p>
+      <div className="min-w-0 space-y-4 md:space-y-7">
+        <div className="flex items-baseline justify-between gap-3 md:block">
+          <h1 className="font-display text-lg leading-tight uppercase sm:text-4xl">“{text}”</h1>
+          <p className="shrink-0 text-lg font-bold md:mt-2 md:text-2xl">
+            {formatPrice(garment.price)}
+          </p>
         </div>
 
         {slogan.personalise && (
@@ -111,14 +113,19 @@ export default function Designer({
               onChange={(e) => change(() => setCustom(e.target.value))}
               aria-invalid={invalid}
               aria-describedby={invalid ? 'custom-error' : undefined}
-              className="mt-2 block w-full rounded-lg border-2 border-ink bg-white px-3 py-2 text-lg"
+              className="mt-1.5 block w-full rounded-lg border-2 border-ink bg-white px-3 py-1.5 text-base md:mt-2 md:py-2 md:text-lg"
             />
             {invalid && (
               <p id="custom-error" className="mt-1 text-sm font-bold">
                 Letters, numbers and simple punctuation only.
               </p>
             )}
-            <div id="word-ideas" className="mt-2 flex flex-wrap gap-2">
+            <div
+              id="word-ideas"
+              className={`no-scrollbar mt-2 flex gap-1.5 md:flex-wrap md:gap-2 ${
+                showMore ? 'flex-wrap' : '-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0'
+              }`}
+            >
               {[
                 ...slogan.personalise.suggestions,
                 ...(showMore ? (slogan.personalise.more ?? []) : []),
@@ -128,31 +135,31 @@ export default function Designer({
                   type="button"
                   aria-pressed={cleaned === s}
                   onClick={() => change(() => setCustom(s))}
-                  className={`rounded-full border-2 border-ink px-3 py-1 text-sm font-semibold ${
+                  className={`shrink-0 rounded-full border-2 border-ink px-3 py-1 text-sm font-semibold ${
                     cleaned === s ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
                   }`}
                 >
                   {s}
                 </button>
               ))}
+              {slogan.personalise.more && (
+                <button
+                  type="button"
+                  onClick={() => setShowMore((v) => !v)}
+                  aria-expanded={showMore}
+                  aria-controls="word-ideas"
+                  className="shrink-0 rounded-full px-2 py-1 text-sm font-semibold whitespace-nowrap underline"
+                >
+                  {showMore ? 'See fewer' : `See more (${slogan.personalise.more.length})`}
+                </button>
+              )}
             </div>
-            {slogan.personalise.more && (
-              <button
-                type="button"
-                onClick={() => setShowMore((v) => !v)}
-                aria-expanded={showMore}
-                aria-controls="word-ideas"
-                className="mt-3 text-sm font-semibold underline"
-              >
-                {showMore ? 'See fewer' : `See more (${slogan.personalise.more.length})`}
-              </button>
-            )}
           </div>
         )}
 
         <div>
           <Label>Print it on</Label>
-          <div className="mt-2 grid grid-cols-3 gap-2">
+          <div className="mt-1.5 grid grid-cols-3 gap-1.5 md:mt-2 md:gap-2">
             {garments.map((g) => (
               <button
                 key={g.id}
@@ -164,7 +171,7 @@ export default function Designer({
                     if (!g.colors.some((c) => c.name === colorName)) setColorName(g.colors[0].name)
                   })
                 }
-                className={`flex flex-col items-center gap-1 rounded-xl border-2 border-ink px-1 py-2 text-center ${
+                className={`flex flex-col items-center gap-0.5 rounded-xl border-2 border-ink px-1 py-1 text-center md:gap-1 md:py-2 ${
                   g.id === garmentId ? 'bg-volt' : 'bg-white hover:bg-paper'
                 }`}
               >
@@ -173,70 +180,76 @@ export default function Designer({
                   slogan=""
                   color={g.colors[0].hex}
                   ink={g.colors[0].ink}
-                  className="size-10 shrink-0"
+                  className="size-7 shrink-0 md:size-10"
                 />
-                <span className="text-xs leading-tight font-bold">{g.name}</span>
-                <span className="text-xs">{formatPrice(g.price)}</span>
+                <span className="text-[11px] leading-tight font-bold md:text-xs">{g.name}</span>
+                <span className="hidden text-xs md:block">{formatPrice(g.price)}</span>
               </button>
             ))}
           </div>
         </div>
 
-        <div>
-          <Label>Colour: {color.name}</Label>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            {garment.colors.map((c) => (
-              <button
-                key={c.name}
-                type="button"
-                onClick={() => change(() => setColorName(c.name))}
-                aria-label={c.name}
-                aria-pressed={c.name === color.name}
-                title={c.name}
-                className={`size-11 rounded-full border-2 border-ink ${
-                  c.name === color.name ? 'ring-4 ring-ink ring-offset-2' : ''
-                }`}
-                style={{ background: c.hex }}
-              />
-            ))}
+        <div className="flex items-start gap-3 md:block md:space-y-7">
+          <div className="shrink-0">
+            <Label>
+              Colour: <span className="md:hidden">{color.name.replace('Hi-vis ', '')}</span>
+              <span className="hidden md:inline">{color.name}</span>
+            </Label>
+            <div className="mt-1.5 flex flex-wrap items-center gap-2 md:mt-2">
+              {garment.colors.map((c) => (
+                <button
+                  key={c.name}
+                  type="button"
+                  onClick={() => change(() => setColorName(c.name))}
+                  aria-label={c.name}
+                  aria-pressed={c.name === color.name}
+                  title={c.name}
+                  className={`size-8 rounded-full border-2 border-ink md:size-11 ${
+                    c.name === color.name ? 'ring-4 ring-ink ring-offset-2' : ''
+                  }`}
+                  style={{ background: c.hex }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <Label>Size{size ? `: ${size}` : ''}</Label>
+            <div className="mt-1.5 flex flex-wrap gap-1 md:mt-2 md:gap-2">
+              {garment.sizes.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => change(() => setSize(s))}
+                  aria-pressed={s === size}
+                  className={`min-w-8 rounded-lg border-2 border-ink px-1.5 py-1 text-sm font-semibold md:min-w-12 md:px-3 md:py-2 md:text-base ${
+                    s === size ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
+                  }`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div>
-          <Label>Size{size ? `: ${size}` : ''}</Label>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {garment.sizes.map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => change(() => setSize(s))}
-                aria-pressed={s === size}
-                className={`min-w-12 rounded-lg border-2 border-ink px-3 py-2 font-semibold ${
-                  s === size ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
-                }`}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
+        {/* On phones this bar is pinned to the bottom of the screen */}
+        <div className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-ink bg-paper px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:static md:border-0 md:p-0">
+          {status === 'no-size' && (
+            <p role="alert" className="mb-2 text-center font-bold md:order-last">
+              Pick a size first.
+            </p>
+          )}
           <button
             type="button"
             onClick={add}
             disabled={invalid}
-            className="w-full rounded-full border-2 border-ink bg-volt px-6 py-4 font-display text-lg uppercase hover:shadow-[4px_4px_0_var(--color-ink)] disabled:opacity-50"
+            className="w-full rounded-full border-2 border-ink bg-volt px-6 py-3 font-display text-lg uppercase hover:shadow-[4px_4px_0_var(--color-ink)] disabled:opacity-50 md:py-4"
           >
-            Add to cart
+            Add to cart · {formatPrice(garment.price)}
           </button>
-          {status === 'no-size' && (
-            <p role="alert" className="mt-3 font-bold">
-              Pick a size first.
-            </p>
-          )}
           {status === 'added' && (
-            <p role="status" className="mt-3">
+            <p role="status" className="mt-2 text-center md:mt-3 md:text-left">
               Added!{' '}
               <Link href="/cart" className="font-semibold underline">
                 Go to cart
