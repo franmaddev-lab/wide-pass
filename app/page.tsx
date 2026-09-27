@@ -4,7 +4,6 @@ import ItemCard from '@/components/ItemCard'
 import ProductArt from '@/components/ProductArt'
 import HeroSlogan from '@/components/HeroSlogan'
 import RealPhotos from '@/components/RealPhotos'
-import { charity, charityName } from '@/lib/site'
 import {
   COLLECTIONS,
   collections,
@@ -85,19 +84,16 @@ export default async function Home() {
     <>
       <section className="border-b-2 border-ink bg-ink text-paper">
         <HeroSlogan sloganId={pick.id}>
-          <p className="mt-5 max-w-md text-lg">
+          <p className="mt-3 max-w-md md:mt-5 md:text-lg">
             Hi-vis vests, tees, rain jackets and more, with slogans (funny, serious, or your own
             words) that remind drivers there’s a person on that bike.
           </p>
           <Link
             href="/slogans"
-            className="mt-8 block w-full max-w-md rounded-full border-2 border-paper bg-paper px-4 py-3 text-center font-display text-lg text-ink uppercase hover:border-volt hover:bg-volt"
+            className="mt-5 block w-full max-w-md rounded-full md:mt-8 border-2 border-paper bg-paper px-4 py-3 text-center font-display text-lg text-ink uppercase hover:border-volt hover:bg-volt"
           >
             Pick your slogan
           </Link>
-          <p className="mt-3 max-w-md text-center text-sm text-paper/70">
-            {charity.percent}% of every sale goes to {charityName}.
-          </p>
         </HeroSlogan>
       </section>
 

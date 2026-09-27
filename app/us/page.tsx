@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { charity, charityName } from '@/lib/site'
+import { charity, charityAmount, charityName } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Us — Wide Pass',
@@ -188,18 +188,6 @@ export default function UsPage() {
         </p>
       </section>
 
-      <section className="mt-12 rounded-2xl border-2 border-ink bg-volt p-6 sm:p-8">
-        <h2 className="font-display text-2xl uppercase sm:text-3xl">
-          {charity.percent}% goes back to the road
-        </h2>
-        <p className="mt-4 max-w-2xl">
-          {charity.percent}% of the price of everything you buy goes to{' '}
-          {charity.url ? <Out href={charity.url}>{charityName}</Out> : charityName}. So your vest
-          asks drivers for space and helps the people working to make roads safer. Not a bad deal
-          for a t-shirt.
-        </p>
-      </section>
-
       <section className="mt-12">
         <h2 className="font-display text-2xl uppercase sm:text-3xl">Useful links</h2>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -219,7 +207,12 @@ export default function UsPage() {
         </ul>
       </section>
 
-      <div className="mt-12 grid gap-3 sm:grid-cols-2">
+      <p className="mt-12 text-sm text-muted">
+        P.S. {charityAmount} from every order goes to{' '}
+        {charity.url ? <Out href={charity.url}>{charityName}</Out> : charityName}.
+      </p>
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <Link
           href="/slogans"
           className="rounded-full border-2 border-ink bg-ink px-6 py-4 text-center font-display text-lg text-volt uppercase"

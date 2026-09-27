@@ -28,13 +28,17 @@ export const business = {
   vatNumber: '',
 }
 
-// Share of every sale given to charity. Shown on the home page, Us page, cart and footer.
+// Donation from every order. Mentioned quietly in the footer, cart, Us page and terms.
 // TODO: pick the charity. Before naming one, UK law (Charities Act 1992, "commercial
 // participator") needs a written agreement with it, and the page must say how much goes.
 export const charity = {
-  percent: 5, // of the price of every item sold (before shipping)
+  perOrder: 50, // pence from every order
   name: '', // e.g. 'RoadPeace'; empty = "a UK cycling charity"
   url: '',
 }
 
 export const charityName = charity.name || 'a UK cycling charity'
+
+// "50p" rather than "£0.50"
+export const charityAmount =
+  charity.perOrder < 100 ? `${charity.perOrder}p` : `£${(charity.perOrder / 100).toFixed(2)}`

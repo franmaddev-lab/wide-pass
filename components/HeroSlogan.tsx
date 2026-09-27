@@ -95,12 +95,12 @@ export default function HeroSlogan({
   }
 
   return (
-    <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 md:grid-cols-2 md:py-20">
+    <div className="mx-auto grid max-w-6xl items-center gap-4 px-4 pt-5 pb-6 md:grid-cols-2 md:gap-8 md:py-20">
       <div>
-        <p className="text-sm font-bold tracking-widest text-volt uppercase">
+        <p className="text-xs font-bold tracking-widest text-volt uppercase md:text-sm">
           Cycling apparel with a message
         </p>
-        <h1 className="mt-3 font-display text-4xl leading-[0.95] break-words uppercase min-[360px]:text-[2.5rem] sm:text-6xl">
+        <h1 className="mt-2 font-display md:mt-3 text-4xl leading-[0.95] break-words uppercase min-[360px]:text-[2.5rem] sm:text-6xl">
           {/* while typing, keep the sentence steady for screen readers */}
           <span className="sr-only">{typing ? fullText : artText}</span>
           <span aria-hidden="true">{headline}</span>
@@ -110,7 +110,7 @@ export default function HeroSlogan({
       <Link
         href={designHref({ slogan: slogan.id, custom: personalise ? word || first : undefined })}
         aria-label={`Design “${fullText}”`}
-        className="mx-auto block w-full max-w-sm"
+        className="mx-auto block md:w-full md:max-w-sm"
       >
         <ProductArt
           art="vest"
@@ -118,7 +118,7 @@ export default function HeroSlogan({
           color="#e8f525"
           ink="#111111"
           sign={slogan.sign}
-          className="w-full"
+          className="h-[34vh] w-auto md:h-auto md:w-full"
         />
       </Link>
     </div>
