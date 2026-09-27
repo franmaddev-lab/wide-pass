@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import FavouriteButton from './FavouriteButton'
 import ProductArt from './ProductArt'
+import RealPhotos from './RealPhotos'
 import { addToCart } from '@/lib/cart'
 import {
   cleanCustom,
@@ -88,6 +89,9 @@ export default function Designer({
             label={`“${sloganTemplate(slogan)}”`}
             className="absolute top-3 right-3"
           />
+        </div>
+        <div className="mt-6">
+          <RealPhotos garment={garment.id} title="Real photos" />
         </div>
       </div>
 

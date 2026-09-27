@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import ItemCard from '@/components/ItemCard'
 import ProductArt from '@/components/ProductArt'
+import RealPhotos from '@/components/RealPhotos'
 import {
   COLLECTIONS,
   collections,
@@ -151,6 +152,8 @@ export default function Home() {
           })}
         </div>
       </section>
+
+      <RealPhotos className="mx-auto max-w-6xl px-4 pt-14" />
 
       <section className="mx-auto max-w-6xl px-4 pt-14">
         <h2 className="font-display text-3xl uppercase">Pick your message</h2>

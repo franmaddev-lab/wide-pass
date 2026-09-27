@@ -40,6 +40,14 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
 - **Product images:** `components/ProductArt.tsx` draws each item with its slogan
   (or road sign) as SVG, so no photos are needed yet.
 
+## Real photos and social links
+
+- **Instagram / TikTok:** paste the profile URLs into `lib/site.ts`. The links then show in the
+  footer, on the home page and on the design page. Empty = hidden.
+- **Photos:** drop files into `public/photos/` and list them in `lib/photos.ts` with a short
+  description. Tag a photo with `garment: 'vest'` or `'tee'` to also show it on that product's
+  design page. With no photos, those spots just show the social links (or nothing).
+
 ## Votes, suggestions and favourite counts
 
 These need a small shared database. The app uses **Upstash Redis** over its REST API

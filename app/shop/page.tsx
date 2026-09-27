@@ -2,13 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import ItemCard from '@/components/ItemCard'
 import ProductArt from '@/components/ProductArt'
-import {
-  collections,
-  collectionTag,
-  formatPrice,
-  gadgets,
-  garments,
-} from '@/lib/catalog'
+import { collections, collectionTag, formatPrice, gadgets, garments } from '@/lib/catalog'
 
 export const metadata: Metadata = { title: 'Shop — Wide Pass' }
 

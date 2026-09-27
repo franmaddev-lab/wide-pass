@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SocialLinks from './SocialLinks'
 
 export default function Footer() {
   return (
@@ -37,9 +38,10 @@ export default function Footer() {
             </Link>
           </li>
         </ul>
-        <p className="text-sm text-paper/70">
-          Free shipping on orders over €50. Ride safe, ride seen.
-        </p>
+        <div className="space-y-3 text-sm">
+          <SocialLinks variant="plain" />
+          <p className="text-paper/70">Free shipping on orders over €50. Ride safe, ride seen.</p>
+        </div>
       </div>
     </footer>
   )
