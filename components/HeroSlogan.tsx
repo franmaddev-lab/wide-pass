@@ -118,7 +118,7 @@ export default function HeroSlogan({
           color="#e8f525"
           ink="#111111"
           sign={slogan.sign}
-          className="h-[34vh] w-auto md:h-auto md:w-full"
+          className="h-[34vh] w-auto md:h-auto md:w-full [@media(max-height:700px)]:h-[28vh]"
         />
       </Link>
     </div>

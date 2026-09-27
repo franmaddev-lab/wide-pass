@@ -21,9 +21,17 @@ import {
   type SignPrint,
 } from '@/lib/catalog'
 
-// The hero headline picks one of the slogans with a blank on every visit, so it
-// can animate ("I could be your ___" types through sister, brother, mum…)
-const HERO = slogans.filter((s) => s.personalise)
+// The hero headline picks one of these slogans with a blank on every visit, so it
+// can animate ("I could be your ___" types through sister, brother, mum… and ends on cat)
+const HERO_IDS = [
+  'i-could-be-your',
+  'waiting-at-home',
+  'somebodys',
+  'home-for-dinner',
+  'powered-by',
+  'a-person',
+]
+const HERO = slogans.filter((s) => s.personalise && HERO_IDS.includes(s.id))
 
 // Called after connection(), so it runs once per request rather than at build time
 function randomHero() {
