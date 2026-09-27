@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { connection } from 'next/server'
 import ItemCard from '@/components/ItemCard'
 import ProductArt from '@/components/ProductArt'
+import HeroSlogan from '@/components/HeroSlogan'
 import RealPhotos from '@/components/RealPhotos'
 import {
   COLLECTIONS,
@@ -29,7 +30,10 @@ const HERO: { slogan: string; custom?: string }[] = [
   { slogan: 'same-rights' },
   { slogan: 'jealous-calves' },
   { slogan: 'powered-by', custom: 'pasta' },
-  { slogan: 'i-could-be-your', custom: 'dad' },
+  { slogan: 'i-could-be-your', custom: 'mum' },
+  { slogan: 'somebodys', custom: 'mum' },
+  { slogan: 'brake-for', custom: 'gelato' },
+  { slogan: 'is-watching', custom: 'nonna' },
 ]
 
 // Called after connection(), so it runs once per request rather than at build time
@@ -48,7 +52,7 @@ const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: num
   { garment: 'vest', slogan: 'i-could-be-your', custom: 'sister', color: 0 },
   { garment: 'vest', slogan: 'jealous-calves', color: 0 },
   { garment: 'vest', slogan: 'give-space', color: 0 },
-  { garment: 'tee', slogan: 'powered-by', custom: 'pasta', color: 0 },
+  { garment: 'vest', slogan: 'powered-by', custom: 'pasta', color: 0 },
 ]
 
 const TILES: Record<
@@ -68,10 +72,9 @@ const TILES: Record<
     className: 'bg-white text-ink',
   },
   funny: {
-    art: 'tee',
+    art: 'vest',
     text: 'Powered by pasta',
-    color: '#1b1b1b',
-    ink: '#e8f525',
+    color: '#e8f525',
     className: 'bg-white text-ink',
   },
   signs: {
@@ -87,59 +90,33 @@ export default async function Home() {
   // Render per request so the hero slogan changes on each page load
   await connection()
   const pick = randomHero()
-  const heroSlogan = getSlogan(pick.slogan)!
-  const heroText = sloganText(heroSlogan, pick.custom)
-  const words = heroText.split(' ')
-  const lastWord = words.pop()
 
   return (
     <>
       <section className="border-b-2 border-ink bg-ink text-paper">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 md:grid-cols-2 md:py-20">
-          <div>
-            <p className="text-sm font-bold tracking-widest text-volt uppercase">
-              Cycling apparel with a message
-            </p>
-            <h1 className="mt-3 font-display text-4xl leading-[0.95] break-words uppercase min-[360px]:text-5xl sm:text-6xl">
-              {words.join(' ')} <span className="text-volt">{lastWord}</span>
-            </h1>
-            <p className="mt-5 max-w-md text-lg">
-              Hi-vis vests, tees, rain jackets and more, with slogans (funny, serious, or your own
-              words) that remind drivers there’s a person on that bike.
-            </p>
-            <div className="mt-8 inline-flex flex-col items-center">
-              <p className="text-sm font-bold tracking-widest uppercase">Start with</p>
-              <div className="mt-3 flex flex-wrap justify-center gap-3">
-                <Link
-                  href="/slogans"
-                  className="rounded-full border-2 border-volt bg-volt px-7 py-3 font-display text-lg text-ink uppercase hover:bg-white"
-                >
-                  The slogan
-                </Link>
-                <Link
-                  href="/shop"
-                  className="rounded-full border-2 border-paper px-7 py-3 font-display text-lg uppercase hover:bg-paper hover:text-ink"
-                >
-                  The gear
-                </Link>
-              </div>
+        <HeroSlogan sloganId={pick.slogan} custom={pick.custom}>
+          <p className="mt-5 max-w-md text-lg">
+            Hi-vis vests, tees, rain jackets and more, with slogans (funny, serious, or your own
+            words) that remind drivers there’s a person on that bike.
+          </p>
+          <div className="mt-8 inline-flex flex-col items-center">
+            <p className="text-sm font-bold tracking-widest uppercase">Start with</p>
+            <div className="mt-3 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/slogans"
+                className="rounded-full border-2 border-volt bg-volt px-7 py-3 font-display text-lg text-ink uppercase hover:bg-white"
+              >
+                The slogan
+              </Link>
+              <Link
+                href="/shop"
+                className="rounded-full border-2 border-paper px-7 py-3 font-display text-lg uppercase hover:bg-paper hover:text-ink"
+              >
+                The gear
+              </Link>
             </div>
           </div>
-          <Link
-            href={designHref({ slogan: heroSlogan.id, custom: pick.custom })}
-            aria-label={`Design “${heroText}”`}
-            className="mx-auto block w-full max-w-sm"
-          >
-            <ProductArt
-              art="vest"
-              slogan={heroText}
-              color="#e8f525"
-              ink="#111111"
-              sign={heroSlogan.sign}
-              className="w-full"
-            />
-          </Link>
-        </div>
+        </HeroSlogan>
       </section>
 
       <section className="overflow-hidden border-b-2 border-ink bg-volt py-3 text-ink">
