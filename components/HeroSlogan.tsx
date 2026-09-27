@@ -9,9 +9,11 @@ const START_DELAY = 1500
 const DELETE_MS = 60
 const TYPE_MS = 95
 const HOLD_MS = 1600
+const WORD_CHANGES = 4 // then it settles on the last word
 
 // Home page headline + vest. If the slogan has a blank ("I could be your ___"),
-// the word is deleted and retyped letter by letter through the suggestions.
+// the word is deleted and retyped letter by letter through a few suggestions,
+// then it settles.
 export default function HeroSlogan({
   sloganId,
   custom,
@@ -40,7 +42,7 @@ export default function HeroSlogan({
       await wait(START_DELAY)
       if (cancelled) return
       setTyping(true)
-      for (let i = 0; !cancelled; i++) {
+      for (let i = 0; i < WORD_CHANGES && !cancelled; i++) {
         const current = words[i % words.length]
         const next = words[(i + 1) % words.length]
         for (let n = current.length - 1; n >= 0 && !cancelled; n--) {
@@ -52,8 +54,9 @@ export default function HeroSlogan({
           setWord(next.slice(0, n))
           await wait(TYPE_MS)
         }
-        await wait(HOLD_MS)
+        if (i < WORD_CHANGES - 1) await wait(HOLD_MS)
       }
+      if (!cancelled) setTyping(false)
     })()
 
     return () => {
@@ -98,7 +101,8 @@ export default function HeroSlogan({
           Cycling apparel with a message
         </p>
         <h1 className="mt-3 font-display text-4xl leading-[0.95] break-words uppercase min-[360px]:text-5xl sm:text-6xl">
-          <span className="sr-only">{fullText}</span>
+          {/* while typing, keep the sentence steady for screen readers */}
+          <span className="sr-only">{typing ? fullText : artText}</span>
           <span aria-hidden="true">{headline}</span>
         </h1>
         {children}

@@ -97,12 +97,6 @@ export default function Designer({
         <div>
           <h1 className="font-display text-3xl uppercase sm:text-4xl">“{text}”</h1>
           <p className="mt-2 text-2xl font-bold">{formatPrice(garment.price)}</p>
-          <Link
-            href={`/slogans?garment=${garment.id}`}
-            className="mt-2 inline-block text-sm font-semibold underline"
-          >
-            Change slogan
-          </Link>
         </div>
 
         {slogan.personalise && (
@@ -188,7 +182,7 @@ export default function Designer({
         </div>
 
         <div>
-          <Label>Colour & size</Label>
+          <Label>Colour: {color.name}</Label>
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {garment.colors.map((c) => (
               <button
@@ -205,7 +199,11 @@ export default function Designer({
               />
             ))}
           </div>
-          <div className="mt-3 flex flex-wrap gap-2">
+        </div>
+
+        <div>
+          <Label>Size</Label>
+          <div className="mt-2 flex flex-wrap gap-2">
             {garment.sizes.map((s) => (
               <button
                 key={s}
