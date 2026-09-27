@@ -27,13 +27,13 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
 | `/shop` | The five garments: hi-vis vest, tank top, t-shirt, long-sleeve shirt, rain cover |
 | `/design` | After a slogan is picked: fill in the blank (if any), vest or tee, colour and size. Needs `?slogan=`; also takes `garment` and `text` |
 | `/shop/[slug]` | Gadget pages (bell, stickers, tote…). Paused: no longer linked from the shop |
-| `/cart` | Cart (saved in the browser's localStorage), free shipping over €50 |
+| `/cart` | Cart (saved in the browser's localStorage), free shipping over £50 |
 | `/checkout` | Shipping form; a server action re-checks and re-prices every line |
 | `/about` | The mission |
 | `/suggest` | Visitors suggest slogans and vote (one vote per browser); sort by most votes or newest |
 | `/favourites` | Everything the visitor has hearted (saved in their browser) |
 
-- **Garments, slogans and gadgets:** edit `lib/catalog.ts`. Prices are in euro cents.
+- **Garments, slogans and gadgets:** edit `lib/catalog.ts`. Prices are in pence (GBP).
   A slogan with `{}` in its text and a `personalise` block gets a fill-in-the-blank.
 - **The slogan library:** most of the 200+ fixed slogans are plain lists in
   `lib/slogan-library.ts`. Add a line to a list and it appears on the site.

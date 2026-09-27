@@ -28,7 +28,7 @@ export type SuggestState =
   | { status: 'error'; message: string }
   | { status: 'ok'; message: string }
 
-const ALLOWED = /^[\p{L}\p{N} .,'’!?&:;"“”()/%€-]+$/u
+const ALLOWED = /^[\p{L}\p{N} .,'’!?&:;"“”()/%€£-]+$/u
 // A small first line of defence; review suggestions before printing anything
 const BLOCKED = [
   'fuck',

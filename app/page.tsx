@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { connection } from 'next/server'
 import ItemCard from '@/components/ItemCard'
 import ProductArt from '@/components/ProductArt'
 import RealPhotos from '@/components/RealPhotos'
@@ -16,6 +17,31 @@ import {
   type GarmentId,
   type SignPrint,
 } from '@/lib/catalog'
+
+// The hero headline rotates through these on every visit
+const HERO: { slogan: string; custom?: string }[] = [
+  { slogan: 'i-could-be-your', custom: 'sister' },
+  { slogan: 'pass-wide' },
+  { slogan: 'give-space' },
+  { slogan: 'loves-me' },
+  { slogan: 'a-person' },
+  { slogan: 'not-worth-it' },
+  { slogan: 'same-rights' },
+  { slogan: 'jealous-calves' },
+  { slogan: 'powered-by', custom: 'pasta' },
+  { slogan: 'i-could-be-your', custom: 'dad' },
+]
+
+// Called after connection(), so it runs once per request rather than at build time
+function randomHero() {
+  return HERO[Math.floor(Math.random() * HERO.length)]
+}
+
+const STEPS = [
+  ['Say it', 'Pick your message: funny, serious, family or road signs.'],
+  ['Wear it', 'Pick your gear: vest, tank top, t-shirt, long sleeve or rain cover.'],
+  ['Make it yours', 'Fill in the blank: “I could be your ___”.'],
+]
 
 // Ready-made designs shown as a starting point; each opens the designer preset
 const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number }[] = [
@@ -51,7 +77,15 @@ const TILES: Record<
   },
 }
 
-export default function Home() {
+export default async function Home() {
+  // Render per request so the hero slogan changes on each page load
+  await connection()
+  const pick = randomHero()
+  const heroSlogan = getSlogan(pick.slogan)!
+  const heroText = sloganText(heroSlogan, pick.custom)
+  const words = heroText.split(' ')
+  const lastWord = words.pop()
+
   return (
     <>
       <section className="border-b-2 border-ink bg-ink text-paper">
@@ -61,34 +95,42 @@ export default function Home() {
               Cycling apparel with a message
             </p>
             <h1 className="mt-3 font-display text-5xl leading-[0.95] uppercase sm:text-6xl">
-              I could be your <span className="text-volt">sister.</span>
+              {words.join(' ')} <span className="text-volt">{lastWord}</span>
             </h1>
             <p className="mt-5 max-w-md text-lg">
               Hi-vis vests, tees, tanks and rain covers with slogans (funny, serious, or your own
               words) that remind drivers there’s a person on that bike.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <p className="mt-8 text-sm font-bold tracking-widest uppercase">Start with</p>
+            <div className="mt-3 flex flex-wrap gap-3">
               <Link
                 href="/slogans"
-                className="rounded-full border-2 border-volt bg-volt px-6 py-3 font-bold text-ink hover:bg-white"
+                className="rounded-full border-2 border-volt bg-volt px-7 py-3 font-display text-lg text-ink uppercase hover:bg-white"
               >
-                Start with a slogan
+                The slogan
               </Link>
               <Link
                 href="/shop"
-                className="rounded-full border-2 border-paper px-6 py-3 font-bold hover:bg-paper hover:text-ink"
+                className="rounded-full border-2 border-paper px-7 py-3 font-display text-lg uppercase hover:bg-paper hover:text-ink"
               >
-                Start with what you’ll wear
+                The gear
               </Link>
             </div>
           </div>
-          <ProductArt
-            art="vest"
-            slogan="I could be your sister"
-            color="#e8f525"
-            ink="#111111"
-            className="mx-auto w-full max-w-sm"
-          />
+          <Link
+            href={designHref({ slogan: heroSlogan.id, custom: pick.custom })}
+            aria-label={`Design “${heroText}”`}
+            className="mx-auto block w-full max-w-sm"
+          >
+            <ProductArt
+              art="vest"
+              slogan={heroText}
+              color="#e8f525"
+              ink="#111111"
+              sign={heroSlogan.sign}
+              className="w-full"
+            />
+          </Link>
         </div>
       </section>
 
@@ -101,17 +143,13 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-14">
         <div className="grid gap-6 md:grid-cols-3">
-          {[
-            ['1', 'Pick a message', 'Funny, serious, family or road signs.'],
-            ['2', 'Make it yours', 'Fill in the blank: “I could be your ___”.'],
-            ['3', 'Pick your gear', 'Vest, tank top, t-shirt, long sleeve or rain cover.'],
-          ].map(([n, title, body]) => (
-            <div key={n} className="flex gap-4 rounded-2xl border-2 border-ink bg-white p-5">
+          {STEPS.map(([title, body], i) => (
+            <div key={title} className="flex gap-4 rounded-2xl border-2 border-ink bg-white p-5">
               <span className="grid size-10 shrink-0 place-items-center rounded-full bg-volt font-display">
-                {n}
+                {i + 1}
               </span>
               <div>
-                <p className="font-bold">{title}</p>
+                <p className="font-display text-lg uppercase">{title}</p>
                 <p className="text-sm text-asphalt">{body}</p>
               </div>
             </div>
@@ -120,8 +158,10 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl uppercase">Popular designs</h2>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
+            Popular designs
+          </h2>
           <Link href="/slogans" className="font-semibold underline">
             See all slogans
           </Link>
@@ -156,7 +196,9 @@ export default function Home() {
       <RealPhotos className="mx-auto max-w-6xl px-4 pt-14" />
 
       <section className="mx-auto max-w-6xl px-4 pt-14">
-        <h2 className="font-display text-3xl uppercase">Pick your message</h2>
+        <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
+          Pick your message
+        </h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {COLLECTIONS.map((c) => {
             const t = TILES[c]

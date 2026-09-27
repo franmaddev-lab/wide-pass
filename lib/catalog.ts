@@ -51,7 +51,7 @@ export type Garment = {
   name: string
   withArticle: string // "a hi-vis vest", "a t-shirt"
   art: Art
-  price: number // euro cents
+  price: number // pence
   colors: Color[]
   sizes: string[]
   description: string
@@ -469,7 +469,7 @@ export function designHref(p: { garment?: string; slogan?: string; custom?: stri
 // ---------------------------------------------------------------------------
 
 export function formatPrice(cents: number) {
-  return new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' }).format(cents / 100)
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(cents / 100)
 }
 
 export const FREE_SHIPPING_FROM = 5000

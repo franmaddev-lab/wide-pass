@@ -33,7 +33,7 @@ export default function Footer() {
         </ul>
         <div className="space-y-3 text-sm">
           <SocialLinks variant="plain" />
-          <p className="text-paper/70">Free shipping on orders over €50. Ride safe, ride seen.</p>
+          <p className="text-paper/70">Free shipping on orders over £50. Ride safe, ride seen.</p>
         </div>
       </div>
     </footer>
