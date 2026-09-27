@@ -214,6 +214,86 @@ function Sign({ kind, cx, cy, r }: { kind: SignKind; cx: number; cy: number; r: 
   )
 }
 
+// Real photos (back view) used instead of the drawing whenever a slogan is printed.
+// Keyed by "<art>:<colour hex>"; cx/cy is the centre of the print area, width its width.
+type Photo = { src: string; w: number; h: number; cx: number; cy: number; width: number }
+const PHOTOS: Record<string, Photo> = {
+  'vest:#e8f525': {
+    src: '/mockups/vest-yellow.webp',
+    w: 661,
+    h: 718,
+    cx: 315,
+    cy: 196,
+    width: 222,
+  },
+  'vest:#ff7a1a': {
+    src: '/mockups/vest-orange.webp',
+    w: 640,
+    h: 723,
+    cx: 306,
+    cy: 205,
+    width: 212,
+  },
+  'tee:#1b1b1b': { src: '/mockups/tee-black.webp', w: 664, h: 707, cx: 330, cy: 258, width: 260 },
+  'tee:#f4f4f0': { src: '/mockups/tee-white.webp', w: 679, h: 718, cx: 336, cy: 260, width: 260 },
+  'longsleeve:#1b1b1b': {
+    src: '/mockups/longsleeve-black.webp',
+    w: 605,
+    h: 717,
+    cx: 318,
+    cy: 287,
+    width: 250,
+  },
+  'longsleeve:#f4f4f0': {
+    src: '/mockups/longsleeve-white.webp',
+    w: 682,
+    h: 718,
+    cx: 340,
+    cy: 280,
+    width: 250,
+  },
+  'tank:#1b1b1b': { src: '/mockups/tank-black.webp', w: 639, h: 719, cx: 313, cy: 290, width: 240 },
+  'tank:#f4f4f0': { src: '/mockups/tank-white.webp', w: 651, h: 727, cx: 314, cy: 282, width: 240 },
+}
+
+function PhotoArt({
+  photo,
+  slogan,
+  ink,
+  sign,
+  className,
+}: {
+  photo: Photo
+  slogan: string
+  ink: string
+  sign?: SignKind
+  className?: string
+}) {
+  const lines = wrap(slogan, sign ? 14 : 11)
+  const longest = Math.max(...lines.map((l) => l.length))
+  // ~0.66em per capital in Archivo Black: big like a real back print, but inside the print area
+  const size = Math.min(sign ? 40 : 58, photo.width / (longest * 0.66))
+  const lineH = size * 1.08
+  const signR = 52
+  const signH = sign ? signR * 2 + 16 : 0
+  const blockTop = photo.cy - (signH + lines.length * lineH) / 2
+  const textTop = blockTop + signH
+
+  return (
+    <svg viewBox={`0 0 ${photo.w} ${photo.h}`} role="img" aria-label={slogan} className={className}>
+      <image href={photo.src} width={photo.w} height={photo.h} />
+      {sign && <Sign kind={sign} cx={photo.cx} cy={blockTop + signR} r={signR} />}
+      <text textAnchor="middle" fill={ink} fontFamily={FONT} fontWeight={800} fontSize={size}>
+        {lines.map((l, i) => (
+          <tspan key={i} x={photo.cx} y={textTop + i * lineH + size * 0.85}>
+            {l}
+          </tspan>
+        ))}
+      </text>
+    </svg>
+  )
+}
+
 export default function ProductArt({
   art,
   slogan,
@@ -229,6 +309,19 @@ export default function ProductArt({
   sign?: SignPrint
   className?: string
 }) {
+  const photo = slogan && sign !== 'set' ? PHOTOS[`${art}:${color}`] : undefined
+  if (photo) {
+    return (
+      <PhotoArt
+        photo={photo}
+        slogan={slogan}
+        ink={ink}
+        sign={sign && sign !== 'set' ? sign : undefined}
+        className={className}
+      />
+    )
+  }
+
   const shape = SHAPES[art]
   const { x, y } = shape.text
 
