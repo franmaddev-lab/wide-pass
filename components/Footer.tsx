@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import FontSwitcher from './FontSwitcher'
 import SocialLinks from './SocialLinks'
 
 export default function Footer() {
@@ -58,6 +59,7 @@ export default function Footer() {
               </Link>
             </li>
           </ul>
+          <FontSwitcher />
         </div>
       </div>
     </footer>
