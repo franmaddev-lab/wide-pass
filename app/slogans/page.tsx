@@ -21,7 +21,7 @@ const CUSTOM = 'custom'
 const CUSTOM_LABEL = 'Customisable'
 const CUSTOM_BLURB = 'Fill in the blank with your own word: “I could be your ___”.'
 type Filter = Collection | typeof CUSTOM
-const FILTERS: Filter[] = [CUSTOM, ...COLLECTIONS]
+const FILTERS: Filter[] = [...COLLECTIONS, CUSTOM]
 const filterLabel = (f: Filter) => (f === CUSTOM ? CUSTOM_LABEL : collections[f].label)
 
 const SORTS = {

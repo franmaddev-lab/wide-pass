@@ -163,26 +163,6 @@ export default async function Home() {
           See all slogans
         </Link>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
-          <Link
-            href="/slogans?collection=custom"
-            className="flex min-w-0 items-center justify-between gap-4 rounded-2xl border-2 border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] sm:col-span-2"
-          >
-            <div>
-              <p className="font-display text-xl uppercase min-[360px]:text-2xl sm:text-3xl">
-                Customisable
-              </p>
-              <p className="mt-2 max-w-xs opacity-90">
-                Fill in the blank with your own word: “I could be your ___”.
-              </p>
-            </div>
-            <ProductArt
-              art="vest"
-              slogan="I could be your ___"
-              color="#e8f525"
-              ink="#111111"
-              className="size-20 shrink-0 sm:size-28"
-            />
-          </Link>
           {COLLECTIONS.map((c) => {
             const t = TILES[c]
             return (
@@ -208,6 +188,26 @@ export default async function Home() {
               </Link>
             )
           })}
+          <Link
+            href="/slogans?collection=custom"
+            className="flex min-w-0 items-center justify-between gap-4 rounded-2xl border-2 border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] sm:col-span-2"
+          >
+            <div>
+              <p className="font-display text-xl uppercase min-[360px]:text-2xl sm:text-3xl">
+                Customisable
+              </p>
+              <p className="mt-2 max-w-xs opacity-90">
+                Fill in the blank with your own word: “I could be your ___”.
+              </p>
+            </div>
+            <ProductArt
+              art="vest"
+              slogan="I could be your ___"
+              color="#e8f525"
+              ink="#111111"
+              className="size-20 shrink-0 sm:size-28"
+            />
+          </Link>
         </div>
       </section>
     </>
