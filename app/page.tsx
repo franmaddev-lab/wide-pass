@@ -58,27 +58,31 @@ const TILES: Record<
   { art: Art; text: string; color: string; ink?: string; sign?: SignPrint; className: string }
 > = {
   family: {
-    art: 'vest',
+    art: 'tee',
     text: 'I could be your dad',
-    color: '#e8f525',
+    color: '#1b1b1b',
+    ink: '#e8f525',
     className: 'bg-white text-ink',
   },
   serious: {
-    art: 'vest',
+    art: 'tee',
     text: 'Pass wide. Pass slow.',
-    color: '#e8f525',
+    color: '#1b1b1b',
+    ink: '#e8f525',
     className: 'bg-white text-ink',
   },
   funny: {
-    art: 'vest',
+    art: 'tee',
     text: 'Powered by pasta',
-    color: '#e8f525',
+    color: '#1b1b1b',
+    ink: '#e8f525',
     className: 'bg-white text-ink',
   },
   signs: {
-    art: 'vest',
+    art: 'tee',
     text: 'Give me space',
-    color: '#e8f525',
+    color: '#1b1b1b',
+    ink: '#e8f525',
     sign: 'space',
     className: 'bg-white text-ink',
   },
@@ -216,10 +220,10 @@ export default async function Home() {
               </p>
             </div>
             <ProductArt
-              art="vest"
+              art="tee"
               slogan="I could be your ___"
-              color="#e8f525"
-              ink="#111111"
+              color="#1b1b1b"
+              ink="#e8f525"
               className="size-20 shrink-0 sm:size-28"
             />
           </Link>
