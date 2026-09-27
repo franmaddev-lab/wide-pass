@@ -105,13 +105,13 @@ export default async function Home() {
             <div className="mt-3 grid grid-cols-2 gap-3">
               <Link
                 href="/slogans"
-                className="rounded-full border-2 border-volt bg-volt px-5 py-3 text-center font-display text-lg whitespace-nowrap text-ink uppercase hover:bg-white"
+                className="w-full rounded-full border-2 border-paper bg-paper px-5 py-3 text-center font-display text-lg whitespace-nowrap text-ink uppercase hover:border-volt hover:bg-volt"
               >
                 The slogan
               </Link>
               <Link
                 href="/shop"
-                className="rounded-full border-2 border-volt bg-volt px-5 py-3 text-center font-display text-lg whitespace-nowrap text-ink uppercase hover:bg-white"
+                className="w-full rounded-full border-2 border-paper bg-paper px-5 py-3 text-center font-display text-lg whitespace-nowrap text-ink uppercase hover:border-volt hover:bg-volt"
               >
                 The gear
               </Link>

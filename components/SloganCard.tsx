@@ -17,8 +17,12 @@ import {
   type GarmentId,
 } from '@/lib/catalog'
 
-// Hi-vis vest first (the default preview), then the rest in shop order
-const SLIDES = [getGarment('vest')!, ...garments.filter((g) => g.id !== 'vest')]
+// All the yellow hi-vis gear first (the vest is the default preview), then the black items
+const HI_VIS_IDS = ['vest', 'jacket', 'raincover']
+const SLIDES = [
+  ...HI_VIS_IDS.map((id) => getGarment(id)!),
+  ...garments.filter((g) => !HI_VIS_IDS.includes(g.id)),
+]
 
 // A slogan card whose preview can be swiped to see the slogan on each product.
 // With `only`, it shows just that garment (no swiping).
