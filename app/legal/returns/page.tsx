@@ -19,7 +19,7 @@ export default function ReturnsPage() {
           {formatPrice(FREE_SHIPPING_FROM)}.
         </li>
         <li>
-          Everything is printed to order. It usually leaves us within [3–5] working days, then takes
+          Everything is printed to order. It usually leaves us within 3–5 working days, then takes
           2–4 working days to arrive. {/* TODO: confirm with your supplier */}
         </li>
       </ul>

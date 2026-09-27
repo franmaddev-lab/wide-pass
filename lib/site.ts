@@ -17,12 +17,13 @@ export const siteUrl =
     : 'https://wide-pass.vercel.app')
 
 // Who customers are buying from. Shown on the legal pages.
-// TODO: fill in before taking real orders (UK law requires a postal address and an email).
+// TODO: these are FAKE placeholders. Replace them with your real details before taking
+// real orders (UK law requires a real postal address and email).
 export const business = {
   name: 'Wide Pass',
-  owner: '[Your name or company name]',
-  address: '[Business postal address, UK]',
-  email: '[hello@your-domain.co.uk]',
-  companyNumber: '', // e.g. 'Registered in England and Wales, company no. 12345678'
+  owner: 'Wide Pass Ltd',
+  address: '1 Placeholder Road, London, AB1 2CD',
+  email: 'hello@example.com',
+  companyNumber: 'Registered in England and Wales, company no. 00000000',
   vatNumber: '',
 }
