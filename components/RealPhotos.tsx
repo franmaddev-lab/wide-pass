@@ -10,12 +10,14 @@ export default function RealPhotos({
   garment,
   title = 'Seen on the road',
   className,
+  limit = 4,
 }: {
   garment?: GarmentId
   title?: string
   className?: string
+  limit?: number // keeps the grid to full rows
 }) {
-  const list = photosFor(garment)
+  const list = photosFor(garment).slice(0, limit)
   if (list.length === 0 && !hasSocial) return null
 
   return (

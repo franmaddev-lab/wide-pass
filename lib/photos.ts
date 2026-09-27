@@ -13,7 +13,35 @@ export type Photo = {
   garment?: GarmentId
 }
 
-export const photos: Photo[] = []
+// Placeholder illustrations until real photos arrive. Replace them (or add real
+// photos above them) and delete these entries plus their files.
+export const photos: Photo[] = [
+  {
+    src: '/photos/vest-road-sister.png',
+    alt: 'Illustration: a driver’s view of a cyclist ahead in an orange “I could be your sister” vest',
+    garment: 'vest',
+  },
+  {
+    src: '/photos/tee-flatlay-pasta.png',
+    alt: 'Illustration: black “Powered by pasta. Zero emissions.” tee laid out with a helmet, espresso and sunglasses',
+    garment: 'tee',
+  },
+  {
+    src: '/photos/vest-night-slow.png',
+    alt: 'Illustration: cyclist at night in a yellow “Slow down. It’s only a few seconds.” vest, reflective strips lit by headlights',
+    garment: 'vest',
+  },
+  {
+    src: '/photos/tee-hanger-traffic.png',
+    alt: 'Illustration: white “I’m not in your way. I am traffic.” tee on a hanger',
+    garment: 'tee',
+  },
+  {
+    src: '/photos/vest-hanger-passwide.png',
+    alt: 'Illustration: yellow “Pass wide. Pass slow.” vest on a hanger with a Wide Pass tag',
+    garment: 'vest',
+  },
+]
 
 export function photosFor(garment?: GarmentId) {
   return garment ? photos.filter((p) => p.garment === garment) : photos
