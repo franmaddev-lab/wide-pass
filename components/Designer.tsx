@@ -53,6 +53,7 @@ export default function Designer({
   const [filter, setFilter] = useState<Collection | undefined>(
     () => getSlogan(initialSlogan)?.collection
   )
+  const [query, setQuery] = useState('')
   const [colorName, setColorName] = useState(getGarment(initialGarment)!.colors[0].name)
   const [size, setSize] = useState('')
   const [qty, setQty] = useState(1)
@@ -64,7 +65,11 @@ export default function Designer({
   const cleaned = cleanCustom(slogan, custom)
   const invalid = cleaned === null
   const text = sloganText(slogan, invalid ? undefined : cleaned)
-  const shown = slogans.filter((s) => !filter || s.collection === filter)
+  const q = query.trim().toLowerCase()
+  const shown = slogans.filter(
+    (s) =>
+      (!filter || s.collection === filter) && (!q || sloganTemplate(s).toLowerCase().includes(q))
+  )
 
   function change(fn: () => void) {
     fn()
@@ -162,7 +167,21 @@ export default function Designer({
               </button>
             ))}
           </div>
-          <ul className="mt-4 space-y-2">
+          <label htmlFor="slogan-search" className="sr-only">
+            Search slogans
+          </label>
+          <input
+            id="slogan-search"
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={`Search ${slogans.length} slogans…`}
+            className="mt-3 block w-full rounded-lg border-2 border-ink bg-white px-3 py-2"
+          />
+          <p className="mt-2 text-sm text-muted" aria-live="polite">
+            {shown.length} {shown.length === 1 ? 'slogan' : 'slogans'}
+          </p>
+          <ul className="mt-2 max-h-[28rem] space-y-2 overflow-y-auto pr-1">
             {shown.map((s) => (
               <li key={s.id}>
                 <button

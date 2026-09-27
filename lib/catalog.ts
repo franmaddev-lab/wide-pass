@@ -12,6 +12,15 @@ export type SignPrint =
   | 'set' // several signs, for the sticker pack
 export type Color = { name: string; hex: string; ink: string }
 
+import {
+  familyLines,
+  funnyLines,
+  libraryFor,
+  seriousLines,
+  signLines,
+  sloganId,
+} from './slogan-library'
+
 const HI_VIS: Color[] = [
   { name: 'Hi-vis yellow', hex: '#e8f525', ink: '#111111' },
   { name: 'Hi-vis orange', hex: '#ff7a1a', ink: '#111111' },
@@ -194,6 +203,41 @@ export const slogans: Slogan[] = [
   { id: 'eyes-on-road', text: 'Eyes on the road', collection: 'signs', sign: 'no-phone' },
   { id: 'no-honk', text: 'No need to honk. I see you.', collection: 'signs', sign: 'no-horn' },
   { id: 'look-twice', text: 'Look twice. Save a life.', collection: 'signs', sign: 'eye' },
+
+  // More personalised ones
+  {
+    id: 'is-watching',
+    text: 'Drive nice. My {} is watching.',
+    collection: 'family',
+    personalise: {
+      label: 'Who’s watching?',
+      default: 'nonna',
+      suggestions: ['nonna', 'mum', 'dad', 'dog', 'kids', 'grandpa'],
+      maxLength: 12,
+    },
+  },
+  {
+    id: 'will-ride-for',
+    text: 'Will ride for {}',
+    collection: 'funny',
+    personalise: {
+      label: 'What would you ride for?',
+      default: 'gelato',
+      suggestions: ['gelato', 'pizza', 'croissants', 'beer', 'tacos', 'love'],
+      maxLength: 12,
+    },
+  },
+
+  // The wider library
+  ...libraryFor('family', familyLines),
+  ...libraryFor('serious', seriousLines),
+  ...libraryFor('funny', funnyLines),
+  ...signLines.map(([sign, text]) => ({
+    id: sloganId(text),
+    text,
+    collection: 'signs' as const,
+    sign,
+  })),
 ]
 
 export function getSlogan(id: string | undefined) {

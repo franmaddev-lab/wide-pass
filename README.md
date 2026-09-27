@@ -23,7 +23,7 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
 | Page | What it does |
 | --- | --- |
 | `/` | Hero, the two ways to shop, popular designs, the four collections |
-| `/slogans` | All slogans, filter with `?collection=family\|serious\|funny\|signs` |
+| `/slogans` | All slogans with search (`?q=`), filter with `?collection=family\|serious\|funny\|signs` |
 | `/shop` | Vest and tee (each opens the designer), plus ready-made gadgets |
 | `/design` | Designer: gear, slogan, personalised text, colour, size. Presets via `?garment=vest&slogan=powered-by&text=coffee` |
 | `/shop/[slug]` | Gadget page (bell, stickers, tote…) |
@@ -33,6 +33,8 @@ Some slogans have a blank the buyer fills in (“I could be your ___”, “Powe
 
 - **Garments, slogans and gadgets:** edit `lib/catalog.ts`. Prices are in euro cents.
   A slogan with `{}` in its text and a `personalise` block gets a fill-in-the-blank.
+- **The slogan library:** most of the 200+ fixed slogans are plain lists in
+  `lib/slogan-library.ts`. Add a line to a list and it appears on the site.
 - **Product images:** `components/ProductArt.tsx` draws each item with its slogan
   (or road sign) as SVG, so no photos are needed yet.
 

@@ -25,7 +25,20 @@ export default async function SlogansPage({
 }) {
   const sp = await searchParams
   const collection = COLLECTIONS.find((c) => c === sp.collection) as Collection | undefined
-  const list = slogans.filter((s) => !collection || s.collection === collection)
+  const query = typeof sp.q === 'string' ? sp.q.trim().slice(0, 60) : ''
+  const q = query.toLowerCase()
+  const list = slogans.filter(
+    (s) =>
+      (!collection || s.collection === collection) &&
+      (!q || sloganTemplate(s).toLowerCase().includes(q))
+  )
+  const link = (c?: Collection) => {
+    const p = new URLSearchParams()
+    if (c) p.set('collection', c)
+    if (query) p.set('q', query)
+    const str = p.toString()
+    return str ? `/slogans?${str}` : '/slogans'
+  }
   const from = Math.min(...garments.map((g) => g.price))
 
   return (
@@ -44,7 +57,7 @@ export default async function SlogansPage({
         {[undefined, ...COLLECTIONS].map((c) => (
           <Link
             key={c ?? 'all'}
-            href={c ? `/slogans?collection=${c}` : '/slogans'}
+            href={link(c)}
             className={`rounded-full border-2 border-ink px-4 py-1.5 text-sm font-semibold ${
               c === collection ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
             }`}
@@ -54,7 +67,44 @@ export default async function SlogansPage({
         ))}
       </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <form action="/slogans" className="mt-4 flex max-w-xl gap-2">
+        {collection && <input type="hidden" name="collection" value={collection} />}
+        <label htmlFor="q" className="sr-only">
+          Search slogans
+        </label>
+        <input
+          id="q"
+          name="q"
+          type="search"
+          defaultValue={query}
+          placeholder={`Search ${slogans.length} slogans…`}
+          className="block w-full rounded-full border-2 border-ink bg-white px-4 py-2"
+        />
+        <button
+          type="submit"
+          className="rounded-full border-2 border-ink bg-ink px-5 py-2 font-semibold text-volt"
+        >
+          Search
+        </button>
+      </form>
+
+      <p className="mt-4 text-sm text-muted">
+        {list.length} {list.length === 1 ? 'slogan' : 'slogans'}
+        {query && (
+          <>
+            {' '}
+            for “{query}” ·{' '}
+            <Link
+              href={collection ? `/slogans?collection=${collection}` : '/slogans'}
+              className="underline"
+            >
+              clear
+            </Link>
+          </>
+        )}
+      </p>
+
+      <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((s, i) => {
           const c = vest.colors[i % vest.colors.length]
           return (
