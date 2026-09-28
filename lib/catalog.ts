@@ -163,10 +163,10 @@ export const slogans: Slogan[] = [
     collection: 'family',
     personalise: {
       label: 'Who could you be?',
-      default: 'sister',
+      default: 'brother',
       suggestions: [
-        'sister',
         'brother',
+        'sister',
         'mum',
         'dad',
         'cat',
@@ -242,8 +242,8 @@ export const slogans: Slogan[] = [
     collection: 'family',
     personalise: {
       label: 'Whose are you?',
-      default: 'mum',
-      suggestions: ['mum', 'dad', 'kid', 'sister', 'cat', 'brother', 'grandma', 'whole world'],
+      default: 'dad',
+      suggestions: ['dad', 'mum', 'kid', 'sister', 'cat', 'brother', 'grandma', 'whole world'],
       more: [
         'nonna',
         'nonno',

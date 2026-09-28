@@ -22,7 +22,7 @@ import {
 } from '@/lib/catalog'
 
 // The hero headline picks one of these slogans with a blank on every visit, so it
-// can animate ("I could be your ___" types through sister, brother, mum… and ends on cat)
+// can animate ("I could be your ___" types through brother, sister, mum… and ends on cat)
 const HERO_IDS = [
   'i-could-be-your',
   'waiting-at-home',
@@ -47,7 +47,7 @@ const STEPS = [
 
 // Ready-made designs shown as a starting point; each opens the designer preset
 const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number }[] = [
-  { garment: 'tee', slogan: 'i-could-be-your', custom: 'sister', color: 0 },
+  { garment: 'tee', slogan: 'i-could-be-your', custom: 'brother', color: 0 },
   { garment: 'tee', slogan: 'jealous-calves', color: 0 },
   { garment: 'tee', slogan: 'give-space', color: 0 },
   { garment: 'tee', slogan: 'powered-by', custom: 'pasta', color: 0 },
