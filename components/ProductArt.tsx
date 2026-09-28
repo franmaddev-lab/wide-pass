@@ -378,7 +378,7 @@ function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
 }
 
 // Backdrop colour of a photo, so the box around it can match (tees: light grey)
-export const TEE_BG = 'rgb(225 222 218)'
+export const TEE_BG = 'rgb(236 236 234)'
 export function photoBg(art: Art, color: string, slogan: string, fit?: Fit) {
   const p = photoFor(art, color, slogan, fit)
   return p && p.src.includes('/t-tee-') ? TEE_BG : undefined
