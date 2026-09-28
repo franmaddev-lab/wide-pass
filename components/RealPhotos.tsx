@@ -36,10 +36,15 @@ export default function RealPhotos({
       </h2>
       {list.length > 0 && (
         <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {list.map((p) => (
+          {list.map((p, i) => (
             <div
               key={p.src}
-              className="relative aspect-[4/5] overflow-hidden rounded-xl border-2 border-ink bg-paper"
+              // with an odd number, the first photo takes a full row on phones so there's no gap
+              className={`relative overflow-hidden rounded-xl border-2 border-ink bg-paper ${
+                i === 0 && list.length % 2 === 1
+                  ? 'col-span-2 aspect-[4/3] md:col-span-1 md:aspect-[4/5]'
+                  : 'aspect-[4/5]'
+              }`}
             >
               <Image
                 src={p.src}

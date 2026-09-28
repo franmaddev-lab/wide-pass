@@ -16,6 +16,14 @@ export const street: StreetPost[] = [
   // Examples of what tagged posts will look like: replace with real riders' posts
   {
     type: 'photo',
+    src: '/street/slow-down-vest-night.webp',
+    alt: 'A cyclist at dusk on a wet country road in a yellow hi-vis vest reading “Slow down. It’s only a few seconds.”, a car behind',
+    credit: 'Evening ride',
+    garment: 'vest',
+    example: true,
+  },
+  {
+    type: 'photo',
     src: '/street/kids-dinner-white-tee.webp',
     alt: 'A woman cycling through a busy London street in a white t-shirt reading “My kids want me home for dinner”',
     credit: 'Commuting, London',
