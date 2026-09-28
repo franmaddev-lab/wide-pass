@@ -247,7 +247,7 @@ const photo = (
 // gallery shows a mix of people. Add more photos as extra entries in an array.
 // Product-only photos (no people). Items without one fall back to the drawing.
 const PHOTOS: Record<string, Photo | Photo[]> = {
-  // T-shirts: relaxed cut on a white background; fitted white and yellow on black
+  // T-shirts, all on a white background
   'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 290, 370, 290)],
   'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 290, 370, 290)],
   'tee:#e8f525': [photo('t-tee-yellow-m', 900, 900, 450, 290, 370, 290)],
@@ -375,12 +375,6 @@ function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
   let hash = 0
   for (const ch of slogan) hash = (hash * 31 + ch.charCodeAt(0)) | 0
   return found[Math.abs(hash) % found.length]
-}
-
-// Photos shot on a black background (fitted white and yellow tees)
-export function isDarkPhoto(art: Art, color: string, slogan: string, fit?: Fit) {
-  const p = photoFor(art, color, slogan, fit)
-  return Boolean(p && /t-tee-(white|yellow)-w/.test(p.src))
 }
 
 export function hasPhoto(art: Art, color: string, slogan: string, fit?: Fit) {
