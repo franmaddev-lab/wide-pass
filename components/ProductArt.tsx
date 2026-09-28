@@ -251,16 +251,54 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
   'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 205, 260),
   'jacket:#ff7a1a': photo('jacket-orange', 671, 719, 335, 255, 205, 260),
   'raincover:#e8f525': photo('raincover-yellow', 516, 632, 258, 312, 230, 210),
-  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 310, 280, 300),
-  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 305, 280, 300),
-  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 295, 255, 290),
-  'tee:#1b1b1b:w': photo('tee-black-w', 686, 721, 345, 295, 255, 290),
-  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 310, 250, 300),
-  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 315, 250, 300),
-  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 300, 220, 300),
-  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 300, 220, 300),
-  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 410, 205, 260),
-  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 410, 205, 260),
+  'tee:#1b1b1b': [
+    photo('m-tee-black-m1', 215, 333, 108, 143, 95, 100),
+    photo('m-tee-black-m2', 205, 333, 102, 143, 90, 100),
+  ],
+  'tee:#1b1b1b:w': [
+    photo('m-tee-black-w1', 182, 333, 91, 186, 80, 87),
+    photo('m-tee-black-w2', 173, 333, 86, 186, 76, 87),
+  ],
+  'tee:#f4f4f0': [
+    photo('m-tee-white-m1', 201, 333, 100, 143, 88, 100),
+    photo('m-tee-white-m2', 200, 333, 100, 143, 88, 100),
+  ],
+  'tee:#f4f4f0:w': [
+    photo('m-tee-white-w1', 182, 333, 91, 186, 80, 87),
+    photo('m-tee-white-w2', 178, 333, 89, 186, 78, 87),
+  ],
+  'longsleeve:#1b1b1b': [
+    photo('m-longsleeve-black-m1', 215, 347, 108, 149, 95, 104),
+    photo('m-longsleeve-black-m2', 205, 347, 102, 149, 90, 104),
+  ],
+  'longsleeve:#1b1b1b:w': [
+    photo('m-longsleeve-black-w1', 182, 347, 91, 194, 76, 90),
+    photo('m-longsleeve-black-w2', 173, 347, 86, 194, 73, 90),
+  ],
+  'longsleeve:#f4f4f0': [
+    photo('m-longsleeve-white-m1', 201, 347, 100, 149, 88, 104),
+    photo('m-longsleeve-white-m2', 200, 347, 100, 149, 88, 104),
+  ],
+  'longsleeve:#f4f4f0:w': [
+    photo('m-longsleeve-white-w1', 182, 347, 91, 194, 76, 90),
+    photo('m-longsleeve-white-w2', 178, 347, 89, 194, 75, 90),
+  ],
+  'tank:#1b1b1b': [
+    photo('m-tank-black-m1', 215, 340, 108, 153, 77, 95),
+    photo('m-tank-black-m2', 205, 340, 102, 153, 74, 95),
+  ],
+  'tank:#1b1b1b:w': [
+    photo('m-tank-black-w1', 182, 340, 91, 194, 66, 82),
+    photo('m-tank-black-w2', 173, 340, 86, 194, 62, 82),
+  ],
+  'tank:#f4f4f0': [
+    photo('m-tank-white-m1', 201, 340, 100, 153, 72, 95),
+    photo('m-tank-white-m2', 200, 340, 100, 153, 72, 95),
+  ],
+  'tank:#f4f4f0:w': [
+    photo('m-tank-white-w1', 182, 340, 91, 194, 66, 82),
+    photo('m-tank-white-w2', 178, 340, 89, 194, 64, 82),
+  ],
 }
 
 // Advance widths of Archivo Black capitals, in em (measured from the font file)
@@ -392,9 +430,14 @@ function PhotoArt({
   sign?: SignKind
   className?: string
 }) {
-  const signR = 52
-  const signH = sign ? signR * 2 + 16 : 0
-  const { lines, size } = layout(slogan, photo.width, photo.height - signH, sign ? 44 : 80)
+  const signR = Math.round(photo.width * 0.22)
+  const signH = sign ? signR * 2.3 : 0
+  const { lines, size } = layout(
+    slogan,
+    photo.width,
+    photo.height - signH,
+    photo.width * (sign ? 0.16 : 0.24)
+  )
   const lineH = size * 1.1
   // Sit in the upper part of the print area (like a real back print), never
   // above it, so short slogans don't creep up towards the shoulders

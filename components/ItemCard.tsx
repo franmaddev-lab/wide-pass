@@ -38,7 +38,7 @@ export default function ItemCard({
   return (
     <div className="group relative overflow-hidden rounded-2xl border-2 border-ink bg-white transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]">
       <Link href={href} className="block">
-        <div className="relative bg-paper p-6">
+        <div className="relative bg-white p-6">
           <ProductArt
             art={art}
             slogan={text}

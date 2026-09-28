@@ -96,6 +96,7 @@ const allGarments: Garment[] = [
     price: 3200,
     colors: BLACK_WHITE,
     sizes: APPAREL_SIZES,
+    fits: ['unisex', 'women'],
     description: 'For cool mornings and autumn commutes. Organic cotton, relaxed fit.',
   },
   {

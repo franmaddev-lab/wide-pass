@@ -61,7 +61,7 @@ export default function SloganCard({
           const el = e.currentTarget
           setIndex(Math.round(el.scrollLeft / el.clientWidth))
         }}
-        className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto bg-paper"
+        className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto bg-white"
       >
         {slides.map((g) => {
           const c = photoColor(g.art, g.colors, sloganText(slogan))
@@ -116,7 +116,7 @@ export default function SloganCard({
           >
             ›
           </button>
-          <div className="flex justify-center gap-1.5 bg-paper pb-3">
+          <div className="flex justify-center gap-1.5 bg-white pb-3">
             {slides.map((g, i) => (
               <button
                 key={g.id}
