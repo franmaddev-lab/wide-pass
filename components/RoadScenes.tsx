@@ -42,7 +42,6 @@ export default function RoadScenes({ className }: { className?: string }) {
               <image href={s.src} width={s.size} height={s.size} />
               {s.print && fit && (
                 <text
-                  transform={'transform' in s ? s.transform : undefined}
                   textAnchor="middle"
                   fill="#111"
                   fontFamily={FONT}
