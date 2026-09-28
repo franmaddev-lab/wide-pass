@@ -19,8 +19,14 @@ export default function ReturnsPage() {
           {formatPrice(FREE_SHIPPING_FROM)}.
         </li>
         <li>
-          Everything is printed to order. It usually leaves us within 3–5 working days, then takes
-          2–4 working days to arrive. {/* TODO: confirm with your supplier */}
+          We’re a small business and most things are printed when you order them, so your order
+          usually leaves us within 3–5 working days, then takes 2–4 working days to arrive.{' '}
+          {/* TODO: confirm with your supplier */}
+        </li>
+        <li>
+          We know, in the age of next-day everything that feels like forever. We’re very much not a
+          same-day delivery kind of shop. Think of it like overtaking a cyclist: worth waiting a few
+          seconds to get it right.
         </li>
       </ul>
 
