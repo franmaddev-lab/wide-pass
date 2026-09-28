@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
-import ProductArt, { hasPhoto, photoColor } from './ProductArt'
+import ProductArt, { hasPhoto, photoBg, photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
 import {
   collections,
@@ -44,6 +44,8 @@ export default function SloganCard({
   const [index, setIndex] = useState(0)
   const track = useRef<HTMLDivElement>(null)
   const garment = slides[index]
+  const shown = photoColor(garment.art, garment.colors, sloganText(slogan))
+  const boxBg = photoBg(garment.art, shown.hex, sloganText(slogan))
   const title = `“${sloganTemplate(slogan)}”`
 
   function go(i: number) {
@@ -62,6 +64,7 @@ export default function SloganCard({
           setIndex(Math.round(el.scrollLeft / el.clientWidth))
         }}
         className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto bg-white"
+        style={{ background: boxBg }}
       >
         {slides.map((g) => {
           const c = photoColor(g.art, g.colors, sloganText(slogan))
@@ -116,7 +119,7 @@ export default function SloganCard({
           >
             ›
           </button>
-          <div className="flex justify-center gap-1.5 bg-white pb-3">
+          <div className="flex justify-center gap-1.5 bg-white pb-3" style={{ background: boxBg }}>
             {slides.map((g, i) => (
               <button
                 key={g.id}
