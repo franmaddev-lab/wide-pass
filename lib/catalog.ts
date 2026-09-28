@@ -119,16 +119,15 @@ const allGarments: Garment[] = [
     withArticle: 'a bag rain cover',
     art: 'raincover',
     price: 2500,
-    colors: HI_VIS,
+    colors: [HI_VIS[0]],
     sizes: ['15–25 L', '25–35 L'],
     description:
       'Waterproof hi-vis cover for your backpack, with a reflective strip. Your slogan stays visible when it pours.',
   },
 ]
 
-// What's on sale right now: only the items with real product photos.
-// Add 'jacket' or 'raincover' back here to sell them again.
-const ON_SALE: GarmentId[] = ['tank', 'tee', 'longsleeve', 'vest']
+// What's on sale right now (all have real product photos). Remove an id to pause it.
+const ON_SALE: GarmentId[] = ['tank', 'tee', 'longsleeve', 'vest', 'jacket', 'raincover']
 export const garments = allGarments.filter((g) => ON_SALE.includes(g.id))
 
 export function getGarment(id: string | undefined) {
@@ -164,17 +163,7 @@ export const slogans: Slogan[] = [
     personalise: {
       label: 'Who could you be?',
       default: 'brother',
-      suggestions: [
-        'brother',
-        'sister',
-        'mum',
-        'dad',
-        'cat',
-        'daughter',
-        'son',
-        'grandma',
-        'best friend',
-      ],
+      suggestions: ['brother', 'sister', 'mum', 'dad', 'best friend', 'daughter', 'son', 'grandma'],
       more: [
         'grandpa',
         'nonna',
@@ -243,7 +232,7 @@ export const slogans: Slogan[] = [
     personalise: {
       label: 'Whose are you?',
       default: 'dad',
-      suggestions: ['dad', 'mum', 'kid', 'sister', 'cat', 'brother', 'grandma', 'whole world'],
+      suggestions: ['dad', 'mum', 'kid', 'sister', 'whole world', 'brother', 'grandma'],
       more: [
         'nonna',
         'nonno',
@@ -284,6 +273,28 @@ export const slogans: Slogan[] = [
         'Everyone',
       ],
       maxLength: 12,
+    },
+  },
+  {
+    id: 'counting-on-me',
+    text: '{} is counting on me',
+    collection: 'family',
+    personalise: {
+      label: 'Who’s counting on you?',
+      default: 'Somebody',
+      suggestions: ['Somebody', 'My family', 'My kid', 'My mum', 'My team', 'My dog'],
+      more: [
+        'My dad',
+        'My partner',
+        'My wife',
+        'My husband',
+        'My nonna',
+        'My boss',
+        'My club',
+        'My cat',
+        'Everyone',
+      ],
+      maxLength: 14,
     },
   },
   {
@@ -352,18 +363,8 @@ export const slogans: Slogan[] = [
     personalise: {
       label: 'Who rides here?',
       default: 'kid',
-      suggestions: ['kid', 'mum', 'dad', 'nonna', 'cat', 'sister', 'brother'],
-      more: [
-        'daughter',
-        'son',
-        'grandma',
-        'grandad',
-        'wife',
-        'husband',
-        'partner',
-        'best friend',
-        'dog',
-      ],
+      suggestions: ['kid', 'mum', 'dad', 'nonna', 'grandad', 'sister', 'brother'],
+      more: ['daughter', 'son', 'grandma', 'wife', 'husband', 'partner', 'best friend'],
       maxLength: 12,
     },
   },
@@ -382,7 +383,7 @@ export const slogans: Slogan[] = [
     personalise: {
       label: 'What are you?',
       default: 'a person',
-      suggestions: ['a person', 'a dad', 'a mum', 'a sister', 'a cat', 'a brother', 'a nurse'],
+      suggestions: ['a person', 'a dad', 'a mum', 'a sister', 'a human', 'a brother', 'a nurse'],
       more: [
         'a son',
         'a daughter',
@@ -396,7 +397,6 @@ export const slogans: Slogan[] = [
         'a friend',
         'an aunt',
         'an uncle',
-        'a human',
         'someone’s kid',
         'someone’s mum',
         'someone’s dad',
@@ -831,4 +831,22 @@ export function shareHref(p: { slogan: string; custom?: string; garment?: string
   let path = `/s/${p.slogan}`
   if (p.custom) path += `/${encodeURIComponent(p.custom)}`
   return p.garment ? `${path}?on=${p.garment}` : path
+}
+
+// Slogans where the blank describes the wearer ("I could be your sister") get a
+// woman's body in the photo preview when the word is female.
+const FEMALE =
+  'sister|mum|mom|mother|mummy|mama|daughter|grandma|granny|gran|nan|nana|nanna|nonna|wife|girlfriend|' +
+  'aunt|auntie|aunty|niece|stepmum|godmother|goddaughter|stepdaughter|girl|woman|lady|queen|bride'
+const WOMAN_WEARER = [
+  new RegExp(`^i could be your (${FEMALE})\\b`, 'i'),
+  new RegExp(`^i[’']m (somebody|someone)[’']s (${FEMALE})\\b`, 'i'),
+  new RegExp(`^not a cyclist\\. i[’']m (a |an |somebody[’']s |someone[’']s )?(${FEMALE})\\b`, 'i'),
+  new RegExp(`^(${FEMALE})[’']s on the way home`, 'i'),
+  new RegExp(`^imagine it[’']s your (${FEMALE}) on this bike`, 'i'),
+  /^future grandma/i,
+]
+
+export function isWomanWearer(text: string) {
+  return WOMAN_WEARER.some((r) => r.test(text.trim()))
 }

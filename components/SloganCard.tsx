@@ -20,11 +20,12 @@ import {
 } from '@/lib/catalog'
 
 // The t-shirt is the default preview; swipe for the tank and long sleeve.
-// The hi-vis vest isn't shown here (it's still available on the design page).
+// Hi-vis items aren't shown here (they're still available on the design page).
 const FIRST = 'tee'
+const HI_VIS_IDS = ['vest', 'jacket', 'raincover']
 const SLIDES = [
   ...garments.filter((g) => g.id === FIRST),
-  ...garments.filter((g) => g.id !== FIRST && g.id !== 'vest'),
+  ...garments.filter((g) => g.id !== FIRST && !HI_VIS_IDS.includes(g.id)),
 ]
 
 // A slogan card whose preview can be swiped to see the slogan on each product.

@@ -5,7 +5,6 @@ import type { Collection, SignPrint } from './catalog'
 
 export const familyLines = [
   'I’m someone’s reason to smile',
-  'Somebody is counting on me',
   'Be kind. I have a family.',
   'Bringing the kids home safe',
   'Precious cargo on board',

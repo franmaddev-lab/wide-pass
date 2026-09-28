@@ -1,4 +1,4 @@
-import type { Art, SignPrint } from '@/lib/catalog'
+import { isWomanWearer, type Art, type SignPrint } from '@/lib/catalog'
 
 // Draws a product mock-up with its slogan printed on it, so the catalogue
 // needs no photo assets until real product shots exist.
@@ -216,44 +216,48 @@ function Sign({ kind, cx, cy, r }: { kind: SignKind; cx: number; cy: number; r: 
 
 // Real photos (back view) used instead of the drawing whenever a slogan is printed.
 // Keyed by "<art>:<colour hex>"; cx/cy is the centre of the print area, width its width.
-type Photo = { src: string; w: number; h: number; cx: number; cy: number; width: number }
+type Photo = {
+  src: string
+  w: number
+  h: number
+  cx: number
+  cy: number
+  width: number
+  height: number // tallest the print may be
+}
+// photo(file, image width, image height, print centre x, centre y, print width, print height)
+const photo = (
+  file: string,
+  w: number,
+  h: number,
+  cx: number,
+  cy: number,
+  width: number,
+  height = 300
+): Photo => ({
+  src: `/mockups/${file}.webp`,
+  w,
+  h,
+  cx,
+  cy,
+  width,
+  height,
+})
 const PHOTOS: Record<string, Photo> = {
-  'vest:#e8f525': {
-    src: '/mockups/vest-yellow.webp',
-    w: 661,
-    h: 718,
-    cx: 315,
-    cy: 196,
-    width: 222,
-  },
-  'vest:#ff7a1a': {
-    src: '/mockups/vest-orange.webp',
-    w: 640,
-    h: 723,
-    cx: 306,
-    cy: 205,
-    width: 212,
-  },
-  'tee:#1b1b1b': { src: '/mockups/tee-black.webp', w: 664, h: 707, cx: 330, cy: 258, width: 260 },
-  'tee:#f4f4f0': { src: '/mockups/tee-white.webp', w: 679, h: 718, cx: 336, cy: 260, width: 260 },
-  'longsleeve:#1b1b1b': {
-    src: '/mockups/longsleeve-black.webp',
-    w: 605,
-    h: 717,
-    cx: 318,
-    cy: 287,
-    width: 250,
-  },
-  'longsleeve:#f4f4f0': {
-    src: '/mockups/longsleeve-white.webp',
-    w: 682,
-    h: 718,
-    cx: 340,
-    cy: 280,
-    width: 250,
-  },
-  'tank:#1b1b1b': { src: '/mockups/tank-black.webp', w: 639, h: 719, cx: 313, cy: 290, width: 240 },
-  'tank:#f4f4f0': { src: '/mockups/tank-white.webp', w: 651, h: 727, cx: 314, cy: 282, width: 240 },
+  'vest:#e8f525': photo('vest-yellow', 661, 718, 315, 196, 222),
+  'vest:#ff7a1a': photo('vest-orange', 640, 723, 306, 205, 212),
+  'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 220, 260),
+  'jacket:#ff7a1a': photo('jacket-orange', 671, 719, 335, 255, 220, 260),
+  'raincover:#e8f525': photo('raincover-yellow', 516, 632, 258, 312, 250, 210),
+  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 250, 270),
+  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 250, 270),
+  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 240, 260),
+  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 250, 260),
+  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 255, 260),
+  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 270, 230),
+  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 260, 230),
+  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 350, 230),
+  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 350, 230),
 }
 
 function PhotoArt({
@@ -272,10 +276,14 @@ function PhotoArt({
   const lines = wrap(slogan, sign ? 14 : 11)
   const longest = Math.max(...lines.map((l) => l.length))
   // ~0.66em per capital in Archivo Black: big like a real back print, but inside the print area
-  const size = Math.min(sign ? 40 : 58, photo.width / (longest * 0.66))
-  const lineH = size * 1.08
   const signR = 52
   const signH = sign ? signR * 2 + 16 : 0
+  const size = Math.min(
+    sign ? 40 : 58,
+    photo.width / (longest * 0.66),
+    (photo.height - signH) / (lines.length * 1.08)
+  )
+  const lineH = size * 1.08
   const blockTop = photo.cy - (signH + lines.length * lineH) / 2
   const textTop = blockTop + signH
 
@@ -311,11 +319,16 @@ export default function ProductArt({
   className?: string
   drawing?: boolean // force the flat drawing even when a photo exists
 }) {
-  const photo = !drawing && slogan && sign !== 'set' ? PHOTOS[`${art}:${color}`] : undefined
-  if (photo) {
+  const key = `${art}:${color}`
+  // A woman's body when the slogan says the wearer is a woman ("I could be your sister")
+  const pic =
+    !drawing && slogan && sign !== 'set'
+      ? (isWomanWearer(slogan) && PHOTOS[`${key}:w`]) || PHOTOS[key]
+      : undefined
+  if (pic) {
     return (
       <PhotoArt
-        photo={photo}
+        photo={pic}
         slogan={slogan}
         ink={ink}
         sign={sign && sign !== 'set' ? sign : undefined}

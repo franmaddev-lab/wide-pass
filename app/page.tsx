@@ -41,7 +41,7 @@ function randomHero() {
 const STEPS = [
   ['Say it', 'Pick your message: funny, serious, family or road signs.'],
   ['Make it yours', 'Fill in the blank: “I could be your ___”.'],
-  ['Wear it', 'Tank, tee or long sleeve. Or go all in with a hi-vis vest.'],
+  ['Wear it', 'Tank, tee or long sleeve. Or go hi-vis: vest, rain jacket or bag cover.'],
 ]
 
 // Ready-made designs shown as a starting point; each opens the designer preset
@@ -97,7 +97,7 @@ export default async function Home() {
       <section className="border-b-2 border-ink bg-ink text-paper">
         <HeroSlogan sloganId={pick.id}>
           <p className="mt-3 max-w-md md:mt-5 md:text-lg">
-            Hi-vis vests, tees, tanks and long sleeves, with slogans (funny, serious, or your own
+            Tees, tanks, long sleeves and hi-vis gear, with slogans (funny, serious, or your own
             words) that remind drivers there’s a person on that bike.
           </p>
           <Link
