@@ -352,10 +352,13 @@ function balance(words: string[], n: number) {
 export const LINE_H = 1.22
 
 // Splits the slogan into balanced lines at the biggest size that fits the print
-// area. "\n" forces a break (the custom word sits on a line of its own).
+// area. "\n" forces a break (the custom word sits on a line of its own), and so
+// does the end of a sentence.
 export function layout(text: string, width: number, height: number, maxSize: number) {
   const segs = text
     .toUpperCase()
+    // each sentence starts on a new line ("PASS WIDE. / PASS SLOW."), but not after "VS."
+    .replace(/(?<!\bVS)([.?!])\s+/g, '$1\n')
     .split('\n')
     .map((s) => s.split(' ').filter(Boolean))
     .filter((s) => s.length)

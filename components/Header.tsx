@@ -14,7 +14,7 @@ export default function Header() {
           <BikeLogo className="size-5 min-[360px]:size-6 sm:size-7" />
           Wide&nbsp;Pass
         </Link>
-        <nav className="flex items-center gap-1.5 text-xs font-semibold min-[360px]:gap-2 min-[360px]:text-[13px] sm:gap-6 sm:text-sm">
+        <nav className="flex items-center gap-2.5 text-[15px] font-semibold min-[380px]:gap-3 min-[380px]:text-base sm:gap-6 sm:text-lg">
           <Link href="/slogans" className="hover:underline">
             Slogans
           </Link>
