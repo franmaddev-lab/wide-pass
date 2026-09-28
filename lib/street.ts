@@ -9,6 +9,7 @@ export type StreetPost = {
   credit?: string // e.g. '@anna.rides, Bristol'
   link?: string // the original post
   example?: boolean // marked "Example" until real posts arrive
+  home?: boolean // false = not shown in “Seen on the road” on the home page
   garment?: 'tee' | 'tank' | 'longsleeve' | 'vest' | 'jacket' | 'raincover' // what they're wearing
 }
 
@@ -25,6 +26,7 @@ export const street: StreetPost[] = [
   {
     type: 'photo',
     src: '/street/kids-dinner-white-tee.webp',
+    home: false,
     alt: 'A woman cycling through a busy London street in a white t-shirt reading “My kids want me home for dinner”',
     credit: 'Commuting, London',
     garment: 'tee',

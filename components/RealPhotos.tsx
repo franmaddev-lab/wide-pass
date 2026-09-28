@@ -18,7 +18,7 @@ export default function RealPhotos({
   limit?: number // keeps the grid to full rows
 }) {
   // Real photos from the road (lib/street.ts); on an item page, that item first
-  const photos = street.filter((s) => s.type === 'photo')
+  const photos = street.filter((s) => s.type === 'photo' && (garment || s.home !== false))
   const list = (
     garment
       ? [
