@@ -224,10 +224,10 @@ export default async function Home() {
           })}
           <Link
             href="/slogans?collection=custom"
-            className="flex min-w-0 items-center justify-between gap-4 rounded-2xl border-2 border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] sm:col-span-2"
+            className="flex min-w-0 items-center justify-between gap-4 rounded-2xl border-2 border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]"
           >
-            <div>
-              <p className="font-display text-xl uppercase min-[360px]:text-2xl sm:text-3xl">
+            <div className="min-w-0">
+              <p className="font-display text-xl uppercase min-[360px]:text-2xl sm:text-[1.6rem] lg:text-3xl">
                 Customisable
               </p>
               <p className="mt-2 max-w-xs opacity-90">
