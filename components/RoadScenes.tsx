@@ -6,9 +6,12 @@ import SocialLinks from './SocialLinks'
 // Riding shots sit on a diagonal (top right, bottom left) so the grid alternates
 const SCENES = [
   {
-    src: '/scenes/pasta-tee.webp',
-    alt: 'A rider in a black “Powered by pasta. Zero emissions.” t-shirt',
-    size: 622,
+    src: '/scenes/folded-tee.webp',
+    alt: 'A folded white t-shirt printed “Honk if you’re jealous of my calves”',
+    text: 'Honk if you’re jealous of my calves',
+    print: { cx: 450, cy: 470, w: 400, h: 270 },
+    rotate: -3,
+    size: 900,
   },
   {
     src: '/scenes/road-vest.webp',
