@@ -239,7 +239,8 @@ export default function Designer({
                     className={`size-8 rounded-full border-2 border-ink md:size-11 ${
                       c.name === color.name ? 'ring-4 ring-ink ring-offset-2' : ''
                     }`}
-                    style={{ background: c.hex }}
+                    // split dot: garment colour and print colour
+                    style={{ background: `linear-gradient(135deg, ${c.hex} 50%, ${c.ink} 50%)` }}
                   />
                 ))}
               </div>

@@ -39,6 +39,14 @@ const BLACK_WHITE: Color[] = [
   { name: 'Black', hex: '#1b1b1b', ink: '#e8f525' },
   { name: 'White', hex: '#f4f4f0', ink: '#1b1b1b' },
 ]
+// Extra print colours on the t-shirt
+const TEE_COLORS: Color[] = [
+  BLACK_WHITE[0],
+  { name: 'Black, white print', hex: '#1b1b1b', ink: '#f4f4f0' },
+  BLACK_WHITE[1],
+  { name: 'White, yellow print', hex: '#f4f4f0', ink: '#e8f525' },
+  HI_VIS[0],
+]
 const APPAREL_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 const ONE_SIZE = ['One size']
 
@@ -82,7 +90,7 @@ const allGarments: Garment[] = [
     withArticle: 'a t-shirt',
     art: 'tee',
     price: 2400,
-    colors: [...BLACK_WHITE, HI_VIS[0]],
+    colors: TEE_COLORS,
     sizes: APPAREL_SIZES,
     fits: ['unisex', 'women'],
     description:
