@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import ProductArt from './ProductArt'
+import { FONT, layout } from './ProductArt'
 import { designHref, getSlogan, sloganText } from '@/lib/catalog'
 
 const START_DELAY = 1500
@@ -112,16 +112,36 @@ export default function HeroSlogan({
         aria-label={`Design “${fullText}”`}
         className="mx-auto block md:w-full md:max-w-sm"
       >
-        <ProductArt
-          art="vest"
-          slogan={artText}
-          color="#e8f525"
-          ink="#111111"
-          sign={slogan.sign}
-          drawing
+        <HeroTee
+          text={artText}
           className="h-[34vh] w-auto md:h-auto md:w-full [@media(max-height:700px)]:h-[28vh]"
         />
       </Link>
     </div>
+  )
+}
+
+// The hi-vis tee photo with the (animating) slogan printed on the back
+function HeroTee({ text, className }: { text: string; className?: string }) {
+  const print = { cx: 450, cy: 320, w: 400, h: 250 }
+  const { lines, size } = layout(text || ' ', print.w, print.h, 62)
+  const lineH = size * 1.1
+  const top = print.cy - (lines.length * lineH) / 2
+  return (
+    <svg
+      viewBox="0 0 900 900"
+      role="img"
+      aria-label={text}
+      className={`overflow-hidden rounded-2xl ${className ?? ''}`}
+    >
+      <image href="/scenes/hivis-tee-blank.webp" width="900" height="900" />
+      <text textAnchor="middle" fill="#111" fontFamily={FONT} fontWeight={800} fontSize={size}>
+        {lines.map((l, i) => (
+          <tspan key={i} x={print.cx} y={top + i * lineH + size * 0.85}>
+            {l}
+          </tspan>
+        ))}
+      </text>
+    </svg>
   )
 }
