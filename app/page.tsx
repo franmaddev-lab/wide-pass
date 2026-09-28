@@ -114,7 +114,7 @@ export default async function Home() {
           </p>
           <Link
             href="/slogans"
-            className="mt-5 block w-full max-w-md rounded-full md:mt-8 border-2 border-paper bg-paper px-4 py-3 text-center font-display text-lg text-ink uppercase hover:border-volt hover:bg-volt"
+            className="mt-5 block w-full max-w-md rounded-full md:mt-8 border-2 border-volt bg-volt px-4 py-3 text-center font-display text-lg text-ink uppercase hover:border-paper hover:bg-paper"
           >
             Pick your slogan
           </Link>
