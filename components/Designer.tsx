@@ -100,8 +100,8 @@ export default function Designer({
           className="relative rounded-2xl border-2 border-ink bg-white p-2 md:p-8"
           style={{ background: photoBg(garment.art, color.hex, text, fit) }}
         >
-          {/* keyed so switching item or colour fades the new one in instead of jumping */}
-          <div key={`${garment.id}/${color.name}/${fit}`} className="animate-swap">
+          {/* switching item or colour fades the new photo in once it has loaded */}
+          <div>
             <ProductArt
               art={garment.art}
               slogan={text}

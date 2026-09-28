@@ -1,4 +1,5 @@
 import { isWomanWearer, type Art, type Fit, type SignPrint } from '@/lib/catalog'
+import PhotoSwap from './PhotoSwap'
 
 // Draws a product mock-up with its slogan printed on it, so the catalogue
 // needs no photo assets until real product shots exist.
@@ -470,7 +471,7 @@ function PhotoArt({
   )
 }
 
-export default function ProductArt({
+function Art_({
   art,
   slogan,
   color,
@@ -579,5 +580,16 @@ export default function ProductArt({
         </>
       )}
     </svg>
+  )
+}
+
+// Switching item or colour waits for the new photo before showing it with its slogan
+export default function ProductArt(props: Parameters<typeof Art_>[0]) {
+  const { art, slogan, color, sign, drawing, fit, className } = props
+  const pic = !drawing && sign !== 'set' ? photoFor(art, color, slogan, fit) : undefined
+  return (
+    <PhotoSwap src={pic?.src ?? `drawing:${art}:${color}`} className={className}>
+      <Art_ {...props} className="block size-full" />
+    </PhotoSwap>
   )
 }
