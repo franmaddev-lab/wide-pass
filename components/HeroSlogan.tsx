@@ -128,13 +128,8 @@ function HeroTee({ text, className }: { text: string; className?: string }) {
   const lineH = size * 1.1
   const top = print.cy - (lines.length * lineH) / 2
   return (
-    <svg
-      viewBox="0 0 900 900"
-      role="img"
-      aria-label={text}
-      className={`overflow-hidden rounded-2xl ${className ?? ''}`}
-    >
-      <image href="/scenes/hivis-tee-blank.webp" width="900" height="900" />
+    <svg viewBox="0 0 900 900" role="img" aria-label={text} className={className}>
+      <image href="/scenes/hivis-tee.webp" width="900" height="900" />
       <text textAnchor="middle" fill="#111" fontFamily={FONT} fontWeight={800} fontSize={size}>
         {lines.map((l, i) => (
           <tspan key={i} x={print.cx} y={top + i * lineH + size * 0.85}>
