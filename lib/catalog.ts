@@ -61,7 +61,8 @@ export type Garment = {
 }
 
 export type Fit = 'unisex' | 'women'
-export const fitLabel: Record<Fit, string> = { unisex: 'Unisex', women: 'Women’s' }
+// Named by cut, not gender. Previews still show a man or a woman to match.
+export const fitLabel: Record<Fit, string> = { unisex: 'Relaxed', women: 'Fitted' }
 
 const allGarments: Garment[] = [
   {
@@ -752,7 +753,7 @@ export function resolveLine(line: CartLine): ResolvedLine | null {
     const text = sloganText(slogan, custom)
     return {
       title: `“${text}” on ${garment.withArticle}`,
-      detail: `${fit === 'women' ? 'Women’s fit · ' : ''}${color.name} · ${line.size}`,
+      detail: `${garment.fits ? `${fitLabel[fit]} fit · ` : ''}${color.name} · ${line.size}`,
       unit: garment.price,
       art: garment.art,
       sign: slogan.sign,

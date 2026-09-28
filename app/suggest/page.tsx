@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { deleteSuggestion } from '@/app/actions/community'
 import SuggestForm from '@/components/SuggestForm'
 import VoteButton from '@/components/VoteButton'
-import WornGallery from '@/components/WornGallery'
+import StreetWall from '@/components/StreetWall'
 import { listSuggestions, persistent, votedBy } from '@/lib/store'
 import { currentVoter } from '@/lib/voter'
 
-export const metadata: Metadata = { title: 'Suggest a slogan — Wide Pass' }
+export const metadata: Metadata = { title: 'You — Wide Pass' }
 
 const SORTS = { top: 'Most votes', new: 'Newest' } as const
 type Sort = keyof typeof SORTS
@@ -44,8 +44,16 @@ export default async function SuggestPage({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <h1 className="font-display text-4xl uppercase">Suggest a slogan</h1>
+      <p className="text-sm font-bold tracking-widest uppercase">You</p>
+      <h1 className="mt-1 font-display text-4xl uppercase">Riders like you</h1>
       <p className="mt-2 max-w-xl text-asphalt">
+        The people wearing it, and the slogans you come up with next.
+      </p>
+
+      <StreetWall />
+
+      <h2 className="mt-12 font-display text-2xl uppercase">Suggest a slogan</h2>
+      <p className="mt-1 max-w-xl text-asphalt">
         Got a line that would make a driver slow down, smile or think? Post it, then vote for your
         favourites. The best ideas get printed.
       </p>
@@ -58,8 +66,6 @@ export default async function SuggestPage({
           Connect a database (see README) to keep them.
         </p>
       )}
-
-      <WornGallery />
 
       <div className="mt-10 flex flex-wrap items-end justify-between gap-3">
         <h2 className="font-display text-2xl uppercase">

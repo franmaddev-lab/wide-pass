@@ -18,7 +18,7 @@ export default function SuggestForm() {
     <form
       ref={formRef}
       action={action}
-      className="mt-6 space-y-4 rounded-2xl border-2 border-ink bg-volt p-5"
+      className="mt-4 space-y-4 rounded-2xl border-2 border-ink bg-white p-5"
     >
       <div>
         <label htmlFor="text" className="font-bold">
