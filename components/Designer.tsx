@@ -6,7 +6,7 @@ import FavouriteButton from './FavouriteButton'
 import ProductArt, { photoBg, photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
 import SizeChart from './SizeChart'
-import { addToCart } from '@/lib/cart'
+import { addToCart, useCart } from '@/lib/cart'
 import {
   cleanCustom,
   fitLabel,
@@ -73,6 +73,17 @@ export default function Designer({
   const [fitChoice, setFitChoice] = useState<Fit | null>(null)
 
   const garment = getGarment(garmentId)!
+  // this slogan on this item, already in the cart (any colour or size)
+  const inCart = useCart().filter((l) => l.item === garment.id && l.slogan === slogan.id)
+  const inCartQty = inCart.reduce((n, l) => n + l.qty, 0)
+  const inCartSizes = Object.entries(
+    inCart.reduce<Record<string, number>>(
+      (m, l) => ({ ...m, [l.size]: (m[l.size] ?? 0) + l.qty }),
+      {}
+    )
+  )
+    .map(([s, n]) => (n > 1 ? `${s} ×${n}` : s))
+    .join(', ')
   const color = garment.colors.find((c) => c.name === colorName) ?? garment.colors[0]
   const cleaned = cleanCustom(slogan, custom)
   const invalid = cleaned === null
@@ -336,9 +347,10 @@ export default function Designer({
           <p className="mt-1.5 text-center text-xs font-semibold md:text-left md:text-sm">
             {BUNDLE_TEXT}
           </p>
-          {status === 'added' && (
-            <p role="status" className="mt-2 text-center md:mt-3 md:text-left">
-              Added!{' '}
+          {inCartQty > 0 && (
+            <p role="status" className="mt-1 text-center text-sm md:mt-2 md:text-left">
+              <span className="font-semibold">{inCartQty} in your cart</span>
+              {garment.sizes.length > 1 && ` (${inCartSizes})`} ·{' '}
               <Link href="/cart" className="font-semibold underline">
                 Go to cart
               </Link>
