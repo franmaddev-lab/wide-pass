@@ -3,24 +3,7 @@ import SocialLinks from './SocialLinks'
 
 // Home page "Seen on the road": real scenes with the slogan printed onto the gear.
 // Coordinates are in the 900px image: centre of the print, its width and height.
-// Riding shots sit on a diagonal (top right, bottom left) so the grid alternates
 const SCENES = [
-  {
-    src: '/scenes/folded-tee.webp',
-    alt: 'A folded white t-shirt printed “Honk if you’re jealous of my calves”',
-    text: 'Honk if you’re jealous of my calves',
-    print: { cx: 450, cy: 470, w: 400, h: 270 },
-    // follow the fold: tilted and slanted with the shirt's perspective
-    transform: 'matrix(0.95 0.26 -0.18 0.86 90 -60)',
-    size: 900,
-  },
-  {
-    src: '/scenes/road-vest.webp',
-    alt: 'A driver’s view of a cyclist ahead on a country lane in a yellow “I could be your sister” vest',
-    text: 'I could be your sister',
-    print: { cx: 452, cy: 362, w: 84, h: 44 },
-    size: 900,
-  },
   {
     src: '/scenes/night-vest.webp',
     alt: 'A cyclist at night on a wet road in a yellow “Slow down. It’s only a few seconds.” vest, a car behind',
@@ -30,8 +13,8 @@ const SCENES = [
   },
   {
     src: '/scenes/hanger-tee.webp',
-    alt: 'A white “I’m not in your way. I am traffic.” t-shirt on a hanger',
-    text: 'I’m not in your way. I am traffic.',
+    alt: 'A white “Slow down. It’s only a few seconds.” t-shirt on a hanger',
+    text: 'Slow down. It’s only a few seconds.',
     print: { cx: 450, cy: 420, w: 320, h: 290 },
     size: 900,
   },
@@ -43,7 +26,7 @@ export default function RoadScenes({ className }: { className?: string }) {
       <h2 id="road-scenes" className="font-display text-2xl uppercase">
         Seen on the road
       </h2>
-      <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
+      <div className="mt-4 grid grid-cols-2 gap-3 md:max-w-3xl">
         {SCENES.map((s) => {
           const fit = s.print && s.text ? layout(s.text, s.print.w, s.print.h, s.print.h / 2) : null
           const lineH = fit ? fit.size * 1.1 : 0
