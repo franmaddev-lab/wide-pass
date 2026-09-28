@@ -45,3 +45,24 @@ body {
     animation: none;
   }
 }
+
+/* Quick bounce when something lands in the cart */
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-pop {
+  animation: pop 320ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop {
+    animation: none;
+  }
+}

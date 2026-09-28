@@ -10,7 +10,9 @@ export default function CartLink() {
     <Link
       href="/cart"
       aria-label={`Cart${count ? ` (${count} items)` : ''}`}
-      className="relative grid size-10 place-items-center rounded-full border-2 border-ink bg-ink text-volt hover:bg-asphalt"
+      // re-keyed when the count changes so the icon bounces as items land
+      key={count}
+      className={`relative grid size-10 place-items-center rounded-full border-2 border-ink bg-ink text-volt hover:bg-asphalt ${count ? 'animate-pop' : ''}`}
     >
       <svg
         viewBox="0 0 24 24"

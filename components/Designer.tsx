@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
 import ProductArt, { photoBg, photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
@@ -59,6 +59,14 @@ export default function Designer({
   })
   const [size, setSize] = useState('')
   const [status, setStatus] = useState<'idle' | 'added' | 'no-size'>('idle')
+  const [adds, setAdds] = useState(0)
+  // the button says "Added" for a moment after each add, then goes back
+  const [flash, setFlash] = useState(false)
+  useEffect(() => {
+    if (!adds) return
+    const t = setTimeout(() => setFlash(false), 1800)
+    return () => clearTimeout(t)
+  }, [adds])
   const [showMore, setShowMore] = useState(false)
   const [showSizes, setShowSizes] = useState(false)
   // null = follow the slogan (women's fit for "I could be your sister"), until the customer picks
@@ -93,6 +101,8 @@ export default function Designer({
       qty: 1,
     })
     setStatus('added')
+    setAdds((n) => n + 1)
+    setFlash(true)
   }
 
   return (
@@ -312,12 +322,16 @@ export default function Designer({
             </p>
           )}
           <button
+            // re-keyed on each add so the bounce plays every time
+            key={adds}
             type="button"
             onClick={add}
             disabled={invalid}
-            className="w-full rounded-full border-2 border-ink bg-volt px-6 py-3 font-display text-lg uppercase hover:shadow-[4px_4px_0_var(--color-ink)] disabled:opacity-50 md:py-4"
+            className={`w-full rounded-full border-2 border-ink px-6 py-3 font-display text-lg uppercase transition-colors hover:shadow-[4px_4px_0_var(--color-ink)] disabled:opacity-50 md:py-4 ${
+              flash ? 'animate-pop bg-ink text-volt' : 'bg-volt'
+            }`}
           >
-            Add to cart · {formatPrice(garment.price)}
+            {flash ? 'Added to cart ✓' : `Add to cart · ${formatPrice(garment.price)}`}
           </button>
           <p className="mt-1.5 text-center text-xs font-semibold md:text-left md:text-sm">
             {BUNDLE_TEXT}
