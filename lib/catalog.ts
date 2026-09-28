@@ -71,7 +71,7 @@ const allGarments: Garment[] = [
     withArticle: 'a tank top',
     art: 'tank',
     price: 2200,
-    colors: BLACK_WHITE,
+    colors: [...BLACK_WHITE, HI_VIS[0]],
     sizes: APPAREL_SIZES,
     fits: ['unisex', 'women'],
     description: 'Light, breathable tank top for hot rides. Big back print, nothing in the way.',
@@ -94,9 +94,9 @@ const allGarments: Garment[] = [
     withArticle: 'a long-sleeve shirt',
     art: 'longsleeve',
     price: 3200,
-    colors: BLACK_WHITE,
+    colors: [...BLACK_WHITE, HI_VIS[0]],
     sizes: APPAREL_SIZES,
-    fits: ['unisex', 'women'],
+    fits: ['unisex'], // relaxed cut only
     description: 'For cool mornings and autumn commutes. Organic cotton, relaxed fit.',
   },
   {

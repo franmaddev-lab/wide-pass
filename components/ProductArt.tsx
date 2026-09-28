@@ -254,14 +254,22 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
   'tee:#1b1b1b:w': [photo('t-tee-black-w', 900, 900, 450, 300, 320, 280)],
   'tee:#f4f4f0:w': [photo('t-tee-white-w', 900, 900, 450, 300, 320, 280)],
   'tee:#e8f525:w': [photo('t-tee-yellow-w', 900, 900, 450, 300, 320, 280)],
+  'tank:#1b1b1b': [photo('t-tank-black-m', 900, 900, 450, 341, 320, 255)],
+  'tank:#f4f4f0': [photo('t-tank-white-m', 900, 900, 450, 341, 320, 255)],
+  'tank:#e8f525': [photo('t-tank-yellow-m', 900, 900, 450, 341, 320, 255)],
+  'tank:#1b1b1b:w': [photo('t-tank-black-w', 900, 900, 450, 341, 255, 237)],
+  'tank:#f4f4f0:w': [photo('t-tank-white-w', 900, 900, 450, 341, 255, 237)],
+  'tank:#e8f525:w': [photo('t-tank-yellow-w', 900, 900, 450, 341, 255, 237)],
   'jacket:#e8f525': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
   'jacket:#e8f525:w': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
   'jacket:#ff7a1a': [photo('jacket-orange', 671, 719, 335, 255, 205, 260)],
   'jacket:#ff7a1a:w': [photo('jacket-orange', 671, 719, 335, 255, 205, 260)],
-  'longsleeve:#1b1b1b': [photo('p-longsleeve-black-m', 646, 698, 324, 229, 258, 212)],
-  'longsleeve:#1b1b1b:w': [photo('p-longsleeve-black-w', 622, 698, 311, 231, 246, 210)],
-  'longsleeve:#f4f4f0': [photo('p-longsleeve-white-m', 628, 698, 315, 232, 252, 212)],
-  'longsleeve:#f4f4f0:w': [photo('p-longsleeve-white-w', 620, 698, 312, 234, 248, 211)],
+  'longsleeve:#1b1b1b': [photo('t-longsleeve-black', 900, 900, 450, 300, 300, 230)],
+  'longsleeve:#1b1b1b:w': [photo('t-longsleeve-black', 900, 900, 450, 300, 300, 230)],
+  'longsleeve:#f4f4f0': [photo('t-longsleeve-white', 900, 900, 450, 300, 300, 230)],
+  'longsleeve:#f4f4f0:w': [photo('t-longsleeve-white', 900, 900, 450, 300, 300, 230)],
+  'longsleeve:#e8f525': [photo('t-longsleeve-yellow', 900, 900, 450, 300, 300, 230)],
+  'longsleeve:#e8f525:w': [photo('t-longsleeve-yellow', 900, 900, 450, 300, 300, 230)],
   'raincover:#e8f525': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
   'raincover:#e8f525:w': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
   'vest:#e8f525': [
@@ -377,11 +385,11 @@ function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
   return found[Math.abs(hash) % found.length]
 }
 
-// Backdrop colour of a photo, so the box around it can match (tees: light grey)
+// Backdrop colour of a photo, so the box around it can match (tees, tanks, long sleeves: light grey)
 export const TEE_BG = 'rgb(236 236 234)'
 export function photoBg(art: Art, color: string, slogan: string, fit?: Fit) {
   const p = photoFor(art, color, slogan, fit)
-  return p && p.src.includes('/t-tee-') ? TEE_BG : undefined
+  return p && /\/t-(tee|tank|longsleeve)-/.test(p.src) ? TEE_BG : undefined
 }
 
 export function hasPhoto(art: Art, color: string, slogan: string, fit?: Fit) {
