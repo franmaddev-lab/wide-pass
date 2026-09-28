@@ -248,9 +248,9 @@ const photo = (
 // Product-only photos (no people). Items without one fall back to the drawing.
 const PHOTOS: Record<string, Photo | Photo[]> = {
   // T-shirts, on the light grey studio background of the photos
-  'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 290, 370, 290)],
-  'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 290, 370, 290)],
-  'tee:#e8f525': [photo('t-tee-yellow-m', 900, 900, 450, 290, 370, 290)],
+  'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 300, 400, 300)],
+  'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 300, 400, 300)],
+  'tee:#e8f525': [photo('t-tee-yellow-m', 900, 900, 450, 300, 400, 300)],
   'tee:#1b1b1b:w': [photo('t-tee-black-w', 900, 900, 450, 300, 320, 280)],
   'tee:#f4f4f0:w': [photo('t-tee-white-w', 900, 900, 450, 300, 320, 280)],
   'tee:#e8f525:w': [photo('t-tee-yellow-w', 900, 900, 450, 300, 320, 280)],
