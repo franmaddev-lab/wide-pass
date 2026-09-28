@@ -245,74 +245,18 @@ const photo = (
 })
 // A key can list several models; each slogan always gets the same one, so the
 // gallery shows a mix of people. Add more photos as extra entries in an array.
+// Product-only photos (no people). Items without one fall back to the drawing.
 const PHOTOS: Record<string, Photo | Photo[]> = {
-  // no fitted vest: women's slogans use the same straight-cut vests
-  'vest:#e8f525:w': [
-    photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
-    photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
-  ],
-  'jacket:#e8f525': [
-    photo('m-jacket-yellow-m1', 543, 669, 289, 321, 250, 201),
-    photo('m-jacket-yellow-m2', 501, 654, 257, 314, 230, 196),
-  ],
+  'jacket:#e8f525': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
   'jacket:#e8f525:w': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
-  'jacket:#ff7a1a': [
-    photo('m-jacket-orange-w1', 477, 669, 248, 328, 219, 201),
-    photo('m-jacket-orange-w2', 483, 654, 246, 320, 222, 196),
-  ],
-  'jacket:#ff7a1a:w': [
-    photo('m-jacket-orange-w1', 477, 669, 248, 328, 219, 201),
-    photo('m-jacket-orange-w2', 483, 654, 246, 320, 222, 196),
-  ],
+  'jacket:#ff7a1a': [photo('jacket-orange', 671, 719, 335, 255, 205, 260)],
+  'jacket:#ff7a1a:w': [photo('jacket-orange', 671, 719, 335, 255, 205, 260)],
   'longsleeve:#1b1b1b': [photo('p-longsleeve-black-m', 646, 698, 324, 229, 258, 212)],
   'longsleeve:#1b1b1b:w': [photo('p-longsleeve-black-w', 622, 698, 311, 231, 246, 210)],
   'longsleeve:#f4f4f0': [photo('p-longsleeve-white-m', 628, 698, 315, 232, 252, 212)],
   'longsleeve:#f4f4f0:w': [photo('p-longsleeve-white-w', 620, 698, 312, 234, 248, 211)],
-  'raincover:#e8f525': [
-    photo('m-raincover-yellow-m1', 537, 669, 283, 348, 247, 241),
-    photo('m-raincover-yellow-m2', 495, 654, 261, 340, 228, 235),
-  ],
+  'raincover:#e8f525': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
   'raincover:#e8f525:w': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
-  'raincover:#ff7a1a': [
-    photo('m-raincover-orange-w1', 489, 669, 246, 361, 225, 241),
-    photo('m-raincover-orange-w2', 480, 654, 243, 353, 221, 235),
-  ],
-  'raincover:#ff7a1a:w': [
-    photo('m-raincover-orange-w1', 489, 669, 246, 361, 225, 241),
-    photo('m-raincover-orange-w2', 480, 654, 243, 353, 221, 235),
-  ],
-  'tank:#1b1b1b': [
-    photo('m-tank-black-m1', 645, 1020, 347, 474, 232, 275),
-    photo('m-tank-black-m2', 615, 1020, 336, 474, 221, 275),
-    photo('m-tank-black-m3', 579, 870, 293, 444, 208, 226),
-    photo('m-tank-black-m4', 582, 870, 295, 444, 210, 226),
-    photo('m-tank-black-m6', 612, 876, 311, 447, 220, 228),
-    photo('m-tank-black-m7', 588, 876, 308, 447, 212, 228),
-    photo('m-tank-black-m9', 752, 614, 382, 215, 286, 209),
-  ],
-  'tank:#1b1b1b:w': [
-    photo('m-tank-black-w1', 546, 1020, 288, 581, 153, 245),
-    photo('m-tank-black-w2', 519, 1020, 278, 581, 145, 245),
-    photo('m-tank-black-w3', 510, 870, 264, 487, 143, 209),
-    photo('m-tank-black-w4', 510, 870, 264, 487, 143, 209),
-    photo('m-tank-black-w6', 522, 876, 263, 491, 146, 210),
-    photo('m-tank-black-w9', 752, 614, 376, 301, 188, 160),
-  ],
-  'tank:#f4f4f0': [
-    photo('m-tank-white-m1', 603, 1020, 292, 474, 217, 275),
-    photo('m-tank-white-m2', 600, 1020, 298, 474, 216, 275),
-    photo('m-tank-white-m3', 588, 870, 307, 444, 212, 226),
-    photo('m-tank-white-m6', 585, 876, 302, 447, 211, 228),
-    photo('m-tank-white-m9', 752, 614, 361, 215, 286, 209),
-  ],
-  'tank:#f4f4f0:w': [
-    photo('m-tank-white-w1', 546, 1020, 274, 581, 153, 245),
-    photo('m-tank-white-w2', 534, 1020, 235, 581, 150, 245),
-    photo('m-tank-white-w3', 504, 870, 261, 487, 141, 209),
-    photo('m-tank-white-w6', 510, 876, 255, 491, 143, 210),
-    photo('m-tank-white-w7', 528, 876, 265, 491, 148, 210),
-    photo('m-tank-white-w9', 752, 614, 364, 301, 188, 160),
-  ],
   'tee:#1b1b1b': [photo('p-tee-black-m', 656, 658, 329, 232, 311, 217)],
   'tee:#1b1b1b:w': [photo('p-tee-black-w', 590, 658, 296, 236, 278, 212)],
   'tee:#f4f4f0': [photo('p-tee-white-m', 624, 658, 318, 234, 294, 218)],
@@ -321,14 +265,12 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
     photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
     photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
   ],
-  'vest:#ff7a1a': [
-    photo('m-vest-orange-w1', 441, 669, 223, 361, 176, 187),
-    photo('m-vest-orange-w2', 432, 654, 218, 353, 173, 183),
+  'vest:#e8f525:w': [
+    photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
+    photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
   ],
-  'vest:#ff7a1a:w': [
-    photo('m-vest-orange-w1', 441, 669, 223, 361, 176, 187),
-    photo('m-vest-orange-w2', 432, 654, 218, 353, 173, 183),
-  ],
+  'vest:#ff7a1a': [photo('vest-orange', 640, 723, 306, 224, 195, 230)],
+  'vest:#ff7a1a:w': [photo('vest-orange', 640, 723, 306, 224, 195, 230)],
 }
 
 // Advance widths of Archivo Black capitals, in em (measured from the font file)

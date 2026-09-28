@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
-import ProductArt, { photoColor } from './ProductArt'
+import ProductArt, { hasPhoto, photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
 import {
   collections,
@@ -26,7 +26,7 @@ const HI_VIS_IDS = ['vest', 'jacket', 'raincover']
 const SLIDES = [
   ...garments.filter((g) => g.id === FIRST),
   ...garments.filter((g) => g.id !== FIRST && !HI_VIS_IDS.includes(g.id)),
-]
+].filter((g) => hasPhoto(g.art, g.colors[0].hex, 'x')) // only items with a product photo
 
 // A slogan card whose preview can be swiped to see the slogan on each product.
 // With `only`, it shows just that garment (no swiping).
