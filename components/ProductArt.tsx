@@ -25,7 +25,7 @@ export const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w
     text: { x: 100, y: 105, w: 12 },
   },
   vest: {
-    path: 'M66 14 Q56 14 55 24 Q55 56 42 72 Q36 80 37 94 L39 172 Q39 186 53 186 L147 186 Q161 186 161 172 L163 94 Q164 80 158 72 Q145 56 145 24 Q144 14 134 14 Q124 14 121 28 Q114 58 100 58 Q86 58 79 28 Q76 14 66 14 Z',
+    path: 'M65 16 L57 18 Q56 56 43 74 Q40 79 40 86 L40 178 Q40 184 46 184 L154 184 Q160 184 160 178 L160 86 Q160 79 157 74 Q144 56 143 18 L135 16 Q120 60 100 60 Q80 60 65 16 Z',
     text: { x: 100, y: 118, w: 12 },
   },
   tank: {
@@ -411,7 +411,7 @@ export default function ProductArt({
         d={shape.path}
         fill={color}
         stroke={INK}
-        strokeWidth={art === 'vest' ? 4 : 2}
+        strokeWidth={art === 'vest' ? 2.5 : 2}
         strokeLinejoin="round"
         fillRule="evenodd"
       />
@@ -438,35 +438,9 @@ export default function ProductArt({
       )}
       {art === 'vest' && (
         <g>
-          {/* chunky cartoon reflective bands and a shine on the fabric */}
-          <rect
-            x="41"
-            y="150"
-            width="118"
-            height="9"
-            rx="4.5"
-            fill="#dfe3e8"
-            stroke={INK}
-            strokeWidth="2.5"
-          />
-          <rect
-            x="41"
-            y="165"
-            width="118"
-            height="9"
-            rx="4.5"
-            fill="#dfe3e8"
-            stroke={INK}
-            strokeWidth="2.5"
-          />
-          <path
-            d="M50 84 Q46 110 48 138"
-            stroke="#ffffff"
-            strokeWidth="5"
-            strokeLinecap="round"
-            fill="none"
-            opacity="0.45"
-          />
+          {/* reflective bands */}
+          <rect x="41.5" y="152" width="117" height="8" rx="2" fill="#dfe3e8" />
+          <rect x="41.5" y="166" width="117" height="8" rx="2" fill="#dfe3e8" />
         </g>
       )}
       {sign === 'set' ? (
