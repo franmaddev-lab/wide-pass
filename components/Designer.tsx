@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import FavouriteButton from './FavouriteButton'
 import ProductArt, { photoColor } from './ProductArt'
-import RealPhotos from './RealPhotos'
 import ShareButton from './ShareButton'
 import SizeChart from './SizeChart'
 import { addToCart } from '@/lib/cart'
@@ -323,8 +322,6 @@ export default function Designer({
           )}
         </div>
       </div>
-
-      <RealPhotos garment={garment.id} title="On the road" limit={2} className="md:col-span-2" />
     </div>
   )
 }
