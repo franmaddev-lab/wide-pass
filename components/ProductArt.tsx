@@ -274,8 +274,8 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
   'vest:#e8f525:w': [photo('t-vest-yellow', 900, 900, 450, 290, 360, 250)],
   'vest:#ff7a1a': [photo('t-vest-orange', 900, 900, 450, 290, 360, 250)],
   'vest:#ff7a1a:w': [photo('t-vest-orange', 900, 900, 450, 290, 360, 250)],
-  'raincover:#e8f525': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
-  'raincover:#e8f525:w': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
+  'raincover:#e8f525': [photo('t-raincover-yellow', 900, 900, 450, 300, 340, 260)],
+  'raincover:#e8f525:w': [photo('t-raincover-yellow', 900, 900, 450, 300, 340, 260)],
 }
 
 // Advance widths of Archivo Black capitals, in em (measured from the font file)
@@ -383,7 +383,7 @@ function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
 export const TEE_BG = 'rgb(236 236 234)'
 export function photoBg(art: Art, color: string, slogan: string, fit?: Fit) {
   const p = photoFor(art, color, slogan, fit)
-  return p && /\/t-(tee|tank|longsleeve|jacket|vest)-/.test(p.src) ? TEE_BG : undefined
+  return p && /\/t-(tee|tank|longsleeve|jacket|vest|raincover)-/.test(p.src) ? TEE_BG : undefined
 }
 
 export function hasPhoto(art: Art, color: string, slogan: string, fit?: Fit) {
