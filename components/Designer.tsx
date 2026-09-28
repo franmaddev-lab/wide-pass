@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import FavouriteButton from './FavouriteButton'
-import ProductArt, { photoBg, photoColor } from './ProductArt'
+import ProductArt, { photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
 import SizeChart from './SizeChart'
 import { addToCart } from '@/lib/cart'
@@ -96,10 +96,7 @@ export default function Designer({
     <div className="grid gap-4 pb-24 md:grid-cols-2 md:gap-10 md:pb-0">
       {/* Pinned under the header so the preview stays in view while choosing */}
       <div className="sticky top-[58px] z-10 -mx-4 self-start bg-paper px-4 pt-2 pb-2 md:top-20 md:mx-0 md:p-0">
-        <div
-          className="relative rounded-2xl border-2 border-ink bg-white p-2 md:p-8"
-          style={{ background: photoBg(garment.art, color.hex, text, fit) }}
-        >
+        <div className="relative rounded-2xl border-2 border-ink bg-white p-2 md:p-8">
           {/* keyed so switching item or colour fades the new one in instead of jumping */}
           <div key={`${garment.id}/${color.name}/${fit}`} className="animate-swap">
             <ProductArt

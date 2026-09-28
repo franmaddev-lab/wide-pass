@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
-import ProductArt, { hasPhoto, photoBg, photoColor } from './ProductArt'
+import ProductArt, { hasPhoto, photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
 import {
   collections,
@@ -71,7 +71,6 @@ export default function SloganCard({
               href={designHref({ slogan: slogan.id, garment: g.id })}
               aria-label={`${title} on ${g.withArticle}`}
               className="block w-full shrink-0 snap-center p-6"
-              style={{ background: photoBg(g.art, c.hex, sloganText(slogan)) }}
             >
               <ProductArt
                 art={g.art}

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import FavouriteButton from './FavouriteButton'
-import ProductArt, { photoBg } from './ProductArt'
+import ProductArt from './ProductArt'
 import ShareButton from './ShareButton'
 import type { Art, Fit, SignPrint } from '@/lib/catalog'
 
@@ -38,10 +38,7 @@ export default function ItemCard({
   return (
     <div className="group relative overflow-hidden rounded-2xl border-2 border-ink bg-white transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]">
       <Link href={href} className="block">
-        <div
-          className="relative bg-white p-6"
-          style={{ background: photoBg(art, color, text, fit) }}
-        >
+        <div className="relative bg-white p-6">
           <ProductArt
             art={art}
             slogan={text}
