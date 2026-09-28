@@ -244,20 +244,20 @@ const photo = (
   height,
 })
 const PHOTOS: Record<string, Photo> = {
-  'vest:#e8f525': photo('vest-yellow', 661, 718, 315, 196, 222),
-  'vest:#ff7a1a': photo('vest-orange', 640, 723, 306, 205, 212),
+  'vest:#e8f525': photo('vest-yellow', 661, 718, 315, 215, 222, 230),
+  'vest:#ff7a1a': photo('vest-orange', 640, 723, 306, 224, 212, 230),
   'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 220, 260),
   'jacket:#ff7a1a': photo('jacket-orange', 671, 719, 335, 255, 220, 260),
   'raincover:#e8f525': photo('raincover-yellow', 516, 632, 258, 312, 250, 210),
-  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 265, 310, 330),
-  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 265, 310, 330),
-  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 255, 290, 320),
-  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 265, 270, 330),
-  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 270, 270, 330),
-  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 290, 250, 330),
-  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 285, 250, 330),
-  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 380, 240, 300),
-  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 380, 240, 300),
+  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 310, 300, 300),
+  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 305, 300, 300),
+  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 295, 280, 290),
+  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 310, 260, 300),
+  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 315, 260, 300),
+  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 300, 240, 300),
+  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 300, 240, 300),
+  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 410, 230, 260),
+  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 410, 230, 260),
 }
 
 // Splits the words into `n` lines as evenly as possible (smallest longest line)
@@ -345,7 +345,11 @@ function PhotoArt({
   const signH = sign ? signR * 2 + 16 : 0
   const { lines, size } = layout(slogan, photo.width, photo.height - signH, sign ? 44 : 80)
   const lineH = size * 1.1
-  const blockTop = photo.cy - (signH + lines.length * lineH) / 2
+  // Sit in the upper part of the print area (like a real back print), never
+  // above it, so short slogans don't creep up towards the shoulders
+  const blockH = signH + lines.length * lineH
+  const areaTop = photo.cy - photo.height / 2
+  const blockTop = areaTop + Math.max(0, photo.height - blockH) * 0.3
   const textTop = blockTop + signH
 
   return (
