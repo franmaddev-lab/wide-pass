@@ -10,7 +10,8 @@ const SCENES = [
     alt: 'A folded white t-shirt printed “Honk if you’re jealous of my calves”',
     text: 'Honk if you’re jealous of my calves',
     print: { cx: 450, cy: 470, w: 400, h: 270 },
-    rotate: -3,
+    // follow the fold: tilted and slanted with the shirt's perspective
+    transform: 'matrix(0.95 0.26 -0.18 0.86 90 -60)',
     size: 900,
   },
   {
@@ -58,6 +59,7 @@ export default function RoadScenes({ className }: { className?: string }) {
               <image href={s.src} width={s.size} height={s.size} />
               {s.print && fit && (
                 <text
+                  transform={'transform' in s ? s.transform : undefined}
                   textAnchor="middle"
                   fill="#111"
                   fontFamily={FONT}
