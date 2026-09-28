@@ -121,7 +121,7 @@ export default function HeroSlogan({
   )
 }
 
-// The white tee photo with the (animating) slogan printed on the back
+// The hi-vis yellow tee photo with the (animating) slogan printed on the back
 function HeroTee({ text, className }: { text: string; className?: string }) {
   const print = { cx: 450, cy: 330, w: 390, h: 260 }
   const { lines, size } = layout(text || ' ', print.w, print.h, 62)
@@ -129,7 +129,7 @@ function HeroTee({ text, className }: { text: string; className?: string }) {
   const top = print.cy - (lines.length * lineH) / 2
   return (
     <svg viewBox="0 0 900 900" role="img" aria-label={text} className={className}>
-      <image href="/scenes/hero-white-tee.webp" width="900" height="900" />
+      <image href="/scenes/hero-yellow-tee.webp" width="900" height="900" />
       <text textAnchor="middle" fill="#111" fontFamily={FONT} fontWeight={800} fontSize={size}>
         {lines.map((l, i) => (
           <tspan key={i} x={print.cx} y={top + i * lineH + size * 0.85}>
