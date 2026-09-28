@@ -262,6 +262,7 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
   'longsleeve:#1b1b1b': [
     photo('m-longsleeve-black-m1', 645, 1041, 348, 474, 284, 302),
     photo('m-longsleeve-black-m2', 615, 1041, 337, 474, 271, 302),
+    photo('m-longsleeve-black-m9', 752, 742, 377, 252, 331, 267),
   ],
   'longsleeve:#1b1b1b:w': [
     photo('m-longsleeve-black-w1', 546, 1041, 287, 583, 229, 271),
@@ -272,6 +273,7 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
     photo('m-longsleeve-black-w6', 489, 690, 245, 380, 205, 179),
     photo('m-longsleeve-black-w7', 477, 690, 248, 380, 200, 179),
     photo('m-longsleeve-black-w8', 483, 690, 250, 380, 203, 179),
+    photo('m-longsleeve-black-w9', 752, 742, 375, 282, 331, 237),
   ],
   'longsleeve:#f4f4f0': [
     photo('m-longsleeve-white-m1', 603, 1041, 295, 474, 265, 302),
@@ -282,10 +284,12 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
     photo('m-longsleeve-white-m6', 534, 690, 271, 345, 235, 193),
     photo('m-longsleeve-white-m7', 522, 690, 276, 345, 230, 193),
     photo('m-longsleeve-white-m8', 504, 690, 262, 345, 222, 193),
+    photo('m-longsleeve-white-m9', 752, 742, 377, 252, 331, 267),
   ],
   'longsleeve:#f4f4f0:w': [
     photo('m-longsleeve-white-w1', 546, 1041, 273, 583, 229, 271),
     photo('m-longsleeve-white-w2', 534, 1041, 255, 583, 224, 271),
+    photo('m-longsleeve-white-w9', 752, 742, 367, 282, 331, 237),
   ],
   'raincover:#e8f525': [
     photo('m-raincover-yellow-m1', 537, 669, 283, 348, 247, 241),
@@ -307,32 +311,37 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
     photo('m-tank-black-m4', 582, 870, 295, 444, 210, 226),
     photo('m-tank-black-m6', 612, 876, 311, 447, 220, 228),
     photo('m-tank-black-m7', 588, 876, 308, 447, 212, 228),
+    photo('m-tank-black-m9', 752, 614, 382, 215, 286, 209),
   ],
   'tank:#1b1b1b:w': [
-    photo('m-tank-black-w1', 546, 1020, 288, 581, 197, 245),
-    photo('m-tank-black-w2', 519, 1020, 278, 581, 187, 245),
-    photo('m-tank-black-w3', 510, 870, 264, 487, 184, 209),
-    photo('m-tank-black-w4', 510, 870, 264, 487, 184, 209),
-    photo('m-tank-black-w6', 522, 876, 263, 491, 188, 210),
+    photo('m-tank-black-w1', 546, 1020, 288, 581, 153, 245),
+    photo('m-tank-black-w2', 519, 1020, 278, 581, 145, 245),
+    photo('m-tank-black-w3', 510, 870, 264, 487, 143, 209),
+    photo('m-tank-black-w4', 510, 870, 264, 487, 143, 209),
+    photo('m-tank-black-w6', 522, 876, 263, 491, 146, 210),
+    photo('m-tank-black-w9', 752, 614, 376, 301, 188, 160),
   ],
   'tank:#f4f4f0': [
     photo('m-tank-white-m1', 603, 1020, 292, 474, 217, 275),
     photo('m-tank-white-m2', 600, 1020, 298, 474, 216, 275),
     photo('m-tank-white-m3', 588, 870, 307, 444, 212, 226),
     photo('m-tank-white-m6', 585, 876, 302, 447, 211, 228),
+    photo('m-tank-white-m9', 752, 614, 361, 215, 286, 209),
   ],
   'tank:#f4f4f0:w': [
-    photo('m-tank-white-w1', 546, 1020, 274, 581, 197, 245),
-    photo('m-tank-white-w2', 534, 1020, 235, 581, 192, 245),
-    photo('m-tank-white-w3', 504, 870, 261, 487, 181, 209),
-    photo('m-tank-white-w6', 510, 876, 255, 491, 184, 210),
-    photo('m-tank-white-w7', 528, 876, 265, 491, 190, 210),
+    photo('m-tank-white-w1', 546, 1020, 274, 581, 153, 245),
+    photo('m-tank-white-w2', 534, 1020, 235, 581, 150, 245),
+    photo('m-tank-white-w3', 504, 870, 261, 487, 141, 209),
+    photo('m-tank-white-w6', 510, 876, 255, 491, 143, 210),
+    photo('m-tank-white-w7', 528, 876, 265, 491, 148, 210),
+    photo('m-tank-white-w9', 752, 614, 364, 301, 188, 160),
   ],
   'tee:#1b1b1b': [
     photo('m-tee-black-m1', 645, 999, 350, 455, 284, 290),
     photo('m-tee-black-m2', 615, 999, 336, 455, 271, 290),
     photo('m-tee-black-m3', 582, 792, 297, 396, 256, 222),
     photo('m-tee-black-m4', 579, 792, 293, 396, 255, 222),
+    photo('m-tee-black-m9', 752, 652, 377, 222, 346, 235),
   ],
   'tee:#1b1b1b:w': [
     photo('m-tee-black-w1', 546, 999, 289, 559, 240, 260),
@@ -341,6 +350,7 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
     photo('m-tee-black-w6', 525, 792, 256, 436, 220, 206),
     photo('m-tee-black-w7', 516, 792, 263, 436, 217, 206),
     photo('m-tee-black-w8', 531, 792, 267, 436, 223, 206),
+    photo('m-tee-black-w9', 752, 652, 374, 248, 346, 209),
   ],
   'tee:#f4f4f0': [
     photo('m-tee-white-m1', 603, 999, 295, 455, 265, 290),
@@ -349,12 +359,14 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
     photo('m-tee-white-m6', 588, 792, 300, 396, 259, 222),
     photo('m-tee-white-m7', 567, 792, 290, 396, 249, 222),
     photo('m-tee-white-m8', 573, 792, 296, 396, 252, 222),
+    photo('m-tee-white-m9', 752, 652, 366, 222, 346, 235),
   ],
   'tee:#f4f4f0:w': [
     photo('m-tee-white-w1', 546, 999, 262, 559, 240, 260),
     photo('m-tee-white-w2', 534, 999, 239, 559, 235, 260),
     photo('m-tee-white-w3', 483, 792, 249, 436, 203, 206),
     photo('m-tee-white-w4', 504, 792, 263, 436, 212, 206),
+    photo('m-tee-white-w9', 752, 652, 367, 248, 346, 209),
   ],
   'vest:#e8f525': [
     photo('m-vest-yellow-m1', 495, 669, 260, 341, 198, 201),
@@ -493,16 +505,22 @@ function viewBox(photo: Photo) {
   if (!photo.src.includes('/m-')) return `0 0 ${photo.w} ${photo.h}`
   const top = Math.max(0, photo.cy - photo.height / 2 - photo.h * 0.1)
   // stop above the waistband so no trousers show
-  const cut = /-tank-.*-w[12]\./.test(photo.src)
-    ? 0.68
-    : /-tank-.*-w\d/.test(photo.src)
-      ? 0.73
-      : /-(tee|tank|longsleeve)-/.test(photo.src)
-        ? 0.84
-        : 0.9
+  // the tightly framed sheet (…9): trousers start lower for men
+  const cut = /-w9\./.test(photo.src)
+    ? 0.8
+    : /-m9\./.test(photo.src)
+      ? 0.83
+      : /-tank-.*-w[12]\./.test(photo.src)
+        ? 0.68
+        : /-tank-.*-w\d/.test(photo.src)
+          ? 0.73
+          : /-(tee|tank|longsleeve)-/.test(photo.src)
+            ? 0.84
+            : 0.9
   const bottom = photo.h * cut
   const h = bottom - top
-  const w = Math.max(photo.w, h)
+  // square where possible, but always wide enough to show the whole print with margin
+  const w = Math.max(h, photo.width * 1.9, photo.w * 0.7)
   return `${Math.round(photo.cx - w / 2)} ${Math.round(top)} ${Math.round(w)} ${Math.round(h)}`
 }
 
