@@ -127,7 +127,7 @@ const allGarments: Garment[] = [
     withArticle: 'a bag rain cover',
     art: 'raincover',
     price: 2500,
-    colors: [HI_VIS[0]],
+    colors: HI_VIS,
     sizes: ['15–25 L', '25–35 L'],
     description:
       'Waterproof hi-vis cover for your backpack, with a reflective strip. Your slogan stays visible when it pours.',

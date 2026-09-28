@@ -246,58 +246,128 @@ const photo = (
 // A key can list several models; each slogan always gets the same one, so the
 // gallery shows a mix of people. Add more photos as extra entries in an array.
 const PHOTOS: Record<string, Photo | Photo[]> = {
-  'vest:#e8f525': photo('vest-yellow', 661, 718, 315, 215, 205, 230),
-  'vest:#ff7a1a': photo('vest-orange', 640, 723, 306, 224, 195, 230),
-  'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 205, 260),
-  'jacket:#ff7a1a': photo('jacket-orange', 671, 719, 335, 255, 205, 260),
-  'raincover:#e8f525': photo('raincover-yellow', 516, 632, 258, 312, 230, 210),
-  'tee:#1b1b1b': [
-    photo('m-tee-black-m1', 215, 333, 108, 143, 95, 100),
-    photo('m-tee-black-m2', 205, 333, 102, 143, 90, 100),
+  'jacket:#e8f525': [
+    photo('m-jacket-yellow-m1', 181, 223, 90, 107, 83, 67),
+    photo('m-jacket-yellow-m2', 167, 218, 84, 105, 77, 65),
   ],
-  'tee:#1b1b1b:w': [
-    photo('m-tee-black-w1', 182, 333, 91, 186, 80, 87),
-    photo('m-tee-black-w2', 173, 333, 86, 186, 76, 87),
+  'jacket:#e8f525:w': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
+  'jacket:#ff7a1a': [
+    photo('m-jacket-orange-w1', 159, 223, 80, 109, 73, 67),
+    photo('m-jacket-orange-w2', 161, 218, 80, 107, 74, 65),
   ],
-  'tee:#f4f4f0': [
-    photo('m-tee-white-m1', 201, 333, 100, 143, 88, 100),
-    photo('m-tee-white-m2', 200, 333, 100, 143, 88, 100),
-  ],
-  'tee:#f4f4f0:w': [
-    photo('m-tee-white-w1', 182, 333, 91, 186, 80, 87),
-    photo('m-tee-white-w2', 178, 333, 89, 186, 78, 87),
+  'jacket:#ff7a1a:w': [
+    photo('m-jacket-orange-w1', 159, 223, 80, 109, 73, 67),
+    photo('m-jacket-orange-w2', 161, 218, 80, 107, 74, 65),
   ],
   'longsleeve:#1b1b1b': [
-    photo('m-longsleeve-black-m1', 215, 347, 108, 149, 95, 104),
-    photo('m-longsleeve-black-m2', 205, 347, 102, 149, 90, 104),
+    photo('m-longsleeve-black-m1', 215, 347, 108, 158, 95, 101),
+    photo('m-longsleeve-black-m2', 205, 347, 102, 158, 90, 101),
   ],
   'longsleeve:#1b1b1b:w': [
     photo('m-longsleeve-black-w1', 182, 347, 91, 194, 76, 90),
     photo('m-longsleeve-black-w2', 173, 347, 86, 194, 73, 90),
+    photo('m-longsleeve-black-w3', 160, 239, 80, 131, 67, 62),
+    photo('m-longsleeve-black-w4', 159, 239, 80, 131, 67, 62),
+    photo('m-longsleeve-black-w5', 161, 239, 80, 131, 68, 62),
+    photo('m-longsleeve-black-w6', 163, 230, 82, 127, 68, 60),
+    photo('m-longsleeve-black-w7', 159, 230, 80, 127, 67, 60),
+    photo('m-longsleeve-black-w8', 161, 230, 80, 127, 68, 60),
   ],
   'longsleeve:#f4f4f0': [
-    photo('m-longsleeve-white-m1', 201, 347, 100, 149, 88, 104),
-    photo('m-longsleeve-white-m2', 200, 347, 100, 149, 88, 104),
+    photo('m-longsleeve-white-m1', 201, 347, 100, 158, 88, 101),
+    photo('m-longsleeve-white-m2', 200, 347, 100, 158, 88, 101),
+    photo('m-longsleeve-white-m3', 177, 239, 88, 120, 78, 67),
+    photo('m-longsleeve-white-m4', 175, 239, 88, 120, 77, 67),
+    photo('m-longsleeve-white-m5', 175, 239, 88, 120, 77, 67),
+    photo('m-longsleeve-white-m6', 178, 230, 89, 115, 78, 64),
+    photo('m-longsleeve-white-m7', 174, 230, 87, 115, 77, 64),
+    photo('m-longsleeve-white-m8', 168, 230, 84, 115, 74, 64),
   ],
   'longsleeve:#f4f4f0:w': [
     photo('m-longsleeve-white-w1', 182, 347, 91, 194, 76, 90),
     photo('m-longsleeve-white-w2', 178, 347, 89, 194, 75, 90),
   ],
+  'raincover:#e8f525': [
+    photo('m-raincover-yellow-m1', 179, 223, 90, 116, 82, 80),
+    photo('m-raincover-yellow-m2', 165, 218, 82, 113, 76, 78),
+  ],
+  'raincover:#e8f525:w': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
+  'raincover:#ff7a1a': [
+    photo('m-raincover-orange-w1', 163, 223, 82, 120, 75, 80),
+    photo('m-raincover-orange-w2', 160, 218, 80, 118, 74, 78),
+  ],
+  'raincover:#ff7a1a:w': [
+    photo('m-raincover-orange-w1', 163, 223, 82, 120, 75, 80),
+    photo('m-raincover-orange-w2', 160, 218, 80, 118, 74, 78),
+  ],
   'tank:#1b1b1b': [
-    photo('m-tank-black-m1', 215, 340, 108, 153, 77, 95),
-    photo('m-tank-black-m2', 205, 340, 102, 153, 74, 95),
+    photo('m-tank-black-m1', 215, 340, 108, 158, 77, 92),
+    photo('m-tank-black-m2', 205, 340, 102, 158, 74, 92),
+    photo('m-tank-black-m3', 193, 290, 96, 148, 69, 75),
+    photo('m-tank-black-m4', 194, 290, 97, 148, 70, 75),
+    photo('m-tank-black-m6', 204, 292, 102, 149, 73, 76),
+    photo('m-tank-black-m7', 196, 292, 98, 149, 71, 76),
   ],
   'tank:#1b1b1b:w': [
     photo('m-tank-black-w1', 182, 340, 91, 194, 66, 82),
     photo('m-tank-black-w2', 173, 340, 86, 194, 62, 82),
+    photo('m-tank-black-w3', 170, 290, 85, 162, 61, 70),
+    photo('m-tank-black-w4', 170, 290, 85, 162, 61, 70),
+    photo('m-tank-black-w6', 174, 292, 87, 164, 63, 70),
   ],
   'tank:#f4f4f0': [
-    photo('m-tank-white-m1', 201, 340, 100, 153, 72, 95),
-    photo('m-tank-white-m2', 200, 340, 100, 153, 72, 95),
+    photo('m-tank-white-m1', 201, 340, 100, 158, 72, 92),
+    photo('m-tank-white-m2', 200, 340, 100, 158, 72, 92),
+    photo('m-tank-white-m3', 196, 290, 98, 148, 71, 75),
+    photo('m-tank-white-m6', 195, 292, 98, 149, 70, 76),
   ],
   'tank:#f4f4f0:w': [
     photo('m-tank-white-w1', 182, 340, 91, 194, 66, 82),
     photo('m-tank-white-w2', 178, 340, 89, 194, 64, 82),
+    photo('m-tank-white-w3', 168, 290, 84, 162, 60, 70),
+    photo('m-tank-white-w6', 170, 292, 85, 164, 61, 70),
+    photo('m-tank-white-w7', 176, 292, 88, 164, 63, 70),
+  ],
+  'tee:#1b1b1b': [
+    photo('m-tee-black-m1', 215, 333, 108, 152, 95, 97),
+    photo('m-tee-black-m2', 205, 333, 102, 152, 90, 97),
+    photo('m-tee-black-m3', 194, 264, 97, 132, 85, 74),
+    photo('m-tee-black-m4', 193, 264, 96, 132, 85, 74),
+  ],
+  'tee:#1b1b1b:w': [
+    photo('m-tee-black-w1', 182, 333, 91, 186, 80, 87),
+    photo('m-tee-black-w2', 173, 333, 86, 186, 76, 87),
+    photo('m-tee-black-w3', 169, 264, 84, 145, 71, 69),
+    photo('m-tee-black-w6', 175, 264, 88, 145, 74, 69),
+    photo('m-tee-black-w7', 172, 264, 86, 145, 72, 69),
+    photo('m-tee-black-w8', 177, 264, 88, 145, 74, 69),
+  ],
+  'tee:#f4f4f0': [
+    photo('m-tee-white-m1', 201, 333, 100, 152, 88, 97),
+    photo('m-tee-white-m2', 200, 333, 100, 152, 88, 97),
+    photo('m-tee-white-m3', 190, 264, 95, 132, 84, 74),
+    photo('m-tee-white-m6', 196, 264, 98, 132, 86, 74),
+    photo('m-tee-white-m7', 189, 264, 94, 132, 83, 74),
+    photo('m-tee-white-m8', 191, 264, 96, 132, 84, 74),
+  ],
+  'tee:#f4f4f0:w': [
+    photo('m-tee-white-w1', 182, 333, 91, 186, 80, 87),
+    photo('m-tee-white-w2', 178, 333, 89, 186, 78, 87),
+    photo('m-tee-white-w3', 161, 264, 80, 145, 68, 69),
+    photo('m-tee-white-w4', 168, 264, 84, 145, 71, 69),
+  ],
+  'vest:#e8f525': [
+    photo('m-vest-yellow-m1', 165, 223, 82, 114, 66, 67),
+    photo('m-vest-yellow-m2', 160, 218, 80, 111, 64, 65),
+  ],
+  'vest:#e8f525:w': [photo('vest-yellow', 661, 718, 315, 215, 205, 230)],
+  'vest:#ff7a1a': [
+    photo('m-vest-orange-w1', 147, 223, 74, 120, 59, 62),
+    photo('m-vest-orange-w2', 144, 218, 72, 118, 58, 61),
+  ],
+  'vest:#ff7a1a:w': [
+    photo('m-vest-orange-w1', 147, 223, 74, 120, 59, 62),
+    photo('m-vest-orange-w2', 144, 218, 72, 118, 58, 61),
   ],
 }
 
@@ -417,6 +487,17 @@ export function photoColor<C extends { hex: string }>(
   return colors.find((c) => hasPhoto(art, c.hex, slogan, fit)) ?? colors[0]
 }
 
+// People photos are framed from just above the collar to the waist, so the
+// garment (and the slogan) fills the picture instead of heads and legs
+function viewBox(photo: Photo) {
+  if (!photo.src.includes('/m-')) return `0 0 ${photo.w} ${photo.h}`
+  const top = Math.max(0, photo.cy - photo.height / 2 - photo.h * 0.13)
+  const bottom = photo.h * 0.98
+  const h = bottom - top
+  const w = Math.max(photo.w, h)
+  return `${Math.round(photo.cx - w / 2)} ${Math.round(top)} ${Math.round(w)} ${Math.round(h)}`
+}
+
 function PhotoArt({
   photo,
   slogan,
@@ -447,7 +528,7 @@ function PhotoArt({
   const textTop = blockTop + signH
 
   return (
-    <svg viewBox={`0 0 ${photo.w} ${photo.h}`} role="img" aria-label={slogan} className={className}>
+    <svg viewBox={viewBox(photo)} role="img" aria-label={slogan} className={className}>
       <image href={photo.src} width={photo.w} height={photo.h} />
       {sign && <Sign kind={sign} cx={photo.cx} cy={blockTop + signR} r={signR} />}
       <text textAnchor="middle" fill={ink} fontFamily={FONT} fontWeight={800} fontSize={size}>
