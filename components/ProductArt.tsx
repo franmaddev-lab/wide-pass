@@ -247,6 +247,13 @@ const photo = (
 // gallery shows a mix of people. Add more photos as extra entries in an array.
 // Product-only photos (no people). Items without one fall back to the drawing.
 const PHOTOS: Record<string, Photo | Photo[]> = {
+  // T-shirts: relaxed cut on a white background; fitted white and yellow on black
+  'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 290, 370, 290)],
+  'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 290, 370, 290)],
+  'tee:#e8f525': [photo('t-tee-yellow-m', 900, 900, 450, 290, 370, 290)],
+  'tee:#1b1b1b:w': [photo('t-tee-black-w', 900, 900, 450, 300, 320, 280)],
+  'tee:#f4f4f0:w': [photo('t-tee-white-w', 900, 900, 450, 300, 320, 280)],
+  'tee:#e8f525:w': [photo('t-tee-yellow-w', 900, 900, 450, 300, 320, 280)],
   'jacket:#e8f525': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
   'jacket:#e8f525:w': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
   'jacket:#ff7a1a': [photo('jacket-orange', 671, 719, 335, 255, 205, 260)],
@@ -257,10 +264,6 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
   'longsleeve:#f4f4f0:w': [photo('p-longsleeve-white-w', 620, 698, 312, 234, 248, 211)],
   'raincover:#e8f525': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
   'raincover:#e8f525:w': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
-  'tee:#1b1b1b': [photo('p-tee-black-m', 656, 658, 329, 232, 311, 217)],
-  'tee:#1b1b1b:w': [photo('p-tee-black-w', 590, 658, 296, 236, 278, 212)],
-  'tee:#f4f4f0': [photo('p-tee-white-m', 624, 658, 318, 234, 294, 218)],
-  'tee:#f4f4f0:w': [photo('p-tee-white-w', 582, 658, 314, 237, 254, 214)],
   'vest:#e8f525': [
     photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
     photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
@@ -372,6 +375,12 @@ function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
   let hash = 0
   for (const ch of slogan) hash = (hash * 31 + ch.charCodeAt(0)) | 0
   return found[Math.abs(hash) % found.length]
+}
+
+// Photos shot on a black background (fitted white and yellow tees)
+export function isDarkPhoto(art: Art, color: string, slogan: string, fit?: Fit) {
+  const p = photoFor(art, color, slogan, fit)
+  return Boolean(p && /t-tee-(white|yellow)-w/.test(p.src))
 }
 
 export function hasPhoto(art: Art, color: string, slogan: string, fit?: Fit) {

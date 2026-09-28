@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
-import ProductArt, { hasPhoto, photoColor } from './ProductArt'
+import ProductArt, { hasPhoto, isDarkPhoto, photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
 import {
   collections,
@@ -70,7 +70,9 @@ export default function SloganCard({
               key={g.id}
               href={designHref({ slogan: slogan.id, garment: g.id })}
               aria-label={`${title} on ${g.withArticle}`}
-              className="block w-full shrink-0 snap-center p-6"
+              className={`block w-full shrink-0 snap-center p-6 ${
+                isDarkPhoto(g.art, c.hex, sloganText(slogan)) ? 'bg-black' : ''
+              }`}
             >
               <ProductArt
                 art={g.art}

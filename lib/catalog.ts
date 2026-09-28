@@ -82,7 +82,7 @@ const allGarments: Garment[] = [
     withArticle: 'a t-shirt',
     art: 'tee',
     price: 2400,
-    colors: BLACK_WHITE,
+    colors: [...BLACK_WHITE, HI_VIS[0]],
     sizes: APPAREL_SIZES,
     fits: ['unisex', 'women'],
     description:
