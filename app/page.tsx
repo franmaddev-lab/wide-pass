@@ -13,6 +13,7 @@ import {
   getGarment,
   getSlogan,
   shareHref,
+  printText,
   sloganText,
   slogans,
   type Art,
@@ -42,7 +43,7 @@ function randomHero() {
 const STEPS = [
   ['Say it', 'Pick your message: funny, serious or family.'],
   ['Make it yours', 'Fill in the blank: “I could be your ___”.'],
-  ['Wear it', 'Tank, tee or long sleeve. Or go hi-vis: vest, rain jacket or bag cover.'],
+  ['Wear it', 'Tank, tee or long sleeve. Or go hi-vis: vest, jacket or bag cover.'],
 ]
 
 // Ready-made designs shown as a starting point; each opens the designer preset
@@ -69,7 +70,7 @@ const TILES: Record<
 > = {
   family: {
     art: 'tee',
-    text: 'I could be your dad',
+    text: 'I could be your\ndad',
     color: '#1b1b1b',
     ink: '#e8f525',
     className: 'bg-white text-ink',
@@ -161,7 +162,7 @@ export default async function Home() {
                 key={p.slogan}
                 href={designHref({ garment: p.garment, slogan: p.slogan, custom: p.custom })}
                 art={garment.art}
-                text={sloganText(slogan, p.custom)}
+                text={printText(slogan, p.custom)}
                 color={c.hex}
                 ink={c.ink}
                 sign={slogan.sign}
@@ -235,7 +236,7 @@ export default async function Home() {
             </div>
             <ProductArt
               art="tee"
-              slogan="I could be your ___"
+              slogan={'I could be your\n___'}
               color="#1b1b1b"
               ink="#e8f525"
               fit="women"

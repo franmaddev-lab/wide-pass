@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { FONT, layout } from './ProductArt'
-import { designHref, getSlogan, sloganText } from '@/lib/catalog'
+import { FONT, LINE_H, layout } from './ProductArt'
+import { designHref, getSlogan, markCustom, sloganText } from '@/lib/catalog'
 
 const START_DELAY = 1500
 const DELETE_MS = 60
@@ -70,7 +70,7 @@ export default function HeroSlogan({
   let artText: string
   if (personalise) {
     const [before, after] = slogan.text.split('{}')
-    artText = `${before}${word}${after}`
+    artText = markCustom(before, word, after)
     headline = (
       <>
         {before}
@@ -125,7 +125,7 @@ export default function HeroSlogan({
 function HeroTee({ text, className }: { text: string; className?: string }) {
   const print = { cx: 450, cy: 330, w: 390, h: 260 }
   const { lines, size } = layout(text || ' ', print.w, print.h, 62)
-  const lineH = size * 1.1
+  const lineH = size * LINE_H
   const top = print.cy - (lines.length * lineH) / 2
   return (
     <svg viewBox="0 0 900 900" role="img" aria-label={text} className={className}>

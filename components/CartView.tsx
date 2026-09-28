@@ -40,7 +40,7 @@ export default function CartView() {
           >
             <ProductArt
               art={item.art}
-              slogan={item.text}
+              slogan={item.print ?? item.text}
               color={item.color.hex}
               ink={item.color.ink}
               sign={item.sign}

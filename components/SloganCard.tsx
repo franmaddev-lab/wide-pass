@@ -15,6 +15,7 @@ import {
   getSlogan,
   shareHref,
   sloganTemplate,
+  printText,
   sloganText,
   type GarmentId,
 } from '@/lib/catalog'
@@ -77,7 +78,7 @@ export default function SloganCard({
             >
               <ProductArt
                 art={g.art}
-                slogan={sloganText(slogan)}
+                slogan={printText(slogan)}
                 color={c.hex}
                 ink={c.ink}
                 sign={slogan.sign}

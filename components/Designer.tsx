@@ -17,6 +17,7 @@ import {
   shareHref,
   getSlogan,
   sloganTemplate,
+  printText,
   sloganText,
   type Fit,
   type GarmentId,
@@ -67,6 +68,7 @@ export default function Designer({
   const cleaned = cleanCustom(slogan, custom)
   const invalid = cleaned === null
   const text = sloganText(slogan, invalid ? undefined : cleaned)
+  const print = printText(slogan, invalid ? undefined : (cleaned ?? undefined))
   const fits = garment.fits ?? ['unisex']
   const fit: Fit = fits.includes('women')
     ? (fitChoice ?? (isWomanWearer(text) ? 'women' : 'unisex'))
@@ -104,7 +106,7 @@ export default function Designer({
           <div>
             <ProductArt
               art={garment.art}
-              slogan={text}
+              slogan={print}
               color={color.hex}
               ink={color.ink}
               sign={slogan.sign}

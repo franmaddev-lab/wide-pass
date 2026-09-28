@@ -1,4 +1,4 @@
-import { FONT, layout } from './ProductArt'
+import { FONT, LINE_H, layout } from './ProductArt'
 import SocialLinks from './SocialLinks'
 
 // Home page "Seen on the road": real scenes with the slogan printed onto the gear.
@@ -29,7 +29,7 @@ export default function RoadScenes({ className }: { className?: string }) {
       <div className="mt-4 grid grid-cols-2 gap-3 md:max-w-3xl">
         {SCENES.map((s) => {
           const fit = s.print && s.text ? layout(s.text, s.print.w, s.print.h, s.print.h / 2) : null
-          const lineH = fit ? fit.size * 1.1 : 0
+          const lineH = fit ? fit.size * LINE_H : 0
           const top = s.print && fit ? s.print.cy - (fit.lines.length * lineH) / 2 : 0
           return (
             <svg

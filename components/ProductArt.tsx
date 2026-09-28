@@ -5,7 +5,7 @@ import PhotoSwap from './PhotoSwap'
 // needs no photo assets until real product shots exist.
 
 function wrap(text: string, maxChars: number) {
-  const words = text.toUpperCase().split(' ')
+  const words = text.toUpperCase().replace(/\n/g, ' ').split(' ')
   const out: string[] = []
   let line = ''
   for (const w of words) {
@@ -249,30 +249,30 @@ const photo = (
 // Product-only photos (no people). Items without one fall back to the drawing.
 const PHOTOS: Record<string, Photo | Photo[]> = {
   // T-shirts, on the light grey studio background of the photos
-  'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 313, 364, 273)],
-  'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 313, 364, 273)],
-  'tee:#1b1b1b:w': [photo('t-tee-black-w', 900, 900, 450, 313, 292, 255)],
-  'tee:#f4f4f0:w': [photo('t-tee-white-w', 900, 900, 450, 313, 292, 255)],
-  'tank:#1b1b1b': [photo('t-tank-black-m', 900, 900, 450, 341, 320, 255)],
-  'tank:#f4f4f0': [photo('t-tank-white-m', 900, 900, 450, 341, 320, 255)],
-  'tank:#1b1b1b:w': [photo('t-tank-black-w', 900, 900, 450, 341, 255, 237)],
-  'tank:#f4f4f0:w': [photo('t-tank-white-w', 900, 900, 450, 341, 255, 237)],
-  'longsleeve:#1b1b1b': [photo('t-longsleeve-black', 900, 900, 450, 300, 300, 230)],
-  'longsleeve:#1b1b1b:w': [photo('t-longsleeve-black', 900, 900, 450, 300, 300, 230)],
-  'longsleeve:#f4f4f0': [photo('t-longsleeve-white', 900, 900, 450, 300, 300, 230)],
-  'longsleeve:#f4f4f0:w': [photo('t-longsleeve-white', 900, 900, 450, 300, 300, 230)],
-  'jacket:#e8f525': [photo('t-jacket-yellow', 900, 900, 450, 297, 300, 200)],
-  'jacket:#e8f525:w': [photo('t-jacket-yellow', 900, 900, 450, 297, 300, 200)],
-  'jacket:#ff7a1a': [photo('t-jacket-orange', 900, 900, 450, 297, 300, 200)],
-  'jacket:#ff7a1a:w': [photo('t-jacket-orange', 900, 900, 450, 297, 300, 200)],
-  'vest:#e8f525': [photo('t-vest-yellow', 900, 900, 450, 290, 360, 250)],
-  'vest:#e8f525:w': [photo('t-vest-yellow', 900, 900, 450, 290, 360, 250)],
-  'vest:#ff7a1a': [photo('t-vest-orange', 900, 900, 450, 290, 360, 250)],
-  'vest:#ff7a1a:w': [photo('t-vest-orange', 900, 900, 450, 290, 360, 250)],
-  'raincover:#e8f525': [photo('t-raincover-yellow', 900, 900, 450, 300, 340, 260)],
-  'raincover:#e8f525:w': [photo('t-raincover-yellow', 900, 900, 450, 300, 340, 260)],
-  'raincover:#ff7a1a': [photo('t-raincover-orange', 900, 900, 450, 300, 340, 260)],
-  'raincover:#ff7a1a:w': [photo('t-raincover-orange', 900, 900, 450, 300, 340, 260)],
+  'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 345, 316, 380)],
+  'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 345, 316, 380)],
+  'tee:#1b1b1b:w': [photo('t-tee-black-w', 900, 900, 450, 335, 250, 340)],
+  'tee:#f4f4f0:w': [photo('t-tee-white-w', 900, 900, 450, 335, 250, 340)],
+  'tank:#1b1b1b': [photo('t-tank-black-m', 900, 900, 450, 360, 280, 370)],
+  'tank:#f4f4f0': [photo('t-tank-white-m', 900, 900, 450, 360, 280, 370)],
+  'tank:#1b1b1b:w': [photo('t-tank-black-w', 900, 900, 450, 360, 215, 330)],
+  'tank:#f4f4f0:w': [photo('t-tank-white-w', 900, 900, 450, 360, 215, 330)],
+  'longsleeve:#1b1b1b': [photo('t-longsleeve-black', 900, 900, 450, 330, 266, 350)],
+  'longsleeve:#1b1b1b:w': [photo('t-longsleeve-black', 900, 900, 450, 330, 266, 350)],
+  'longsleeve:#f4f4f0': [photo('t-longsleeve-white', 900, 900, 450, 330, 266, 350)],
+  'longsleeve:#f4f4f0:w': [photo('t-longsleeve-white', 900, 900, 450, 330, 266, 350)],
+  'jacket:#e8f525': [photo('t-jacket-yellow', 900, 900, 450, 290, 266, 240)],
+  'jacket:#e8f525:w': [photo('t-jacket-yellow', 900, 900, 450, 290, 266, 240)],
+  'jacket:#ff7a1a': [photo('t-jacket-orange', 900, 900, 450, 290, 266, 240)],
+  'jacket:#ff7a1a:w': [photo('t-jacket-orange', 900, 900, 450, 290, 266, 240)],
+  'vest:#e8f525': [photo('t-vest-yellow', 900, 900, 450, 282, 316, 320)],
+  'vest:#e8f525:w': [photo('t-vest-yellow', 900, 900, 450, 282, 316, 320)],
+  'vest:#ff7a1a': [photo('t-vest-orange', 900, 900, 450, 282, 316, 320)],
+  'vest:#ff7a1a:w': [photo('t-vest-orange', 900, 900, 450, 282, 316, 320)],
+  'raincover:#e8f525': [photo('t-raincover-yellow', 900, 900, 450, 305, 300, 330)],
+  'raincover:#e8f525:w': [photo('t-raincover-yellow', 900, 900, 450, 305, 300, 330)],
+  'raincover:#ff7a1a': [photo('t-raincover-orange', 900, 900, 450, 305, 300, 330)],
+  'raincover:#ff7a1a:w': [photo('t-raincover-orange', 900, 900, 450, 305, 300, 330)],
 }
 
 // Advance widths of Archivo Black capitals, in em (measured from the font file)
@@ -348,15 +348,36 @@ function balance(words: string[], n: number) {
 
 // Picks the number of lines that lets the slogan print biggest in the area,
 // so it spreads across the back and reads from a distance
+// Space between printed lines, as a multiple of the letter size
+export const LINE_H = 1.22
+
+// Splits the slogan into balanced lines at the biggest size that fits the print
+// area. "\n" forces a break (the custom word sits on a line of its own).
 export function layout(text: string, width: number, height: number, maxSize: number) {
-  const words = text.toUpperCase().split(' ')
+  const segs = text
+    .toUpperCase()
+    .split('\n')
+    .map((s) => s.split(' ').filter(Boolean))
+    .filter((s) => s.length)
+  if (!segs.length) return { lines: [text.toUpperCase()], size: 0 }
+  // every way of splitting each part into 1-6 lines, 7 lines at most
+  let combos: number[][] = [[]]
+  for (const words of segs) {
+    combos = combos.flatMap((c) =>
+      Array.from({ length: Math.min(words.length, 6) }, (_, i) => [...c, i + 1])
+    )
+  }
+  combos = combos
+    .filter((c) => c.reduce((a, b) => a + b, 0) <= 7)
+    .sort((a, b) => a.reduce((x, y) => x + y, 0) - b.reduce((x, y) => x + y, 0))
   let pick = { lines: [text.toUpperCase()], size: 0 }
-  for (let n = 1; n <= Math.min(words.length, 6); n++) {
-    const lines = balance(words, n)
+  for (const c of combos) {
+    const parts = segs.map((words, i) => balance(words, c[i]))
+    const lines = parts.flat()
     const widest = Math.max(...lines.map(emWidth))
-    let size = Math.min(maxSize, width / widest, height / (n * 1.1))
+    let size = Math.min(maxSize, width / widest, height / (lines.length * LINE_H))
     // a word like "IS" alone on a line looks broken: prefer another layout
-    if (n > 1 && lines.some((l) => l.length <= 2)) size *= 0.6
+    if (parts.some((p) => p.length > 1 && p.some((l) => l.length <= 2))) size *= 0.6
     // an extra line has to earn its place: at least 8% bigger text
     if (size > pick.size * 1.08) pick = { lines, size }
   }
@@ -446,7 +467,7 @@ function PhotoArt({
     photo.height - signH,
     photo.width * (sign ? 0.16 : 0.24)
   )
-  const lineH = size * 1.1
+  const lineH = size * LINE_H
   // Sit in the upper part of the print area (like a real back print), never
   // above it, so short slogans don't creep up towards the shoulders
   const blockH = signH + lines.length * lineH

@@ -118,8 +118,8 @@ const allGarments: Garment[] = [
   },
   {
     id: 'jacket',
-    name: 'Rain jacket',
-    withArticle: 'a rain jacket',
+    name: 'Hi-vis jacket',
+    withArticle: 'a hi-vis jacket',
     art: 'jacket',
     price: 4500,
     colors: HI_VIS,
@@ -365,8 +365,8 @@ const allSlogans: Slogan[] = [
       label: 'Who needs feeding?',
       default: 'dog',
       suggestions: ['dog', 'cat', 'family', 'baby', 'hamster'],
-      more: ['goldfish', 'parrot', 'tortoise', 'sourdough starter', 'partner', 'teenager'],
-      maxLength: 18,
+      more: ['goldfish', 'parrot', 'tortoise', 'partner', 'teenager'],
+      maxLength: 16,
     },
   },
   {
@@ -378,7 +378,7 @@ const allSlogans: Slogan[] = [
       default: 'family',
       suggestions: ['family', 'mum', 'dad', 'wife', 'husband', 'kids'],
       more: ['nan', 'grandad', 'partner', 'dog', 'cat', 'best friend', 'whole street'],
-      maxLength: 18,
+      maxLength: 16,
     },
   },
   {
@@ -401,8 +401,8 @@ const allSlogans: Slogan[] = [
       label: 'What do you have?',
       default: 'family',
       suggestions: ['family', 'cat', 'dog', 'baby on the way', 'mortgage'],
-      more: ['wedding to get to', 'hamster', 'big day tomorrow', 'train to catch'],
-      maxLength: 20,
+      more: ['hamster', 'big day tomorrow', 'train to catch'],
+      maxLength: 16,
     },
   },
   {
@@ -447,10 +447,10 @@ const allSlogans: Slogan[] = [
     collection: 'family',
     personalise: {
       label: 'Who are you heading back to?',
-      default: 'the people I love',
-      suggestions: ['the people I love', 'my kids', 'my family', 'my cat', 'my dog'],
+      default: 'the ones I love',
+      suggestions: ['the ones I love', 'my kids', 'my family', 'my cat', 'my dog'],
       more: ['my wife', 'my husband', 'my partner', 'the sofa', 'the pub'],
-      maxLength: 20,
+      maxLength: 16,
     },
   },
   {
@@ -461,8 +461,8 @@ const allSlogans: Slogan[] = [
       label: 'Who needs you alive?',
       default: 'cat',
       suggestions: ['cat', 'dog', 'family', 'goldfish', 'plant'],
-      more: ['hamster', 'tortoise', 'rabbit', 'sourdough starter', 'team'],
-      maxLength: 18,
+      more: ['hamster', 'tortoise', 'rabbit', 'team'],
+      maxLength: 16,
     },
   },
   {
@@ -658,9 +658,9 @@ const allSlogans: Slogan[] = [
     personalise: {
       label: 'What are you burning off?',
       default: 'tonight’s dinner',
-      suggestions: ['tonight’s dinner', 'that cake', 'Christmas', 'last night’s pizza'],
+      suggestions: ['tonight’s dinner', 'that cake', 'Christmas'],
       more: ['my birthday', 'the weekend', 'a full English', 'the biscuit tin'],
-      maxLength: 22,
+      maxLength: 16,
     },
   },
   { id: 'coffee-not-cars', text: 'I stop for coffee, not for cars', collection: 'funny' },
@@ -856,8 +856,25 @@ export function cleanCustom(slogan: Slogan, value: string | undefined) {
   if (!slogan.personalise) return undefined
   const v = (value ?? '').replace(/\s+/g, ' ').trim()
   if (!v) return slogan.personalise.default
-  if (v.length > slogan.personalise.maxLength || !CUSTOM_OK.test(v)) return null
+  if (v.length > Math.min(slogan.personalise.maxLength, CUSTOM_MAX) || !CUSTOM_OK.test(v))
+    return null
   return v
+}
+
+// Longest word a customer can put in the blank, so it prints big on its own line
+export const CUSTOM_MAX = 16
+
+// Text for the print: the custom word gets a line of its own ("\n" marks the breaks),
+// keeping anything stuck to it ("’s", ".") on the same line
+export function markCustom(before: string, word: string, after: string) {
+  const glue = after.match(/^\S*/)?.[0] ?? ''
+  return [before.trim(), word + glue, after.slice(glue.length).trim()].filter(Boolean).join('\n')
+}
+
+export function printText(slogan: Slogan, custom?: string) {
+  if (!slogan.personalise) return slogan.text
+  const [before, after] = slogan.text.split('{}')
+  return markCustom(before, custom || slogan.personalise.default, after)
 }
 
 export function sloganText(slogan: Slogan, custom?: string) {
@@ -980,6 +997,7 @@ export type ResolvedLine = {
   art: Art
   sign?: SignPrint
   text: string
+  print?: string // text for the print, custom word on its own line
   color: Color
   fit?: Fit
   href: string
@@ -1005,6 +1023,7 @@ export function resolveLine(line: CartLine): ResolvedLine | null {
       art: garment.art,
       sign: slogan.sign,
       text,
+      print: printText(slogan, custom),
       color,
       fit,
       href: designHref({ garment: garment.id, slogan: slogan.id, custom }),
@@ -1113,5 +1132,6 @@ const WOMAN_WEARER = [
 ]
 
 export function isWomanWearer(text: string) {
-  return WOMAN_WEARER.some((r) => r.test(text.trim()))
+  const t = text.replace(/\s+/g, ' ').trim() // print text has line breaks
+  return WOMAN_WEARER.some((r) => r.test(t))
 }
