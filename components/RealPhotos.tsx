@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import SocialLinks from './SocialLinks'
-import { photosFor } from '@/lib/photos'
+import { street } from '@/lib/street'
 import { hasSocial } from '@/lib/site'
 import type { GarmentId } from '@/lib/catalog'
 
@@ -17,7 +17,16 @@ export default function RealPhotos({
   className?: string
   limit?: number // keeps the grid to full rows
 }) {
-  const list = photosFor(garment).slice(0, limit)
+  // Real photos from the road (lib/street.ts); on an item page, that item first
+  const photos = street.filter((s) => s.type === 'photo')
+  const list = (
+    garment
+      ? [
+          ...photos.filter((s) => s.garment === garment),
+          ...photos.filter((s) => s.garment !== garment),
+        ]
+      : photos
+  ).slice(0, limit)
   if (list.length === 0 && !hasSocial) return null
 
   return (
@@ -30,7 +39,7 @@ export default function RealPhotos({
           {list.map((p) => (
             <div
               key={p.src}
-              className="relative aspect-square overflow-hidden rounded-xl border-2 border-ink bg-paper"
+              className="relative aspect-[4/5] overflow-hidden rounded-xl border-2 border-ink bg-paper"
             >
               <Image
                 src={p.src}
@@ -39,6 +48,11 @@ export default function RealPhotos({
                 sizes="(max-width: 768px) 50vw, 25vw"
                 className="object-cover"
               />
+              {p.example && (
+                <span className="absolute top-2 left-2 rounded-full bg-white px-2 py-0.5 text-xs font-bold uppercase">
+                  Example
+                </span>
+              )}
             </div>
           ))}
         </div>

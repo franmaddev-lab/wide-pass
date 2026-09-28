@@ -9,6 +9,7 @@ export type StreetPost = {
   credit?: string // e.g. '@anna.rides, Bristol'
   link?: string // the original post
   example?: boolean // marked "Example" until real posts arrive
+  garment?: 'tee' | 'tank' | 'longsleeve' | 'vest' | 'jacket' | 'raincover' // what they're wearing
 }
 
 export const street: StreetPost[] = [
@@ -18,6 +19,7 @@ export const street: StreetPost[] = [
     src: '/street/kids-dinner-white-tee.webp',
     alt: 'A woman cycling through a busy London street in a white t-shirt reading “My kids want me home for dinner”',
     credit: 'Commuting, London',
+    garment: 'tee',
     example: true,
   },
   {
@@ -25,6 +27,7 @@ export const street: StreetPost[] = [
     src: '/street/somebodys-dad-backpack.webp',
     alt: 'A man with a backpack cycling in a London bike lane, black t-shirt reading “I am somebody’s dad” in yellow',
     credit: 'Saturday ride, London',
+    garment: 'tee',
     example: true,
   },
 ]
