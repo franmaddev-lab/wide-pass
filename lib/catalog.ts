@@ -76,7 +76,7 @@ const allGarments: Garment[] = [
     name: 'Tank top',
     withArticle: 'a tank top',
     art: 'tank',
-    price: 2200,
+    price: 1900,
     colors: APPAREL_COLORS,
     sizes: APPAREL_SIZES,
     fits: ['unisex', 'women'],
@@ -99,7 +99,7 @@ const allGarments: Garment[] = [
     name: 'Long-sleeve shirt',
     withArticle: 'a long-sleeve shirt',
     art: 'longsleeve',
-    price: 3200,
+    price: 3400,
     colors: APPAREL_COLORS,
     sizes: APPAREL_SIZES,
     fits: ['unisex'], // relaxed cut only
@@ -110,7 +110,7 @@ const allGarments: Garment[] = [
     name: 'Hi-vis vest',
     withArticle: 'a hi-vis vest',
     art: 'vest',
-    price: 2900,
+    price: 2400,
     colors: HI_VIS,
     sizes: APPAREL_SIZES,
     description:
@@ -121,7 +121,7 @@ const allGarments: Garment[] = [
     name: 'Hi-vis jacket',
     withArticle: 'a hi-vis jacket',
     art: 'jacket',
-    price: 4500,
+    price: 6500,
     colors: HI_VIS,
     sizes: APPAREL_SIZES,
     description:
@@ -132,7 +132,7 @@ const allGarments: Garment[] = [
     name: 'Bag rain cover',
     withArticle: 'a bag rain cover',
     art: 'raincover',
-    price: 2500,
+    price: 1400,
     colors: HI_VIS,
     sizes: ['15–25 L', '25–35 L'],
     description:
