@@ -252,6 +252,7 @@ const PHOTOS: Record<string, Photo> = {
   'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 310, 280, 300),
   'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 305, 280, 300),
   'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 295, 255, 290),
+  'tee:#1b1b1b:w': photo('tee-black-w', 686, 721, 345, 295, 255, 290),
   'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 310, 250, 300),
   'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 315, 250, 300),
   'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 300, 220, 300),
