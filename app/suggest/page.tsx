@@ -47,12 +47,10 @@ export default async function SuggestPage({
       <p className="text-sm font-bold tracking-widest uppercase">You</p>
       <h1 className="mt-1 font-display text-4xl uppercase">Riders like you</h1>
       <p className="mt-2 max-w-xl text-asphalt">
-        The people wearing it, and the slogans you come up with next.
+        Your slogan ideas, and the people out there wearing the message.
       </p>
 
-      <StreetWall />
-
-      <h2 className="mt-12 font-display text-2xl uppercase">Suggest a slogan</h2>
+      <h2 className="mt-8 font-display text-2xl uppercase">Suggest a slogan</h2>
       <p className="mt-1 max-w-xl text-asphalt">
         Got a line that would make a driver slow down, smile or think? Post it, then vote for your
         favourites. The best ideas get printed.
@@ -122,6 +120,8 @@ export default async function SuggestPage({
           })}
         </ol>
       )}
+
+      <StreetWall />
     </div>
   )
 }
