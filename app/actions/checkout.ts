@@ -33,6 +33,7 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
       custom: str(raw?.custom),
       color: str(raw?.color) ?? '',
       size: str(raw?.size) ?? '',
+      fit: raw?.fit === 'women' ? 'women' : undefined,
       qty,
     })
     if (!resolved || !Number.isInteger(qty) || qty < 1 || qty > 20) {

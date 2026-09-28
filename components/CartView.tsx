@@ -31,11 +31,11 @@ export default function CartView() {
   const shipping = shippingFor(subtotal)
 
   return (
-    <div className="mt-8 grid gap-8 md:grid-cols-[1fr_280px]">
+    <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[1fr_280px]">
       <ul className="divide-y-2 divide-ink rounded-2xl border-2 border-ink bg-white">
         {rows.map(({ line, item }) => (
           <li
-            key={`${line.item}|${line.slogan}|${line.custom}|${line.color}|${line.size}`}
+            key={`${line.item}|${line.slogan}|${line.custom}|${line.color}|${line.size}|${line.fit ?? ''}`}
             className="flex gap-4 p-4"
           >
             <ProductArt
@@ -44,14 +44,15 @@ export default function CartView() {
               color={item.color.hex}
               ink={item.color.ink}
               sign={item.sign}
+              fit={item.fit}
               className="size-20 shrink-0"
             />
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <Link href={item.href} className="font-semibold hover:underline">
                 {item.title}
               </Link>
               <p className="text-sm text-muted">{item.detail}</p>
-              <div className="mt-2 flex items-center gap-2">
+              <div className="mt-2 flex flex-wrap items-center gap-2">
                 <button
                   type="button"
                   aria-label="Decrease quantity"

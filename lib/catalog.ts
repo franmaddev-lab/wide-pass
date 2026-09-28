@@ -56,8 +56,12 @@ export type Garment = {
   price: number // pence
   colors: Color[]
   sizes: string[]
+  fits?: Fit[] // cuts on offer; the first is the default. Omitted = unisex only
   description: string
 }
+
+export type Fit = 'unisex' | 'women'
+export const fitLabel: Record<Fit, string> = { unisex: 'Unisex', women: 'Women’s' }
 
 const allGarments: Garment[] = [
   {
@@ -68,6 +72,7 @@ const allGarments: Garment[] = [
     price: 2200,
     colors: BLACK_WHITE,
     sizes: APPAREL_SIZES,
+    fits: ['unisex', 'women'],
     description: 'Light, breathable tank top for hot rides. Big back print, nothing in the way.',
   },
   {
@@ -78,6 +83,7 @@ const allGarments: Garment[] = [
     price: 2400,
     colors: BLACK_WHITE,
     sizes: APPAREL_SIZES,
+    fits: ['unisex', 'women'],
     description:
       'Organic cotton t-shirt with a soft screen print. For the ride and the café after.',
   },
@@ -715,6 +721,7 @@ export type CartLine = {
   custom?: string // personalised text, if the slogan has a blank
   color: string
   size: string
+  fit?: Fit // only 'women' is stored; missing = unisex
   qty: number
 }
 
@@ -726,6 +733,7 @@ export type ResolvedLine = {
   sign?: SignPrint
   text: string
   color: Color
+  fit?: Fit
   href: string
 }
 
@@ -737,17 +745,20 @@ export function resolveLine(line: CartLine): ResolvedLine | null {
     const slogan = getSlogan(line.slogan)
     const color = garment.colors.find((c) => c.name === line.color)
     if (!slogan || !color || !garment.sizes.includes(line.size)) return null
+    const fit: Fit = line.fit === 'women' ? 'women' : 'unisex'
+    if (fit === 'women' && !garment.fits?.includes('women')) return null
     const custom = cleanCustom(slogan, line.custom)
     if (custom === null) return null
     const text = sloganText(slogan, custom)
     return {
       title: `“${text}” on ${garment.withArticle}`,
-      detail: `${color.name} · ${line.size}`,
+      detail: `${fit === 'women' ? 'Women’s fit · ' : ''}${color.name} · ${line.size}`,
       unit: garment.price,
       art: garment.art,
       sign: slogan.sign,
       text,
       color,
+      fit,
       href: designHref({ garment: garment.id, slogan: slogan.id, custom }),
     }
   }

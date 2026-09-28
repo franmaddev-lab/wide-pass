@@ -1,4 +1,4 @@
-import { isWomanWearer, type Art, type SignPrint } from '@/lib/catalog'
+import { isWomanWearer, type Art, type Fit, type SignPrint } from '@/lib/catalog'
 
 // Draws a product mock-up with its slogan printed on it, so the catalogue
 // needs no photo assets until real product shots exist.
@@ -352,20 +352,25 @@ function layout(text: string, width: number, height: number, maxSize: number) {
 // The photo for this item and colour. When the slogan says the wearer is a woman
 // ("I could be your sister") only a woman's photo will do; otherwise we fall back
 // to the drawing rather than show a man.
-function photoFor(art: Art, color: string, slogan: string) {
+function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
   if (!slogan) return undefined
   const key = `${art}:${color}`
-  return isWomanWearer(slogan) ? PHOTOS[`${key}:w`] : PHOTOS[key]
+  return fit === 'women' || isWomanWearer(slogan) ? PHOTOS[`${key}:w`] : PHOTOS[key]
 }
 
-export function hasPhoto(art: Art, color: string, slogan: string) {
-  return Boolean(photoFor(art, color, slogan))
+export function hasPhoto(art: Art, color: string, slogan: string, fit?: Fit) {
+  return Boolean(photoFor(art, color, slogan, fit))
 }
 
 // First colour of an item that has a photo for this slogan (e.g. white for a
 // woman's slogan on a tee, until there's a black women's tee photo)
-export function photoColor<C extends { hex: string }>(art: Art, colors: C[], slogan: string) {
-  return colors.find((c) => hasPhoto(art, c.hex, slogan)) ?? colors[0]
+export function photoColor<C extends { hex: string }>(
+  art: Art,
+  colors: C[],
+  slogan: string,
+  fit?: Fit
+) {
+  return colors.find((c) => hasPhoto(art, c.hex, slogan, fit)) ?? colors[0]
 }
 
 function PhotoArt({
@@ -415,6 +420,7 @@ export default function ProductArt({
   sign,
   className,
   drawing = false,
+  fit,
 }: {
   art: Art
   slogan: string
@@ -423,8 +429,9 @@ export default function ProductArt({
   sign?: SignPrint
   className?: string
   drawing?: boolean // force the flat drawing even when a photo exists
+  fit?: Fit // 'women' shows the women's photo
 }) {
-  const pic = !drawing && sign !== 'set' ? photoFor(art, color, slogan) : undefined
+  const pic = !drawing && sign !== 'set' ? photoFor(art, color, slogan, fit) : undefined
   if (pic) {
     return (
       <PhotoArt

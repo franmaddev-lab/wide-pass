@@ -23,8 +23,8 @@ export const raincoverChart = {
 }
 
 export const fitNotes: Record<GarmentId, string> = {
-  tank: 'Unisex regular fit. Between sizes? Go down for a race fit, up for a relaxed one.',
-  tee: 'Unisex regular fit. Between sizes? Go up.',
+  tank: 'Unisex regular fit, or women’s racerback: slimmer and shaped at the waist. Between sizes? Go up for a relaxed fit.',
+  tee: 'Unisex regular fit, or women’s fit: narrower and shaped at the waist. Between sizes? Go up.',
   longsleeve: 'Unisex regular fit. Between sizes? Go up.',
   vest: 'Cut to go over a jersey or jacket. Between sizes? Go up.',
   jacket: 'Cut to go over layers, with a longer back for riding. Between sizes? Go up.',

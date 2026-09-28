@@ -53,7 +53,8 @@ const same = (a: CartLine, b: Omit<CartLine, 'qty'>) =>
   a.slogan === b.slogan &&
   a.custom === b.custom &&
   a.color === b.color &&
-  a.size === b.size
+  a.size === b.size &&
+  (a.fit ?? 'unisex') === (b.fit ?? 'unisex')
 
 export function addToCart(line: CartLine) {
   const current = read()

@@ -10,6 +10,8 @@ import SizeChart from './SizeChart'
 import { addToCart } from '@/lib/cart'
 import {
   cleanCustom,
+  fitLabel,
+  isWomanWearer,
   formatPrice,
   garments,
   getGarment,
@@ -17,6 +19,7 @@ import {
   getSlogan,
   sloganTemplate,
   sloganText,
+  type Fit,
   type GarmentId,
 } from '@/lib/catalog'
 
@@ -57,12 +60,18 @@ export default function Designer({
   const [status, setStatus] = useState<'idle' | 'added' | 'no-size'>('idle')
   const [showMore, setShowMore] = useState(false)
   const [showSizes, setShowSizes] = useState(false)
+  // null = follow the slogan (women's fit for "I could be your sister"), until the customer picks
+  const [fitChoice, setFitChoice] = useState<Fit | null>(null)
 
   const garment = getGarment(garmentId)!
   const color = garment.colors.find((c) => c.name === colorName) ?? garment.colors[0]
   const cleaned = cleanCustom(slogan, custom)
   const invalid = cleaned === null
   const text = sloganText(slogan, invalid ? undefined : cleaned)
+  const fits = garment.fits ?? ['unisex']
+  const fit: Fit = fits.includes('women')
+    ? (fitChoice ?? (isWomanWearer(text) ? 'women' : 'unisex'))
+    : 'unisex'
 
   function change(fn: () => void) {
     fn()
@@ -78,6 +87,7 @@ export default function Designer({
       custom: slogan.personalise ? (cleaned ?? undefined) : undefined,
       color: color.name,
       size,
+      fit: fit === 'women' ? 'women' : undefined,
       qty: 1,
     })
     setStatus('added')
@@ -89,13 +99,14 @@ export default function Designer({
       <div className="sticky top-[58px] z-10 -mx-4 self-start bg-paper px-4 pt-2 pb-2 md:top-20 md:mx-0 md:p-0">
         <div className="relative rounded-2xl border-2 border-ink bg-white p-2 md:p-8">
           {/* keyed so switching item or colour fades the new one in instead of jumping */}
-          <div key={`${garment.id}/${color.name}`} className="animate-swap">
+          <div key={`${garment.id}/${color.name}/${fit}`} className="animate-swap">
             <ProductArt
               art={garment.art}
               slogan={text}
               color={color.hex}
               ink={color.ink}
               sign={slogan.sign}
+              fit={fit}
               className="mx-auto aspect-square h-[20vh] max-w-md md:h-auto md:w-full"
             />
           </div>
@@ -211,24 +222,47 @@ export default function Designer({
         </div>
 
         <div className="space-y-4 md:space-y-7">
-          <div>
-            <Label>Colour: {color.name}</Label>
-            <div className="mt-1.5 flex flex-wrap items-center gap-2 md:mt-2">
-              {garment.colors.map((c) => (
-                <button
-                  key={c.name}
-                  type="button"
-                  onClick={() => change(() => setColorName(c.name))}
-                  aria-label={c.name}
-                  aria-pressed={c.name === color.name}
-                  title={c.name}
-                  className={`size-8 rounded-full border-2 border-ink md:size-11 ${
-                    c.name === color.name ? 'ring-4 ring-ink ring-offset-2' : ''
-                  }`}
-                  style={{ background: c.hex }}
-                />
-              ))}
+          <div className="flex flex-wrap items-start gap-x-6 gap-y-4 md:gap-x-10">
+            <div>
+              <Label>Colour: {color.name}</Label>
+              <div className="mt-1.5 flex flex-wrap items-center gap-2 md:mt-2">
+                {garment.colors.map((c) => (
+                  <button
+                    key={c.name}
+                    type="button"
+                    onClick={() => change(() => setColorName(c.name))}
+                    aria-label={c.name}
+                    aria-pressed={c.name === color.name}
+                    title={c.name}
+                    className={`size-8 rounded-full border-2 border-ink md:size-11 ${
+                      c.name === color.name ? 'ring-4 ring-ink ring-offset-2' : ''
+                    }`}
+                    style={{ background: c.hex }}
+                  />
+                ))}
+              </div>
             </div>
+
+            {fits.length > 1 && (
+              <div>
+                <Label>Fit</Label>
+                <div className="mt-1.5 flex gap-1 md:mt-2 md:gap-2" role="group" aria-label="Fit">
+                  {fits.map((f) => (
+                    <button
+                      key={f}
+                      type="button"
+                      onClick={() => change(() => setFitChoice(f))}
+                      aria-pressed={f === fit}
+                      className={`rounded-lg border-2 border-ink px-2.5 py-1 text-sm font-semibold md:px-3 md:py-2 md:text-base ${
+                        f === fit ? 'bg-ink text-volt' : 'bg-white hover:bg-volt'
+                      }`}
+                    >
+                      {fitLabel[f]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div>
