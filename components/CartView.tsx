@@ -45,6 +45,7 @@ export default function CartView() {
               ink={item.color.ink}
               sign={item.sign}
               fit={item.fit}
+              cutout
               className="size-20 shrink-0"
             />
             <div className="min-w-0 flex-1">

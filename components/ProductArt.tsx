@@ -249,12 +249,12 @@ const photo = (
 // Product-only photos (no people). Items without one fall back to the drawing.
 const PHOTOS: Record<string, Photo | Photo[]> = {
   // T-shirts, on the light grey studio background of the photos
-  'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 300, 400, 300)],
-  'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 300, 400, 300)],
-  'tee:#e8f525': [photo('t-tee-yellow-m', 900, 900, 450, 300, 400, 300)],
-  'tee:#1b1b1b:w': [photo('t-tee-black-w', 900, 900, 450, 300, 320, 280)],
-  'tee:#f4f4f0:w': [photo('t-tee-white-w', 900, 900, 450, 300, 320, 280)],
-  'tee:#e8f525:w': [photo('t-tee-yellow-w', 900, 900, 450, 300, 320, 280)],
+  'tee:#1b1b1b': [photo('t-tee-black-m', 900, 900, 450, 313, 364, 273)],
+  'tee:#f4f4f0': [photo('t-tee-white-m', 900, 900, 450, 313, 364, 273)],
+  'tee:#e8f525': [photo('t-tee-yellow-m', 900, 900, 450, 313, 364, 273)],
+  'tee:#1b1b1b:w': [photo('t-tee-black-w', 900, 900, 450, 313, 292, 255)],
+  'tee:#f4f4f0:w': [photo('t-tee-white-w', 900, 900, 450, 313, 292, 255)],
+  'tee:#e8f525:w': [photo('t-tee-yellow-w', 900, 900, 450, 313, 292, 255)],
   'tank:#1b1b1b': [photo('t-tank-black-m', 900, 900, 450, 341, 320, 255)],
   'tank:#f4f4f0': [photo('t-tank-white-m', 900, 900, 450, 341, 320, 255)],
   'tank:#e8f525': [photo('t-tank-yellow-m', 900, 900, 450, 341, 320, 255)],
@@ -433,12 +433,14 @@ function PhotoArt({
   ink,
   sign,
   className,
+  cutout,
 }: {
   photo: Photo
   slogan: string
   ink: string
   sign?: SignKind
   className?: string
+  cutout?: boolean
 }) {
   const signR = Math.round(photo.width * 0.22)
   const signH = sign ? signR * 2.3 : 0
@@ -458,7 +460,11 @@ function PhotoArt({
 
   return (
     <svg viewBox={viewBox(photo)} role="img" aria-label={slogan} className={className}>
-      <image href={photo.src} width={photo.w} height={photo.h} />
+      <image
+        href={cutout ? photo.src.replace('.webp', '-cut.webp') : photo.src}
+        width={photo.w}
+        height={photo.h}
+      />
       {sign && <Sign kind={sign} cx={photo.cx} cy={blockTop + signR} r={signR} />}
       <text textAnchor="middle" fill={ink} fontFamily={FONT} fontWeight={800} fontSize={size}>
         {lines.map((l, i) => (
@@ -480,6 +486,7 @@ function Art_({
   className,
   drawing = false,
   fit,
+  cutout = false,
 }: {
   art: Art
   slogan: string
@@ -489,6 +496,7 @@ function Art_({
   className?: string
   drawing?: boolean // force the flat drawing even when a photo exists
   fit?: Fit // 'women' shows the women's photo
+  cutout?: boolean // photo without its backdrop, for small thumbnails on white
 }) {
   const pic = !drawing && sign !== 'set' ? photoFor(art, color, slogan, fit) : undefined
   if (pic) {
@@ -499,6 +507,7 @@ function Art_({
         ink={ink}
         sign={sign && sign !== 'set' ? sign : undefined}
         className={className}
+        cutout={cutout}
       />
     )
   }

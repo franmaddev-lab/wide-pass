@@ -215,6 +215,7 @@ export default async function Home() {
                   ink={t.ink ?? '#111111'}
                   sign={t.sign}
                   fit={t.fit}
+                  cutout
                   className="size-20 shrink-0 sm:size-28"
                 />
               </Link>
@@ -238,6 +239,7 @@ export default async function Home() {
               color="#1b1b1b"
               ink="#e8f525"
               fit="women"
+              cutout
               className="size-20 shrink-0 sm:size-28"
             />
           </Link>

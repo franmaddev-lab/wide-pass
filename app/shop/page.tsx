@@ -31,6 +31,7 @@ export default function ShopPage() {
                 slogan="Your message here"
                 color={g.colors[0].hex}
                 ink={g.colors[0].ink}
+                cutout
                 className="mx-auto aspect-square w-full max-w-56"
               />
             </div>
