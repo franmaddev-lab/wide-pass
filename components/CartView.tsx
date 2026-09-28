@@ -3,7 +3,14 @@
 import Link from 'next/link'
 import ProductArt from './ProductArt'
 import { setQty, useCart } from '@/lib/cart'
-import { FREE_SHIPPING_FROM, formatPrice, resolveLine, shippingFor } from '@/lib/catalog'
+import {
+  FREE_SHIPPING_FROM,
+  formatPounds,
+  formatPrice,
+  nextBundle,
+  resolveLine,
+  totals,
+} from '@/lib/catalog'
 import { charityAmount, charityName } from '@/lib/site'
 
 export default function CartView() {
@@ -27,8 +34,10 @@ export default function CartView() {
     )
   }
 
-  const subtotal = rows.reduce((n, r) => n + r.item.unit * r.line.qty, 0)
-  const shipping = shippingFor(subtotal)
+  const { subtotal, items, discount, shipping, total } = totals(
+    rows.map((r) => ({ unit: r.item.unit, qty: r.line.qty }))
+  )
+  const next = nextBundle(items)
 
   return (
     <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[1fr_280px]">
@@ -91,21 +100,33 @@ export default function CartView() {
             <dt>Subtotal</dt>
             <dd>{formatPrice(subtotal)}</dd>
           </div>
+          {discount > 0 && (
+            <div className="flex justify-between font-semibold">
+              <dt>Bundle saving</dt>
+              <dd>−{formatPrice(discount)}</dd>
+            </div>
+          )}
           <div className="flex justify-between">
             <dt>Shipping</dt>
             <dd>{shipping === 0 ? 'Free' : formatPrice(shipping)}</dd>
           </div>
           <div className="flex justify-between border-t-2 border-ink pt-2 text-lg font-bold">
             <dt>Total</dt>
-            <dd>{formatPrice(subtotal + shipping)}</dd>
+            <dd>{formatPrice(total)}</dd>
           </div>
         </dl>
         <p className="mt-3 text-sm text-muted">
           {charityAmount} of this order goes to {charityName}.
         </p>
+        {next && (
+          <p className="mt-3 rounded-lg bg-volt px-3 py-2 text-sm font-semibold">
+            Add {next.more} more item{next.more > 1 ? 's' : ''} and save {formatPounds(next.off)}
+            {discount ? ' in total' : ''}.
+          </p>
+        )}
         {shipping > 0 && (
           <p className="mt-3 text-sm text-muted">
-            Add {formatPrice(FREE_SHIPPING_FROM - subtotal)} more for free shipping.
+            Spend {formatPrice(FREE_SHIPPING_FROM - (subtotal - discount))} more for free delivery.
           </p>
         )}
         <Link

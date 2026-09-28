@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import BikeLogo from './BikeLogo'
 import SocialLinks from './SocialLinks'
+import { BUNDLE_TEXT, formatPounds, FREE_SHIPPING_FROM } from '@/lib/catalog'
 import { charityAmount, charityName } from '@/lib/site'
 
 export default function Footer() {
@@ -46,8 +47,8 @@ export default function Footer() {
         <div className="space-y-3 text-sm">
           <SocialLinks variant="plain" />
           <p className="text-paper/70">
-            Free shipping on orders over £50. {charityAmount} from every order goes to {charityName}
-            . Ride safe, ride seen.
+            Free delivery from {formatPounds(FREE_SHIPPING_FROM)}. {BUNDLE_TEXT}. {charityAmount}{' '}
+            from every order goes to {charityName}. Ride safe, ride seen.
           </p>
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-paper/70">
             <li>

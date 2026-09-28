@@ -45,6 +45,17 @@ export function createCheckoutSession(params: Record<string, unknown>) {
   return stripe<CheckoutSession>('checkout/sessions', params)
 }
 
+// A single-use amount-off coupon, used for the bundle saving on one checkout
+export function createCoupon(amountOff: number, name: string) {
+  return stripe<{ id: string }>('coupons', {
+    amount_off: amountOff,
+    currency: 'gbp',
+    duration: 'once',
+    max_redemptions: 1,
+    name,
+  })
+}
+
 export function getCheckoutSession(id: string) {
   return stripe<CheckoutSession>(`checkout/sessions/${encodeURIComponent(id)}`)
 }

@@ -11,6 +11,7 @@ import {
   cleanCustom,
   fitLabel,
   isWomanWearer,
+  BUNDLE_TEXT,
   formatPrice,
   garments,
   getGarment,
@@ -318,6 +319,9 @@ export default function Designer({
           >
             Add to cart · {formatPrice(garment.price)}
           </button>
+          <p className="mt-1.5 text-center text-xs font-semibold md:text-left md:text-sm">
+            {BUNDLE_TEXT}
+          </p>
           {status === 'added' && (
             <p role="status" className="mt-2 text-center md:mt-3 md:text-left">
               Added!{' '}

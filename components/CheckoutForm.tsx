@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useActionState } from 'react'
 import { placeOrder, type CheckoutState } from '@/app/actions/checkout'
 import { clearCart, useCart } from '@/lib/cart'
-import { formatPrice, resolveLine, shippingFor } from '@/lib/catalog'
+import { formatPrice, resolveLine, totals } from '@/lib/catalog'
 
 const FIELDS = [
   { name: 'name', label: 'Full name', autoComplete: 'name' },
@@ -41,7 +41,9 @@ export default function CheckoutForm({ payments }: { payments: boolean }) {
     )
   }
 
-  const subtotal = cart.reduce((n, l) => n + (resolveLine(l)?.unit ?? 0) * l.qty, 0)
+  const { subtotal, discount, shipping, total } = totals(
+    cart.map((l) => ({ unit: resolveLine(l)?.unit ?? 0, qty: l.qty }))
+  )
 
   if (subtotal === 0) {
     return (
@@ -76,13 +78,19 @@ export default function CheckoutForm({ payments }: { payments: boolean }) {
           <span>Subtotal</span>
           <span>{formatPrice(subtotal)}</span>
         </div>
+        {discount > 0 && (
+          <div className="flex justify-between">
+            <span>Bundle saving</span>
+            <span>−{formatPrice(discount)}</span>
+          </div>
+        )}
         <div className="flex justify-between">
           <span>Shipping</span>
-          <span>{shippingFor(subtotal) === 0 ? 'Free' : formatPrice(shippingFor(subtotal))}</span>
+          <span>{shipping === 0 ? 'Free' : formatPrice(shipping)}</span>
         </div>
         <div className="mt-2 flex justify-between border-t-2 border-ink pt-2 font-bold">
           <span>Total</span>
-          <span>{formatPrice(subtotal + shippingFor(subtotal))}</span>
+          <span>{formatPrice(total)}</span>
         </div>
       </div>
 
@@ -111,7 +119,7 @@ export default function CheckoutForm({ payments }: { payments: boolean }) {
             ? 'Opening secure payment…'
             : 'Placing order…'
           : payments
-            ? `Pay securely · ${formatPrice(subtotal + shippingFor(subtotal))}`
+            ? `Pay securely · ${formatPrice(total)}`
             : 'Place order'}
       </button>
     </form>

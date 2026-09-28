@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import DraftNotice from '@/components/DraftNotice'
-import { formatPrice, FREE_SHIPPING_FROM, SHIPPING } from '@/lib/catalog'
+import { formatPounds, formatPrice, FREE_SHIPPING_FROM, SHIPPING } from '@/lib/catalog'
 import { business } from '@/lib/site'
 
 export const metadata: Metadata = { title: 'Delivery & returns — Wide Pass' }
@@ -15,8 +15,8 @@ export default function ReturnsPage() {
       <ul>
         <li>We deliver to UK addresses.</li>
         <li>
-          Standard delivery is {formatPrice(SHIPPING)}, free on orders over{' '}
-          {formatPrice(FREE_SHIPPING_FROM)}.
+          Standard delivery is {formatPrice(SHIPPING)}, free on orders of{' '}
+          {formatPounds(FREE_SHIPPING_FROM)} or more (after any bundle saving).
         </li>
         <li>
           We’re a small business and most things are printed when you order them, so your order

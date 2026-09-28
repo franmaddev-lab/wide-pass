@@ -2,9 +2,9 @@
 
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { resolveLine, shippingFor, type CartLine, type ResolvedLine } from '@/lib/catalog'
+import { resolveLine, totals, type CartLine, type ResolvedLine } from '@/lib/catalog'
 import { siteUrl } from '@/lib/site'
-import { createCheckoutSession, paymentsEnabled } from '@/lib/stripe'
+import { createCheckoutSession, createCoupon, paymentsEnabled } from '@/lib/stripe'
 
 export type CheckoutState =
   | { status: 'idle' }
@@ -44,17 +44,19 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
     }
     items.push({ line: resolved, qty })
   }
-  const subtotal = items.reduce((n, i) => n + i.line.unit * i.qty, 0)
+  const { subtotal, discount, shipping, total } = totals(
+    items.map((i) => ({ unit: i.line.unit, qty: i.qty }))
+  )
   if (subtotal === 0) {
     return { status: 'error', message: 'Your cart is empty.' }
   }
-  const shipping = shippingFor(subtotal)
 
   if (paymentsEnabled) {
     // Stripe's hosted page collects the address and takes card, Apple Pay or Google Pay
     const origin = (await headers()).get('origin') ?? siteUrl
     let url: string | null
     try {
+      const coupon = discount ? await createCoupon(discount, 'Bundle saving') : null
       const session = await createCheckoutSession({
         mode: 'payment',
         success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -67,6 +69,7 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
             product_data: { name: line.title, description: line.detail },
           },
         })),
+        ...(coupon ? { discounts: [{ coupon: coupon.id }] } : {}),
         shipping_address_collection: { allowed_countries: ['GB'] },
         shipping_options: [
           {
@@ -105,5 +108,5 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
   }
 
   const orderId = 'WP-' + crypto.randomUUID().slice(0, 8).toUpperCase()
-  return { status: 'ok', orderId, total: subtotal + shipping, name, email }
+  return { status: 'ok', orderId, total, name, email }
 }

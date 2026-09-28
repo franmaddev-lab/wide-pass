@@ -1062,11 +1062,43 @@ export function formatPrice(cents: number) {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(cents / 100)
 }
 
-export const FREE_SHIPPING_FROM = 5000
+// "£10" rather than "£10.00", for round amounts in running text
+export function formatPounds(cents: number) {
+  return formatPrice(cents).replace(/\.00$/, '')
+}
+
+export const FREE_SHIPPING_FROM = 5900
 export const SHIPPING = 495
 
 export function shippingFor(subtotal: number) {
   return subtotal === 0 || subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING
+}
+
+// Bundle deal: any 2 items save £5, 3 or more save £10
+export const BUNDLE = [
+  { items: 3, off: 1000 },
+  { items: 2, off: 500 },
+]
+export const BUNDLE_TEXT = 'Buy 2, save £5 · Buy 3+, save £10'
+
+export function bundleDiscount(items: number, subtotal: number) {
+  const off = BUNDLE.find((b) => items >= b.items)?.off ?? 0
+  return Math.min(off, subtotal)
+}
+
+// Money for a cart: free delivery is worked out after the bundle saving
+export function totals(lines: { unit: number; qty: number }[]) {
+  const subtotal = lines.reduce((n, l) => n + l.unit * l.qty, 0)
+  const items = lines.reduce((n, l) => n + l.qty, 0)
+  const discount = bundleDiscount(items, subtotal)
+  const shipping = shippingFor(subtotal - discount)
+  return { subtotal, items, discount, shipping, total: subtotal - discount + shipping }
+}
+
+// What one more item would save, for the cart nudge ("Add 1 more item and save £10")
+export function nextBundle(items: number) {
+  const next = [...BUNDLE].reverse().find((b) => b.items > items)
+  return next ? { more: next.items - items, off: next.off } : null
 }
 
 export const collections: Record<Collection, { label: string; blurb: string }> = {
