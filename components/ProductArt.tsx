@@ -244,26 +244,65 @@ const photo = (
   height,
 })
 const PHOTOS: Record<string, Photo> = {
-  'vest:#e8f525': photo('vest-yellow', 661, 718, 315, 215, 222, 230),
-  'vest:#ff7a1a': photo('vest-orange', 640, 723, 306, 224, 212, 230),
-  'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 220, 260),
-  'jacket:#ff7a1a': photo('jacket-orange', 671, 719, 335, 255, 220, 260),
-  'raincover:#e8f525': photo('raincover-yellow', 516, 632, 258, 312, 250, 210),
-  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 310, 300, 300),
-  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 305, 300, 300),
-  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 295, 280, 290),
-  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 310, 260, 300),
-  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 315, 260, 300),
-  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 300, 240, 300),
-  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 300, 240, 300),
-  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 410, 230, 260),
-  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 410, 230, 260),
+  'vest:#e8f525': photo('vest-yellow', 661, 718, 315, 215, 205, 230),
+  'vest:#ff7a1a': photo('vest-orange', 640, 723, 306, 224, 195, 230),
+  'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 205, 260),
+  'jacket:#ff7a1a': photo('jacket-orange', 671, 719, 335, 255, 205, 260),
+  'raincover:#e8f525': photo('raincover-yellow', 516, 632, 258, 312, 230, 210),
+  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 310, 280, 300),
+  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 305, 280, 300),
+  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 295, 255, 290),
+  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 310, 250, 300),
+  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 315, 250, 300),
+  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 300, 220, 300),
+  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 300, 220, 300),
+  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 410, 205, 260),
+  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 410, 205, 260),
 }
+
+// Advance widths of Archivo Black capitals, in em (measured from the font file)
+const EM: Record<string, number> = {
+  A: 0.778,
+  B: 0.778,
+  C: 0.778,
+  D: 0.778,
+  E: 0.722,
+  F: 0.667,
+  G: 0.833,
+  H: 0.833,
+  I: 0.389,
+  J: 0.667,
+  K: 0.833,
+  L: 0.667,
+  M: 0.944,
+  N: 0.833,
+  O: 0.833,
+  P: 0.722,
+  Q: 0.833,
+  R: 0.778,
+  S: 0.722,
+  T: 0.722,
+  U: 0.833,
+  V: 0.778,
+  W: 1,
+  X: 0.778,
+  Y: 0.778,
+  Z: 0.722,
+  ' ': 0.333,
+  '’': 0.278,
+  "'": 0.278,
+  '.': 0.333,
+  ',': 0.333,
+  '!': 0.333,
+  '?': 0.611,
+  '&': 0.889,
+  '-': 0.333,
+}
+const emWidth = (text: string) => [...text].reduce((w, ch) => w + (EM[ch] ?? 0.7), 0)
 
 // Splits the words into `n` lines as evenly as possible (smallest longest line)
 function balance(words: string[], n: number) {
-  const len = (a: number, b: number) =>
-    words.slice(a, b).reduce((s, w) => s + w.length, 0) + (b - a - 1)
+  const len = (a: number, b: number) => emWidth(words.slice(a, b).join(' '))
   // shortest longest line first, then the most even lines (no lonely "IS")
   type Split = { worst: number; spread: number; cuts: number[] }
   const memo = new Map<string, Split>()
@@ -299,12 +338,12 @@ function layout(text: string, width: number, height: number, maxSize: number) {
   let pick = { lines: [text.toUpperCase()], size: 0 }
   for (let n = 1; n <= Math.min(words.length, 6); n++) {
     const lines = balance(words, n)
-    const longest = Math.max(...lines.map((l) => l.length))
-    // ~0.66em per capital in Archivo Black, 1.1 line height
-    let size = Math.min(maxSize, width / (longest * 0.66), height / (n * 1.1))
+    const widest = Math.max(...lines.map(emWidth))
+    let size = Math.min(maxSize, width / widest, height / (n * 1.1))
     // a word like "IS" alone on a line looks broken: prefer another layout
     if (n > 1 && lines.some((l) => l.length <= 2)) size *= 0.6
-    if (size > pick.size + 0.5) pick = { lines, size }
+    // an extra line has to earn its place: at least 8% bigger text
+    if (size > pick.size * 1.08) pick = { lines, size }
   }
   return pick
 }
