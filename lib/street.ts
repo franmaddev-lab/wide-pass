@@ -12,17 +12,19 @@ export type StreetPost = {
 }
 
 export const street: StreetPost[] = [
-  // Placeholders until the first real posts come in: remove when you have your own
+  // Examples of what tagged posts will look like: replace with real riders' posts
   {
     type: 'photo',
-    src: '/photos/vest-road-sister-v2.png',
-    alt: 'Illustration: a driver’s view of a cyclist ahead in a yellow “I could be your sister” vest',
+    src: '/street/kids-dinner-white-tee.webp',
+    alt: 'A woman cycling through a busy London street in a white t-shirt reading “My kids want me home for dinner”',
+    credit: 'Commuting, London',
     example: true,
   },
   {
     type: 'photo',
-    src: '/photos/vest-night-slow-v2.png',
-    alt: 'Illustration: cyclist at night in a yellow “Slow down. It’s only a few seconds.” vest',
+    src: '/street/somebodys-dad-black-tee.webp',
+    alt: 'A man cycling past a red London bus in a black t-shirt reading “I am somebody’s dad” in yellow',
+    credit: 'Saturday ride, London',
     example: true,
   },
 ]

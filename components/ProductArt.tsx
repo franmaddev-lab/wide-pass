@@ -247,127 +247,127 @@ const photo = (
 // gallery shows a mix of people. Add more photos as extra entries in an array.
 const PHOTOS: Record<string, Photo | Photo[]> = {
   'jacket:#e8f525': [
-    photo('m-jacket-yellow-m1', 181, 223, 90, 107, 83, 67),
-    photo('m-jacket-yellow-m2', 167, 218, 84, 105, 77, 65),
+    photo('m-jacket-yellow-m1', 543, 669, 289, 321, 250, 201),
+    photo('m-jacket-yellow-m2', 501, 654, 257, 314, 230, 196),
   ],
   'jacket:#e8f525:w': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
   'jacket:#ff7a1a': [
-    photo('m-jacket-orange-w1', 159, 223, 80, 109, 73, 67),
-    photo('m-jacket-orange-w2', 161, 218, 80, 107, 74, 65),
+    photo('m-jacket-orange-w1', 477, 669, 248, 328, 219, 201),
+    photo('m-jacket-orange-w2', 483, 654, 246, 320, 222, 196),
   ],
   'jacket:#ff7a1a:w': [
-    photo('m-jacket-orange-w1', 159, 223, 80, 109, 73, 67),
-    photo('m-jacket-orange-w2', 161, 218, 80, 107, 74, 65),
+    photo('m-jacket-orange-w1', 477, 669, 248, 328, 219, 201),
+    photo('m-jacket-orange-w2', 483, 654, 246, 320, 222, 196),
   ],
   'longsleeve:#1b1b1b': [
-    photo('m-longsleeve-black-m1', 215, 347, 108, 158, 95, 101),
-    photo('m-longsleeve-black-m2', 205, 347, 102, 158, 90, 101),
+    photo('m-longsleeve-black-m1', 645, 1041, 348, 474, 284, 302),
+    photo('m-longsleeve-black-m2', 615, 1041, 337, 474, 271, 302),
   ],
   'longsleeve:#1b1b1b:w': [
-    photo('m-longsleeve-black-w1', 182, 347, 91, 194, 76, 90),
-    photo('m-longsleeve-black-w2', 173, 347, 86, 194, 73, 90),
-    photo('m-longsleeve-black-w3', 160, 239, 80, 131, 67, 62),
-    photo('m-longsleeve-black-w4', 159, 239, 80, 131, 67, 62),
-    photo('m-longsleeve-black-w5', 161, 239, 80, 131, 68, 62),
-    photo('m-longsleeve-black-w6', 163, 230, 82, 127, 68, 60),
-    photo('m-longsleeve-black-w7', 159, 230, 80, 127, 67, 60),
-    photo('m-longsleeve-black-w8', 161, 230, 80, 127, 68, 60),
+    photo('m-longsleeve-black-w1', 546, 1041, 287, 583, 229, 271),
+    photo('m-longsleeve-black-w2', 519, 1041, 281, 583, 218, 271),
+    photo('m-longsleeve-black-w3', 480, 717, 250, 394, 202, 186),
+    photo('m-longsleeve-black-w4', 477, 717, 243, 394, 200, 186),
+    photo('m-longsleeve-black-w5', 483, 717, 250, 394, 203, 186),
+    photo('m-longsleeve-black-w6', 489, 690, 245, 380, 205, 179),
+    photo('m-longsleeve-black-w7', 477, 690, 248, 380, 200, 179),
+    photo('m-longsleeve-black-w8', 483, 690, 250, 380, 203, 179),
   ],
   'longsleeve:#f4f4f0': [
-    photo('m-longsleeve-white-m1', 201, 347, 100, 158, 88, 101),
-    photo('m-longsleeve-white-m2', 200, 347, 100, 158, 88, 101),
-    photo('m-longsleeve-white-m3', 177, 239, 88, 120, 78, 67),
-    photo('m-longsleeve-white-m4', 175, 239, 88, 120, 77, 67),
-    photo('m-longsleeve-white-m5', 175, 239, 88, 120, 77, 67),
-    photo('m-longsleeve-white-m6', 178, 230, 89, 115, 78, 64),
-    photo('m-longsleeve-white-m7', 174, 230, 87, 115, 77, 64),
-    photo('m-longsleeve-white-m8', 168, 230, 84, 115, 74, 64),
+    photo('m-longsleeve-white-m1', 603, 1041, 295, 474, 265, 302),
+    photo('m-longsleeve-white-m2', 600, 1041, 300, 474, 264, 302),
+    photo('m-longsleeve-white-m3', 531, 717, 271, 358, 234, 201),
+    photo('m-longsleeve-white-m4', 525, 717, 266, 358, 231, 201),
+    photo('m-longsleeve-white-m5', 525, 717, 267, 358, 231, 201),
+    photo('m-longsleeve-white-m6', 534, 690, 271, 345, 235, 193),
+    photo('m-longsleeve-white-m7', 522, 690, 276, 345, 230, 193),
+    photo('m-longsleeve-white-m8', 504, 690, 262, 345, 222, 193),
   ],
   'longsleeve:#f4f4f0:w': [
-    photo('m-longsleeve-white-w1', 182, 347, 91, 194, 76, 90),
-    photo('m-longsleeve-white-w2', 178, 347, 89, 194, 75, 90),
+    photo('m-longsleeve-white-w1', 546, 1041, 273, 583, 229, 271),
+    photo('m-longsleeve-white-w2', 534, 1041, 255, 583, 224, 271),
   ],
   'raincover:#e8f525': [
-    photo('m-raincover-yellow-m1', 179, 223, 90, 116, 82, 80),
-    photo('m-raincover-yellow-m2', 165, 218, 82, 113, 76, 78),
+    photo('m-raincover-yellow-m1', 537, 669, 283, 348, 247, 241),
+    photo('m-raincover-yellow-m2', 495, 654, 261, 340, 228, 235),
   ],
   'raincover:#e8f525:w': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
   'raincover:#ff7a1a': [
-    photo('m-raincover-orange-w1', 163, 223, 82, 120, 75, 80),
-    photo('m-raincover-orange-w2', 160, 218, 80, 118, 74, 78),
+    photo('m-raincover-orange-w1', 489, 669, 246, 361, 225, 241),
+    photo('m-raincover-orange-w2', 480, 654, 243, 353, 221, 235),
   ],
   'raincover:#ff7a1a:w': [
-    photo('m-raincover-orange-w1', 163, 223, 82, 120, 75, 80),
-    photo('m-raincover-orange-w2', 160, 218, 80, 118, 74, 78),
+    photo('m-raincover-orange-w1', 489, 669, 246, 361, 225, 241),
+    photo('m-raincover-orange-w2', 480, 654, 243, 353, 221, 235),
   ],
   'tank:#1b1b1b': [
-    photo('m-tank-black-m1', 215, 340, 108, 158, 77, 92),
-    photo('m-tank-black-m2', 205, 340, 102, 158, 74, 92),
-    photo('m-tank-black-m3', 193, 290, 96, 148, 69, 75),
-    photo('m-tank-black-m4', 194, 290, 97, 148, 70, 75),
-    photo('m-tank-black-m6', 204, 292, 102, 149, 73, 76),
-    photo('m-tank-black-m7', 196, 292, 98, 149, 71, 76),
+    photo('m-tank-black-m1', 645, 1020, 347, 474, 232, 275),
+    photo('m-tank-black-m2', 615, 1020, 336, 474, 221, 275),
+    photo('m-tank-black-m3', 579, 870, 293, 444, 208, 226),
+    photo('m-tank-black-m4', 582, 870, 295, 444, 210, 226),
+    photo('m-tank-black-m6', 612, 876, 311, 447, 220, 228),
+    photo('m-tank-black-m7', 588, 876, 308, 447, 212, 228),
   ],
   'tank:#1b1b1b:w': [
-    photo('m-tank-black-w1', 182, 340, 91, 194, 66, 82),
-    photo('m-tank-black-w2', 173, 340, 86, 194, 62, 82),
-    photo('m-tank-black-w3', 170, 290, 85, 162, 61, 70),
-    photo('m-tank-black-w4', 170, 290, 85, 162, 61, 70),
-    photo('m-tank-black-w6', 174, 292, 87, 164, 63, 70),
+    photo('m-tank-black-w1', 546, 1020, 288, 581, 197, 245),
+    photo('m-tank-black-w2', 519, 1020, 278, 581, 187, 245),
+    photo('m-tank-black-w3', 510, 870, 264, 487, 184, 209),
+    photo('m-tank-black-w4', 510, 870, 264, 487, 184, 209),
+    photo('m-tank-black-w6', 522, 876, 263, 491, 188, 210),
   ],
   'tank:#f4f4f0': [
-    photo('m-tank-white-m1', 201, 340, 100, 158, 72, 92),
-    photo('m-tank-white-m2', 200, 340, 100, 158, 72, 92),
-    photo('m-tank-white-m3', 196, 290, 98, 148, 71, 75),
-    photo('m-tank-white-m6', 195, 292, 98, 149, 70, 76),
+    photo('m-tank-white-m1', 603, 1020, 292, 474, 217, 275),
+    photo('m-tank-white-m2', 600, 1020, 298, 474, 216, 275),
+    photo('m-tank-white-m3', 588, 870, 307, 444, 212, 226),
+    photo('m-tank-white-m6', 585, 876, 302, 447, 211, 228),
   ],
   'tank:#f4f4f0:w': [
-    photo('m-tank-white-w1', 182, 340, 91, 194, 66, 82),
-    photo('m-tank-white-w2', 178, 340, 89, 194, 64, 82),
-    photo('m-tank-white-w3', 168, 290, 84, 162, 60, 70),
-    photo('m-tank-white-w6', 170, 292, 85, 164, 61, 70),
-    photo('m-tank-white-w7', 176, 292, 88, 164, 63, 70),
+    photo('m-tank-white-w1', 546, 1020, 274, 581, 197, 245),
+    photo('m-tank-white-w2', 534, 1020, 235, 581, 192, 245),
+    photo('m-tank-white-w3', 504, 870, 261, 487, 181, 209),
+    photo('m-tank-white-w6', 510, 876, 255, 491, 184, 210),
+    photo('m-tank-white-w7', 528, 876, 265, 491, 190, 210),
   ],
   'tee:#1b1b1b': [
-    photo('m-tee-black-m1', 215, 333, 108, 152, 95, 97),
-    photo('m-tee-black-m2', 205, 333, 102, 152, 90, 97),
-    photo('m-tee-black-m3', 194, 264, 97, 132, 85, 74),
-    photo('m-tee-black-m4', 193, 264, 96, 132, 85, 74),
+    photo('m-tee-black-m1', 645, 999, 350, 455, 284, 290),
+    photo('m-tee-black-m2', 615, 999, 336, 455, 271, 290),
+    photo('m-tee-black-m3', 582, 792, 297, 396, 256, 222),
+    photo('m-tee-black-m4', 579, 792, 293, 396, 255, 222),
   ],
   'tee:#1b1b1b:w': [
-    photo('m-tee-black-w1', 182, 333, 91, 186, 80, 87),
-    photo('m-tee-black-w2', 173, 333, 86, 186, 76, 87),
-    photo('m-tee-black-w3', 169, 264, 84, 145, 71, 69),
-    photo('m-tee-black-w6', 175, 264, 88, 145, 74, 69),
-    photo('m-tee-black-w7', 172, 264, 86, 145, 72, 69),
-    photo('m-tee-black-w8', 177, 264, 88, 145, 74, 69),
+    photo('m-tee-black-w1', 546, 999, 289, 559, 240, 260),
+    photo('m-tee-black-w2', 519, 999, 280, 559, 228, 260),
+    photo('m-tee-black-w3', 507, 792, 258, 436, 213, 206),
+    photo('m-tee-black-w6', 525, 792, 256, 436, 220, 206),
+    photo('m-tee-black-w7', 516, 792, 263, 436, 217, 206),
+    photo('m-tee-black-w8', 531, 792, 267, 436, 223, 206),
   ],
   'tee:#f4f4f0': [
-    photo('m-tee-white-m1', 201, 333, 100, 152, 88, 97),
-    photo('m-tee-white-m2', 200, 333, 100, 152, 88, 97),
-    photo('m-tee-white-m3', 190, 264, 95, 132, 84, 74),
-    photo('m-tee-white-m6', 196, 264, 98, 132, 86, 74),
-    photo('m-tee-white-m7', 189, 264, 94, 132, 83, 74),
-    photo('m-tee-white-m8', 191, 264, 96, 132, 84, 74),
+    photo('m-tee-white-m1', 603, 999, 295, 455, 265, 290),
+    photo('m-tee-white-m2', 600, 999, 295, 455, 264, 290),
+    photo('m-tee-white-m3', 570, 792, 296, 396, 251, 222),
+    photo('m-tee-white-m6', 588, 792, 300, 396, 259, 222),
+    photo('m-tee-white-m7', 567, 792, 290, 396, 249, 222),
+    photo('m-tee-white-m8', 573, 792, 296, 396, 252, 222),
   ],
   'tee:#f4f4f0:w': [
-    photo('m-tee-white-w1', 182, 333, 91, 186, 80, 87),
-    photo('m-tee-white-w2', 178, 333, 89, 186, 78, 87),
-    photo('m-tee-white-w3', 161, 264, 80, 145, 68, 69),
-    photo('m-tee-white-w4', 168, 264, 84, 145, 71, 69),
+    photo('m-tee-white-w1', 546, 999, 262, 559, 240, 260),
+    photo('m-tee-white-w2', 534, 999, 239, 559, 235, 260),
+    photo('m-tee-white-w3', 483, 792, 249, 436, 203, 206),
+    photo('m-tee-white-w4', 504, 792, 263, 436, 212, 206),
   ],
   'vest:#e8f525': [
-    photo('m-vest-yellow-m1', 165, 223, 82, 114, 66, 67),
-    photo('m-vest-yellow-m2', 160, 218, 80, 111, 64, 65),
+    photo('m-vest-yellow-m1', 495, 669, 260, 341, 198, 201),
+    photo('m-vest-yellow-m2', 480, 654, 246, 334, 192, 196),
   ],
   'vest:#e8f525:w': [photo('vest-yellow', 661, 718, 315, 215, 205, 230)],
   'vest:#ff7a1a': [
-    photo('m-vest-orange-w1', 147, 223, 74, 120, 59, 62),
-    photo('m-vest-orange-w2', 144, 218, 72, 118, 58, 61),
+    photo('m-vest-orange-w1', 441, 669, 223, 361, 176, 187),
+    photo('m-vest-orange-w2', 432, 654, 218, 353, 173, 183),
   ],
   'vest:#ff7a1a:w': [
-    photo('m-vest-orange-w1', 147, 223, 74, 120, 59, 62),
-    photo('m-vest-orange-w2', 144, 218, 72, 118, 58, 61),
+    photo('m-vest-orange-w1', 441, 669, 223, 361, 176, 187),
+    photo('m-vest-orange-w2', 432, 654, 218, 353, 173, 183),
   ],
 }
 
@@ -491,13 +491,15 @@ export function photoColor<C extends { hex: string }>(
 // garment (and the slogan) fills the picture instead of heads and legs
 function viewBox(photo: Photo) {
   if (!photo.src.includes('/m-')) return `0 0 ${photo.w} ${photo.h}`
-  const top = Math.max(0, photo.cy - photo.height / 2 - photo.h * 0.13)
+  const top = Math.max(0, photo.cy - photo.height / 2 - photo.h * 0.1)
   // stop above the waistband so no trousers show
-  const cut = /-tank-.*-w\d/.test(photo.src)
-    ? 0.73
-    : /-(tee|tank|longsleeve)-/.test(photo.src)
-      ? 0.84
-      : 0.9
+  const cut = /-tank-.*-w[12]\./.test(photo.src)
+    ? 0.68
+    : /-tank-.*-w\d/.test(photo.src)
+      ? 0.73
+      : /-(tee|tank|longsleeve)-/.test(photo.src)
+        ? 0.84
+        : 0.9
   const bottom = photo.h * cut
   const h = bottom - top
   const w = Math.max(photo.w, h)
@@ -530,7 +532,7 @@ function PhotoArt({
   // above it, so short slogans don't creep up towards the shoulders
   const blockH = signH + lines.length * lineH
   const areaTop = photo.cy - photo.height / 2
-  const blockTop = areaTop + Math.max(0, photo.height - blockH) * 0.3
+  const blockTop = areaTop + Math.max(0, photo.height - blockH) * 0.4
   const textTop = blockTop + signH
 
   return (

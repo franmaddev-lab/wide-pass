@@ -15,7 +15,7 @@ export default function StreetWall() {
       </p>
 
       {street.length > 0 && (
-        <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 md:grid-cols-3">
           {street.map((s) => (
             <figure
               key={s.src}
