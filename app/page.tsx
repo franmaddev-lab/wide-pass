@@ -87,7 +87,7 @@ const TILES: Record<
     art: 'tee',
     text: 'Honk if you’re jealous of my calves',
     color: '#1b1b1b',
-    ink: '#e8f525',
+    ink: '#f4f4f0',
     className: 'bg-white text-ink',
   },
   signs: {
