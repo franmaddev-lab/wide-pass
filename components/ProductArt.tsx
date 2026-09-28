@@ -260,28 +260,22 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
   'tank:#1b1b1b:w': [photo('t-tank-black-w', 900, 900, 450, 341, 255, 237)],
   'tank:#f4f4f0:w': [photo('t-tank-white-w', 900, 900, 450, 341, 255, 237)],
   'tank:#e8f525:w': [photo('t-tank-yellow-w', 900, 900, 450, 341, 255, 237)],
-  'jacket:#e8f525': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
-  'jacket:#e8f525:w': [photo('jacket-yellow', 680, 721, 345, 255, 205, 260)],
-  'jacket:#ff7a1a': [photo('jacket-orange', 671, 719, 335, 255, 205, 260)],
-  'jacket:#ff7a1a:w': [photo('jacket-orange', 671, 719, 335, 255, 205, 260)],
   'longsleeve:#1b1b1b': [photo('t-longsleeve-black', 900, 900, 450, 300, 300, 230)],
   'longsleeve:#1b1b1b:w': [photo('t-longsleeve-black', 900, 900, 450, 300, 300, 230)],
   'longsleeve:#f4f4f0': [photo('t-longsleeve-white', 900, 900, 450, 300, 300, 230)],
   'longsleeve:#f4f4f0:w': [photo('t-longsleeve-white', 900, 900, 450, 300, 300, 230)],
   'longsleeve:#e8f525': [photo('t-longsleeve-yellow', 900, 900, 450, 300, 300, 230)],
   'longsleeve:#e8f525:w': [photo('t-longsleeve-yellow', 900, 900, 450, 300, 300, 230)],
+  'jacket:#e8f525': [photo('t-jacket-yellow', 900, 900, 450, 297, 300, 200)],
+  'jacket:#e8f525:w': [photo('t-jacket-yellow', 900, 900, 450, 297, 300, 200)],
+  'jacket:#ff7a1a': [photo('t-jacket-orange', 900, 900, 450, 297, 300, 200)],
+  'jacket:#ff7a1a:w': [photo('t-jacket-orange', 900, 900, 450, 297, 300, 200)],
+  'vest:#e8f525': [photo('t-vest-yellow', 900, 900, 450, 290, 360, 250)],
+  'vest:#e8f525:w': [photo('t-vest-yellow', 900, 900, 450, 290, 360, 250)],
+  'vest:#ff7a1a': [photo('t-vest-orange', 900, 900, 450, 290, 360, 250)],
+  'vest:#ff7a1a:w': [photo('t-vest-orange', 900, 900, 450, 290, 360, 250)],
   'raincover:#e8f525': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
   'raincover:#e8f525:w': [photo('raincover-yellow', 516, 632, 258, 312, 230, 210)],
-  'vest:#e8f525': [
-    photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
-    photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
-  ],
-  'vest:#e8f525:w': [
-    photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
-    photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
-  ],
-  'vest:#ff7a1a': [photo('vest-orange', 640, 723, 306, 224, 195, 230)],
-  'vest:#ff7a1a:w': [photo('vest-orange', 640, 723, 306, 224, 195, 230)],
 }
 
 // Advance widths of Archivo Black capitals, in em (measured from the font file)
@@ -385,11 +379,11 @@ function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
   return found[Math.abs(hash) % found.length]
 }
 
-// Backdrop colour of a photo, so the box around it can match (tees, tanks, long sleeves: light grey)
+// Backdrop colour of a photo, so the box around it can match (the t-… product shots: light grey)
 export const TEE_BG = 'rgb(236 236 234)'
 export function photoBg(art: Art, color: string, slogan: string, fit?: Fit) {
   const p = photoFor(art, color, slogan, fit)
-  return p && /\/t-(tee|tank|longsleeve)-/.test(p.src) ? TEE_BG : undefined
+  return p && /\/t-(tee|tank|longsleeve|jacket|vest)-/.test(p.src) ? TEE_BG : undefined
 }
 
 export function hasPhoto(art: Art, color: string, slogan: string, fit?: Fit) {
