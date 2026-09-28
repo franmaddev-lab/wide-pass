@@ -5,6 +5,7 @@ import { useRef, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
 import ProductArt, { hasPhoto, photoBg, photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
+import { addToCart } from '@/lib/cart'
 import {
   collections,
   collectionTag,
@@ -13,11 +14,14 @@ import {
   garments,
   getGarment,
   getSlogan,
+  isWomanWearer,
   shareHref,
   sloganTemplate,
   printText,
   sloganText,
+  type Garment,
   type GarmentId,
+  type Slogan,
 } from '@/lib/catalog'
 
 // The t-shirt is the default preview; swipe for every other item, hi-vis included.
@@ -139,21 +143,87 @@ export default function SloganCard({
         </>
       )}
 
-      <Link
-        href={designHref({ slogan: slogan.id, garment: garment.id })}
-        className="flex items-start justify-between gap-2 border-t-2 border-ink p-4"
-      >
-        <div>
-          <p className="font-semibold group-hover:underline">{title}</p>
-          <p className="text-sm text-muted">{garment.name}</p>
-          {likes > 0 && (
-            <p className="mt-1 text-xs font-bold">
-              ♥ {likes} {likes === 1 ? 'favourite' : 'favourites'}
-            </p>
-          )}
+      <div className="border-t-2 border-ink p-4">
+        <div className="flex items-start justify-between gap-2">
+          <Link href={designHref({ slogan: slogan.id, garment: garment.id })} className="min-w-0">
+            <p className="font-semibold group-hover:underline">{title}</p>
+            <p className="text-sm text-muted">{garment.name}</p>
+            {likes > 0 && (
+              <p className="mt-1 text-xs font-bold">
+                ♥ {likes} {likes === 1 ? 'favourite' : 'favourites'}
+              </p>
+            )}
+          </Link>
+          <div className="flex shrink-0 flex-col items-end gap-2">
+            <p className="font-bold whitespace-nowrap">{formatPrice(garment.price)}</p>
+          </div>
         </div>
-        <p className="font-bold whitespace-nowrap">{formatPrice(garment.price)}</p>
-      </Link>
+        <QuickAdd key={garment.id} garment={garment} slogan={slogan} color={shown.name} />
+      </div>
+    </div>
+  )
+}
+
+// Add straight from the list: pick a size and it goes in the cart with the colour shown
+// and the slogan's default word (change either on the design page)
+function QuickAdd({ garment, slogan, color }: { garment: Garment; slogan: Slogan; color: string }) {
+  const [open, setOpen] = useState(false)
+  const [added, setAdded] = useState('')
+  const fit =
+    garment.fits?.includes('women') && isWomanWearer(sloganText(slogan)) ? 'women' : undefined
+
+  function add(size: string) {
+    addToCart({ item: garment.id, slogan: slogan.id, color, size, fit, qty: 1 })
+    setAdded(size)
+    setOpen(false)
+  }
+
+  if (added) {
+    return (
+      <p role="status" className="mt-3 flex items-center justify-between gap-2 text-sm">
+        <span className="font-semibold">
+          Added{garment.sizes.length > 1 ? ` · size ${added}` : ''} ✓
+        </span>
+        <Link href="/cart" className="font-semibold underline">
+          Go to cart
+        </Link>
+      </p>
+    )
+  }
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={() => (garment.sizes.length > 1 ? setOpen(true) : add(garment.sizes[0]))}
+        className="mt-3 w-full rounded-full border-2 border-ink bg-volt px-4 py-2 text-sm font-bold hover:shadow-[3px_3px_0_var(--color-ink)]"
+      >
+        Quick add
+      </button>
+    )
+  }
+  return (
+    <div className="mt-3">
+      <p className="text-xs font-bold uppercase">Pick a size</p>
+      <div className="mt-1.5 flex flex-wrap gap-1.5">
+        {garment.sizes.map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => add(s)}
+            className="min-w-10 rounded-lg border-2 border-ink bg-white px-2 py-1.5 text-sm font-bold hover:bg-volt"
+          >
+            {s}
+          </button>
+        ))}
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          aria-label="Cancel"
+          className="px-2 text-sm text-muted underline"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   )
 }
