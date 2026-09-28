@@ -39,13 +39,11 @@ const BLACK_WHITE: Color[] = [
   { name: 'Black', hex: '#1b1b1b', ink: '#e8f525' },
   { name: 'White', hex: '#f4f4f0', ink: '#1b1b1b' },
 ]
-// Extra print colours on the t-shirt
-const TEE_COLORS: Color[] = [
+// Tank, t-shirt and long sleeve: black with yellow or white print, white with black print
+const APPAREL_COLORS: Color[] = [
   BLACK_WHITE[0],
   { name: 'Black, white print', hex: '#1b1b1b', ink: '#f4f4f0' },
   BLACK_WHITE[1],
-  { name: 'White, yellow print', hex: '#f4f4f0', ink: '#e8f525' },
-  HI_VIS[0],
 ]
 const APPAREL_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 const ONE_SIZE = ['One size']
@@ -79,7 +77,7 @@ const allGarments: Garment[] = [
     withArticle: 'a tank top',
     art: 'tank',
     price: 2200,
-    colors: [...BLACK_WHITE, HI_VIS[0]],
+    colors: APPAREL_COLORS,
     sizes: APPAREL_SIZES,
     fits: ['unisex', 'women'],
     description: 'Light, breathable tank top for hot rides. Big back print, nothing in the way.',
@@ -90,7 +88,7 @@ const allGarments: Garment[] = [
     withArticle: 'a t-shirt',
     art: 'tee',
     price: 2400,
-    colors: TEE_COLORS,
+    colors: APPAREL_COLORS,
     sizes: APPAREL_SIZES,
     fits: ['unisex', 'women'],
     description:
@@ -102,7 +100,7 @@ const allGarments: Garment[] = [
     withArticle: 'a long-sleeve shirt',
     art: 'longsleeve',
     price: 3200,
-    colors: [...BLACK_WHITE, HI_VIS[0]],
+    colors: APPAREL_COLORS,
     sizes: APPAREL_SIZES,
     fits: ['unisex'], // relaxed cut only
     description: 'For cool mornings and autumn commutes. Organic cotton, relaxed fit.',
