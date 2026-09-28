@@ -12,8 +12,8 @@ const SCENES = [
     size: 900,
   },
   {
-    src: '/scenes/hanger-tee.webp',
-    alt: 'A white “Slow down. It’s only a few seconds.” t-shirt on a hanger',
+    src: '/scenes/hanger-tee-black.webp',
+    alt: 'A white “Slow down. It’s only a few seconds.” t-shirt on a hanger, on black',
     text: 'Slow down. It’s only a few seconds.',
     print: { cx: 450, cy: 420, w: 320, h: 290 },
     size: 900,
