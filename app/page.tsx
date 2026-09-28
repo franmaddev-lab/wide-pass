@@ -48,7 +48,7 @@ const STEPS = [
 const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number }[] = [
   { garment: 'tee', slogan: 'i-could-be-your', custom: 'brother', color: 0 },
   { garment: 'tee', slogan: 'jealous-calves', color: 0 },
-  { garment: 'tee', slogan: 'give-space', color: 0 },
+  { garment: 'tee', slogan: 'one-mistake-could-cost-my-life', color: 0 },
   { garment: 'tee', slogan: 'a-person', custom: 'a dad', color: 0 },
 ]
 

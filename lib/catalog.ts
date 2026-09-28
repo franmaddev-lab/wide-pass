@@ -154,7 +154,7 @@ export type Slogan = {
   personalise?: Personalise
 }
 
-export const slogans: Slogan[] = [
+const allSlogans: Slogan[] = [
   // Family
   {
     id: 'i-could-be-your',
@@ -587,6 +587,10 @@ export const slogans: Slogan[] = [
   })),
 ]
 
+// Collections hidden from the shop for now. Remove 'signs' here to bring road signs back.
+const PAUSED: Collection[] = ['signs']
+export const slogans = allSlogans.filter((s) => !PAUSED.includes(s.collection))
+
 export function getSlogan(id: string | undefined) {
   return slogans.find((s) => s.id === id)
 }
@@ -806,7 +810,9 @@ export const collections: Record<Collection, { label: string; blurb: string }> =
   },
 }
 
-export const COLLECTIONS = Object.keys(collections) as Collection[]
+export const COLLECTIONS = (Object.keys(collections) as Collection[]).filter(
+  (c) => !PAUSED.includes(c)
+)
 
 export const collectionTag: Record<Collection, string> = {
   family: 'bg-white text-ink',
