@@ -3,18 +3,19 @@ import SocialLinks from './SocialLinks'
 
 // Home page "Seen on the road": real scenes with the slogan printed onto the gear.
 // Coordinates are in the 900px image: centre of the print, its width and height.
+// Riding shots sit on a diagonal (top right, bottom left) so the grid alternates
 const SCENES = [
+  {
+    src: '/scenes/pasta-tee.webp',
+    alt: 'A rider in a black “Powered by pasta. Zero emissions.” t-shirt',
+    size: 622,
+  },
   {
     src: '/scenes/road-vest.webp',
     alt: 'A driver’s view of a cyclist ahead on a country lane in a yellow “I could be your sister” vest',
     text: 'I could be your sister',
     print: { cx: 452, cy: 362, w: 84, h: 44 },
     size: 900,
-  },
-  {
-    src: '/scenes/pasta-tee.webp',
-    alt: 'A rider in a black “Powered by pasta. Zero emissions.” t-shirt',
-    size: 622,
   },
   {
     src: '/scenes/night-vest.webp',
