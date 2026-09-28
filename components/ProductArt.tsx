@@ -492,7 +492,13 @@ export function photoColor<C extends { hex: string }>(
 function viewBox(photo: Photo) {
   if (!photo.src.includes('/m-')) return `0 0 ${photo.w} ${photo.h}`
   const top = Math.max(0, photo.cy - photo.height / 2 - photo.h * 0.13)
-  const bottom = photo.h * 0.98
+  // stop above the waistband so no trousers show
+  const cut = /-tank-.*-w\d/.test(photo.src)
+    ? 0.73
+    : /-(tee|tank|longsleeve)-/.test(photo.src)
+      ? 0.84
+      : 0.9
+  const bottom = photo.h * cut
   const h = bottom - top
   const w = Math.max(photo.w, h)
   return `${Math.round(photo.cx - w / 2)} ${Math.round(top)} ${Math.round(w)} ${Math.round(h)}`
