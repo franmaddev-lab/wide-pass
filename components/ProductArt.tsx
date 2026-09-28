@@ -243,7 +243,9 @@ const photo = (
   width,
   height,
 })
-const PHOTOS: Record<string, Photo> = {
+// A key can list several models; each slogan always gets the same one, so the
+// gallery shows a mix of people. Add more photos as extra entries in an array.
+const PHOTOS: Record<string, Photo | Photo[]> = {
   'vest:#e8f525': photo('vest-yellow', 661, 718, 315, 215, 205, 230),
   'vest:#ff7a1a': photo('vest-orange', 640, 723, 306, 224, 195, 230),
   'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 205, 260),
@@ -355,7 +357,11 @@ function layout(text: string, width: number, height: number, maxSize: number) {
 function photoFor(art: Art, color: string, slogan: string, fit?: Fit) {
   if (!slogan) return undefined
   const key = `${art}:${color}`
-  return fit === 'women' || isWomanWearer(slogan) ? PHOTOS[`${key}:w`] : PHOTOS[key]
+  const found = fit === 'women' || isWomanWearer(slogan) ? PHOTOS[`${key}:w`] : PHOTOS[key]
+  if (!Array.isArray(found)) return found
+  let hash = 0
+  for (const ch of slogan) hash = (hash * 31 + ch.charCodeAt(0)) | 0
+  return found[Math.abs(hash) % found.length]
 }
 
 export function hasPhoto(art: Art, color: string, slogan: string, fit?: Fit) {

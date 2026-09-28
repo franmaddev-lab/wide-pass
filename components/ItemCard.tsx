@@ -2,7 +2,7 @@ import Link from 'next/link'
 import FavouriteButton from './FavouriteButton'
 import ProductArt from './ProductArt'
 import ShareButton from './ShareButton'
-import type { Art, SignPrint } from '@/lib/catalog'
+import type { Art, Fit, SignPrint } from '@/lib/catalog'
 
 export default function ItemCard({
   href,
@@ -18,6 +18,7 @@ export default function ItemCard({
   favourite,
   share,
   likes,
+  fit,
 }: {
   href: string
   art: Art
@@ -32,6 +33,7 @@ export default function ItemCard({
   favourite?: string // favourites key, shows the heart button
   share?: { path: string; text: string } // shows the share button
   likes?: number
+  fit?: Fit // 'women' shows the women's photo
 }) {
   return (
     <div className="group relative overflow-hidden rounded-2xl border-2 border-ink bg-white transition hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]">
@@ -43,6 +45,7 @@ export default function ItemCard({
             color={color}
             ink={ink}
             sign={sign}
+            fit={fit}
             className="mx-auto aspect-square w-full max-w-60"
           />
           {tag && (

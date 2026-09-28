@@ -17,6 +17,7 @@ import {
   slogans,
   type Art,
   type Collection,
+  type Fit,
   type GarmentId,
   type SignPrint,
 } from '@/lib/catalog'
@@ -39,22 +40,32 @@ function randomHero() {
 }
 
 const STEPS = [
-  ['Say it', 'Pick your message: funny, serious, family or road signs.'],
+  ['Say it', 'Pick your message: funny, serious or family.'],
   ['Make it yours', 'Fill in the blank: “I could be your ___”.'],
   ['Wear it', 'Tank, tee or long sleeve. Or go hi-vis: vest, rain jacket or bag cover.'],
 ]
 
 // Ready-made designs shown as a starting point; each opens the designer preset
-const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number }[] = [
-  { garment: 'tee', slogan: 'i-could-be-your', custom: 'brother', color: 0 },
-  { garment: 'tee', slogan: 'jealous-calves', color: 0 },
-  { garment: 'tee', slogan: 'one-mistake-could-cost-my-life', color: 0 },
-  { garment: 'tee', slogan: 'a-person', custom: 'a dad', color: 0 },
-]
+// Mixed men and women so everyone sees themselves in it
+const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: number; fit?: Fit }[] =
+  [
+    { garment: 'tee', slogan: 'i-could-be-your', custom: 'sister', color: 0 },
+    { garment: 'tee', slogan: 'a-person', custom: 'a dad', color: 0 },
+    { garment: 'tee', slogan: 'jealous-calves', color: 0, fit: 'women' },
+    { garment: 'tee', slogan: 'one-mistake-could-cost-my-life', color: 0 },
+  ]
 
 const TILES: Record<
   Collection,
-  { art: Art; text: string; color: string; ink?: string; sign?: SignPrint; className: string }
+  {
+    art: Art
+    text: string
+    color: string
+    ink?: string
+    sign?: SignPrint
+    fit?: Fit
+    className: string
+  }
 > = {
   family: {
     art: 'tee',
@@ -68,6 +79,7 @@ const TILES: Record<
     text: 'Pass wide. Pass slow.',
     color: '#1b1b1b',
     ink: '#e8f525',
+    fit: 'women',
     className: 'bg-white text-ink',
   },
   funny: {
@@ -160,6 +172,7 @@ export default async function Home() {
                 title={`“${sloganText(slogan, p.custom)}”`}
                 subtitle={garment.name}
                 price={formatPrice(garment.price)}
+                fit={p.fit}
                 favourite={`slogan:${p.slogan}`}
                 share={{
                   path: shareHref({ slogan: p.slogan, custom: p.custom, garment: p.garment }),
@@ -201,6 +214,7 @@ export default async function Home() {
                   color={t.color}
                   ink={t.ink ?? '#111111'}
                   sign={t.sign}
+                  fit={t.fit}
                   className="size-20 shrink-0 sm:size-28"
                 />
               </Link>
@@ -223,6 +237,7 @@ export default async function Home() {
               slogan="I could be your ___"
               color="#1b1b1b"
               ink="#e8f525"
+              fit="women"
               className="size-20 shrink-0 sm:size-28"
             />
           </Link>
