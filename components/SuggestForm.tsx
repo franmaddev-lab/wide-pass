@@ -3,11 +3,7 @@
 import { useActionState, useRef } from 'react'
 import { submitSuggestion, type SuggestState } from '@/app/actions/community'
 
-export default function SuggestForm({
-  categories,
-}: {
-  categories: { value: string; label: string }[]
-}) {
+export default function SuggestForm() {
   const formRef = useRef<HTMLFormElement>(null)
   const [state, action, pending] = useActionState(
     async (prev: SuggestState, form: FormData) => {
@@ -28,36 +24,17 @@ export default function SuggestForm({
         <label htmlFor="text" className="font-bold">
           Your slogan
         </label>
-        <input
+        <textarea
           id="text"
           name="text"
           required
+          rows={3}
           minLength={4}
           maxLength={60}
           placeholder="e.g. My mum knows your number plate"
-          className="mt-1 block w-full rounded-lg border-2 border-ink bg-white px-3 py-2 text-lg"
+          className="mt-1 block w-full resize-none rounded-lg border-2 border-ink bg-white px-3 py-2 text-lg"
         />
       </div>
-      <fieldset>
-        <legend className="font-bold">Category</legend>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {categories.map((c, i) => (
-            <label
-              key={c.value}
-              className="cursor-pointer rounded-full border-2 border-ink bg-white px-4 py-1.5 text-sm font-semibold has-[:checked]:bg-ink has-[:checked]:text-volt has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ink has-[:focus-visible]:ring-offset-2"
-            >
-              <input
-                type="radio"
-                name="collection"
-                value={c.value}
-                defaultChecked={i === 0}
-                className="sr-only"
-              />
-              {c.label}
-            </label>
-          ))}
-        </div>
-      </fieldset>
       <div>
         <button
           type="submit"

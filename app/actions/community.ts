@@ -61,16 +61,15 @@ export async function submitSuggestion(_prev: SuggestState, form: FormData): Pro
   const text = String(form.get('text') ?? '')
     .replace(/\s+/g, ' ')
     .trim()
-  const collection = String(form.get('collection') ?? '')
+  // Categories aren't asked for any more; older ideas keep theirs
+  const picked = String(form.get('collection') ?? '')
+  const collection = suggestionCategories.some((c) => c.value === picked) ? picked : 'general'
 
   if (text.length < 4 || text.length > 60) {
     return { status: 'error', message: 'Keep it between 4 and 60 characters.' }
   }
   if (!ALLOWED.test(text)) {
     return { status: 'error', message: 'Letters, numbers and normal punctuation only, please.' }
-  }
-  if (!suggestionCategories.some((c) => c.value === collection)) {
-    return { status: 'error', message: 'Pick a category.' }
   }
   const n = normalise(text)
   if (BLOCKED.some((w) => n.replace(/ /g, '').includes(w))) {

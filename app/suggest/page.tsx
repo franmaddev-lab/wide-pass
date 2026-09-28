@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { deleteSuggestion } from '@/app/actions/community'
 import SuggestForm from '@/components/SuggestForm'
 import VoteButton from '@/components/VoteButton'
-import { suggestionCategories, suggestionCategoryLabel } from '@/lib/catalog'
+import WornGallery from '@/components/WornGallery'
 import { listSuggestions, persistent, votedBy } from '@/lib/store'
 import { currentVoter } from '@/lib/voter'
 
@@ -50,7 +50,7 @@ export default async function SuggestPage({
         favourites. The best ideas get printed.
       </p>
 
-      <SuggestForm categories={suggestionCategories} />
+      <SuggestForm />
 
       {!persistent && (
         <p className="mt-6 rounded-xl border-2 border-dashed border-ink p-3 text-sm">
@@ -58,6 +58,8 @@ export default async function SuggestPage({
           Connect a database (see README) to keep them.
         </p>
       )}
+
+      <WornGallery />
 
       <div className="mt-10 flex flex-wrap items-end justify-between gap-3">
         <h2 className="font-display text-2xl uppercase">
@@ -98,9 +100,6 @@ export default async function SuggestPage({
                 )}
                 <div className="min-w-0 flex-1">
                   <p className="text-lg font-semibold break-words">“{s.text}”</p>
-                  <span className="mt-1 inline-block rounded-full border border-ink bg-white px-2 py-0.5 text-xs font-bold uppercase">
-                    {suggestionCategoryLabel(s.collection)}
-                  </span>
                 </div>
                 <VoteButton id={s.id} votes={s.votes} voted={voted.has(s.id)} />
                 {adminKey && (
