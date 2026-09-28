@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import FavouriteButton from './FavouriteButton'
-import ProductArt from './ProductArt'
+import ProductArt, { photoColor } from './ProductArt'
 import ShareButton from './ShareButton'
 import {
   collections,
@@ -63,23 +63,26 @@ export default function SloganCard({
         }}
         className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto bg-paper"
       >
-        {slides.map((g) => (
-          <Link
-            key={g.id}
-            href={designHref({ slogan: slogan.id, garment: g.id })}
-            aria-label={`${title} on ${g.withArticle}`}
-            className="block w-full shrink-0 snap-center p-6"
-          >
-            <ProductArt
-              art={g.art}
-              slogan={sloganText(slogan)}
-              color={g.colors[0].hex}
-              ink={g.colors[0].ink}
-              sign={slogan.sign}
-              className="mx-auto aspect-square w-full max-w-60"
-            />
-          </Link>
-        ))}
+        {slides.map((g) => {
+          const c = photoColor(g.art, g.colors, sloganText(slogan))
+          return (
+            <Link
+              key={g.id}
+              href={designHref({ slogan: slogan.id, garment: g.id })}
+              aria-label={`${title} on ${g.withArticle}`}
+              className="block w-full shrink-0 snap-center p-6"
+            >
+              <ProductArt
+                art={g.art}
+                slogan={sloganText(slogan)}
+                color={c.hex}
+                ink={c.ink}
+                sign={slogan.sign}
+                className="mx-auto aspect-square w-full max-w-60"
+              />
+            </Link>
+          )
+        })}
       </div>
 
       <span

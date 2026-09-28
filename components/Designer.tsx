@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import FavouriteButton from './FavouriteButton'
-import ProductArt from './ProductArt'
+import ProductArt, { photoColor } from './ProductArt'
 import RealPhotos from './RealPhotos'
 import ShareButton from './ShareButton'
 import SizeChart from './SizeChart'
@@ -46,7 +46,13 @@ export default function Designer({
   const slogan = getSlogan(sloganId)!
   const [garmentId, setGarmentId] = useState<GarmentId>(initialGarment)
   const [custom, setCustom] = useState(initialText ?? '')
-  const [colorName, setColorName] = useState(getGarment(initialGarment)!.colors[0].name)
+  // Start on a colour that has a photo for this slogan (a woman's slogan picks a
+  // colour we have a woman's photo for)
+  const [colorName, setColorName] = useState(() => {
+    const g = getGarment(initialGarment)!
+    const s = getSlogan(sloganId)!
+    return photoColor(g.art, g.colors, sloganText(s, cleanCustom(s, initialText) ?? undefined)).name
+  })
   const [size, setSize] = useState('')
   const [status, setStatus] = useState<'idle' | 'added' | 'no-size'>('idle')
   const [showMore, setShowMore] = useState(false)
@@ -82,14 +88,17 @@ export default function Designer({
       {/* Pinned under the header so the preview stays in view while choosing */}
       <div className="sticky top-[58px] z-10 -mx-4 self-start bg-paper px-4 pt-2 pb-2 md:top-20 md:mx-0 md:p-0">
         <div className="relative rounded-2xl border-2 border-ink bg-white p-2 md:p-8">
-          <ProductArt
-            art={garment.art}
-            slogan={text}
-            color={color.hex}
-            ink={color.ink}
-            sign={slogan.sign}
-            className="mx-auto aspect-square h-[20vh] max-w-md md:h-auto md:w-full"
-          />
+          {/* keyed so switching item or colour fades the new one in instead of jumping */}
+          <div key={`${garment.id}/${color.name}`} className="animate-swap">
+            <ProductArt
+              art={garment.art}
+              slogan={text}
+              color={color.hex}
+              ink={color.ink}
+              sign={slogan.sign}
+              className="mx-auto aspect-square h-[20vh] max-w-md md:h-auto md:w-full"
+            />
+          </div>
           <div className="absolute top-2 right-2 flex gap-2 md:top-3 md:right-3">
             <FavouriteButton item={`slogan:${slogan.id}`} label={`“${sloganTemplate(slogan)}”`} />
             <ShareButton
@@ -105,9 +114,10 @@ export default function Designer({
       </div>
 
       <div className="min-w-0 space-y-4 md:space-y-7">
-        <div className="flex items-baseline justify-between gap-3 md:block">
+        {/* on phones the price lives in the Add to cart bar, so the title gets the full width */}
+        <div>
           <h1 className="font-display text-lg leading-tight uppercase sm:text-4xl">“{text}”</h1>
-          <p className="shrink-0 text-lg font-bold md:mt-2 md:text-2xl">
+          <p className="hidden font-bold md:mt-2 md:block md:text-2xl">
             {formatPrice(garment.price)}
           </p>
         </div>
@@ -178,7 +188,8 @@ export default function Designer({
                 onClick={() =>
                   change(() => {
                     setGarmentId(g.id)
-                    if (!g.colors.some((c) => c.name === colorName)) setColorName(g.colors[0].name)
+                    if (!g.colors.some((c) => c.name === colorName))
+                      setColorName(photoColor(g.art, g.colors, text).name)
                   })
                 }
                 className={`flex flex-col items-center gap-0.5 rounded-xl border-2 border-ink px-1 py-1 text-center md:gap-1 md:py-2 ${

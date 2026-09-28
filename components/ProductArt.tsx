@@ -25,7 +25,7 @@ export const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w
     text: { x: 100, y: 105, w: 12 },
   },
   vest: {
-    path: 'M66 18 L56 22 Q58 60 44 76 L44 182 L156 182 L156 76 Q142 60 144 22 L134 18 Q118 64 100 64 Q82 64 66 18 Z',
+    path: 'M66 14 Q56 14 55 24 Q55 56 42 72 Q36 80 37 94 L39 172 Q39 186 53 186 L147 186 Q161 186 161 172 L163 94 Q164 80 158 72 Q145 56 145 24 Q144 14 134 14 Q124 14 121 28 Q114 58 100 58 Q86 58 79 28 Q76 14 66 14 Z',
     text: { x: 100, y: 118, w: 12 },
   },
   tank: {
@@ -249,15 +249,83 @@ const PHOTOS: Record<string, Photo> = {
   'jacket:#e8f525': photo('jacket-yellow', 680, 721, 345, 255, 220, 260),
   'jacket:#ff7a1a': photo('jacket-orange', 671, 719, 335, 255, 220, 260),
   'raincover:#e8f525': photo('raincover-yellow', 516, 632, 258, 312, 250, 210),
-  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 250, 270),
-  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 250, 270),
-  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 240, 260),
-  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 250, 260),
-  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 255, 260),
-  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 270, 230),
-  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 260, 230),
-  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 350, 230),
-  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 350, 230),
+  'tee:#1b1b1b': photo('tee-black', 665, 726, 340, 265, 310, 330),
+  'tee:#f4f4f0': photo('tee-white', 701, 708, 350, 265, 310, 330),
+  'tee:#f4f4f0:w': photo('tee-white-w', 705, 707, 355, 255, 290, 320),
+  'longsleeve:#1b1b1b': photo('longsleeve-black', 668, 718, 335, 265, 270, 330),
+  'longsleeve:#f4f4f0': photo('longsleeve-white', 671, 728, 340, 270, 270, 330),
+  'tank:#1b1b1b': photo('tank-black', 640, 725, 320, 290, 250, 330),
+  'tank:#f4f4f0': photo('tank-white', 662, 717, 335, 285, 250, 330),
+  'tank:#1b1b1b:w': photo('tank-black-w', 664, 716, 332, 380, 240, 300),
+  'tank:#f4f4f0:w': photo('tank-white-w', 695, 707, 350, 380, 240, 300),
+}
+
+// Splits the words into `n` lines as evenly as possible (smallest longest line)
+function balance(words: string[], n: number) {
+  const len = (a: number, b: number) =>
+    words.slice(a, b).reduce((s, w) => s + w.length, 0) + (b - a - 1)
+  // shortest longest line first, then the most even lines (no lonely "IS")
+  type Split = { worst: number; spread: number; cuts: number[] }
+  const memo = new Map<string, Split>()
+  const best = (start: number, lines: number): Split => {
+    if (lines === 1) {
+      const l = len(start, words.length)
+      return { worst: l, spread: l * l, cuts: [] }
+    }
+    const key = `${start}/${lines}`
+    const hit = memo.get(key)
+    if (hit) return hit
+    let out: Split = { worst: Infinity, spread: Infinity, cuts: [] }
+    for (let end = start + 1; end <= words.length - lines + 1; end++) {
+      const rest = best(end, lines - 1)
+      const l = len(start, end)
+      const worst = Math.max(l, rest.worst)
+      const spread = l * l + rest.spread
+      if (worst < out.worst || (worst === out.worst && spread < out.spread))
+        out = { worst, spread, cuts: [end, ...rest.cuts] }
+    }
+    memo.set(key, out)
+    return out
+  }
+  const { cuts } = best(0, n)
+  const bounds = [0, ...cuts, words.length]
+  return bounds.slice(0, -1).map((b, i) => words.slice(b, bounds[i + 1]).join(' '))
+}
+
+// Picks the number of lines that lets the slogan print biggest in the area,
+// so it spreads across the back and reads from a distance
+function layout(text: string, width: number, height: number, maxSize: number) {
+  const words = text.toUpperCase().split(' ')
+  let pick = { lines: [text.toUpperCase()], size: 0 }
+  for (let n = 1; n <= Math.min(words.length, 6); n++) {
+    const lines = balance(words, n)
+    const longest = Math.max(...lines.map((l) => l.length))
+    // ~0.66em per capital in Archivo Black, 1.1 line height
+    let size = Math.min(maxSize, width / (longest * 0.66), height / (n * 1.1))
+    // a word like "IS" alone on a line looks broken: prefer another layout
+    if (n > 1 && lines.some((l) => l.length <= 2)) size *= 0.6
+    if (size > pick.size + 0.5) pick = { lines, size }
+  }
+  return pick
+}
+
+// The photo for this item and colour. When the slogan says the wearer is a woman
+// ("I could be your sister") only a woman's photo will do; otherwise we fall back
+// to the drawing rather than show a man.
+function photoFor(art: Art, color: string, slogan: string) {
+  if (!slogan) return undefined
+  const key = `${art}:${color}`
+  return isWomanWearer(slogan) ? PHOTOS[`${key}:w`] : PHOTOS[key]
+}
+
+export function hasPhoto(art: Art, color: string, slogan: string) {
+  return Boolean(photoFor(art, color, slogan))
+}
+
+// First colour of an item that has a photo for this slogan (e.g. white for a
+// woman's slogan on a tee, until there's a black women's tee photo)
+export function photoColor<C extends { hex: string }>(art: Art, colors: C[], slogan: string) {
+  return colors.find((c) => hasPhoto(art, c.hex, slogan)) ?? colors[0]
 }
 
 function PhotoArt({
@@ -273,17 +341,10 @@ function PhotoArt({
   sign?: SignKind
   className?: string
 }) {
-  const lines = wrap(slogan, sign ? 14 : 11)
-  const longest = Math.max(...lines.map((l) => l.length))
-  // ~0.66em per capital in Archivo Black: big like a real back print, but inside the print area
   const signR = 52
   const signH = sign ? signR * 2 + 16 : 0
-  const size = Math.min(
-    sign ? 40 : 58,
-    photo.width / (longest * 0.66),
-    (photo.height - signH) / (lines.length * 1.08)
-  )
-  const lineH = size * 1.08
+  const { lines, size } = layout(slogan, photo.width, photo.height - signH, sign ? 44 : 80)
+  const lineH = size * 1.1
   const blockTop = photo.cy - (signH + lines.length * lineH) / 2
   const textTop = blockTop + signH
 
@@ -319,12 +380,7 @@ export default function ProductArt({
   className?: string
   drawing?: boolean // force the flat drawing even when a photo exists
 }) {
-  const key = `${art}:${color}`
-  // A woman's body when the slogan says the wearer is a woman ("I could be your sister")
-  const pic =
-    !drawing && slogan && sign !== 'set'
-      ? (isWomanWearer(slogan) && PHOTOS[`${key}:w`]) || PHOTOS[key]
-      : undefined
+  const pic = !drawing && sign !== 'set' ? photoFor(art, color, slogan) : undefined
   if (pic) {
     return (
       <PhotoArt
@@ -351,7 +407,14 @@ export default function ProductArt({
 
   return (
     <svg viewBox="0 0 200 200" role="img" aria-label={`${slogan}`} className={className}>
-      <path d={shape.path} fill={color} stroke={INK} strokeWidth="2" fillRule="evenodd" />
+      <path
+        d={shape.path}
+        fill={color}
+        stroke={INK}
+        strokeWidth={art === 'vest' ? 4 : 2}
+        strokeLinejoin="round"
+        fillRule="evenodd"
+      />
       {art === 'raincover' && (
         <g>
           <path
@@ -374,9 +437,36 @@ export default function ProductArt({
         </g>
       )}
       {art === 'vest' && (
-        <g stroke="#cfd3d8" strokeWidth="5" opacity="0.9">
-          <line x1="46" y1="158" x2="154" y2="158" />
-          <line x1="46" y1="170" x2="154" y2="170" />
+        <g>
+          {/* chunky cartoon reflective bands and a shine on the fabric */}
+          <rect
+            x="41"
+            y="150"
+            width="118"
+            height="9"
+            rx="4.5"
+            fill="#dfe3e8"
+            stroke={INK}
+            strokeWidth="2.5"
+          />
+          <rect
+            x="41"
+            y="165"
+            width="118"
+            height="9"
+            rx="4.5"
+            fill="#dfe3e8"
+            stroke={INK}
+            strokeWidth="2.5"
+          />
+          <path
+            d="M50 84 Q46 110 48 138"
+            stroke="#ffffff"
+            strokeWidth="5"
+            strokeLinecap="round"
+            fill="none"
+            opacity="0.45"
+          />
         </g>
       )}
       {sign === 'set' ? (
