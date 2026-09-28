@@ -29,7 +29,6 @@ const HERO_IDS = [
   'somebodys',
   'home-for-dinner',
   'kids-ride-here',
-  'powered-by',
   'a-person',
 ]
 const HERO = slogans.filter((s) => s.personalise && HERO_IDS.includes(s.id))
@@ -50,7 +49,7 @@ const POPULAR: { garment: GarmentId; slogan: string; custom?: string; color: num
   { garment: 'tee', slogan: 'i-could-be-your', custom: 'brother', color: 0 },
   { garment: 'tee', slogan: 'jealous-calves', color: 0 },
   { garment: 'tee', slogan: 'give-space', color: 0 },
-  { garment: 'tee', slogan: 'powered-by', custom: 'pasta', color: 0 },
+  { garment: 'tee', slogan: 'a-person', custom: 'a dad', color: 0 },
 ]
 
 const TILES: Record<
@@ -73,7 +72,7 @@ const TILES: Record<
   },
   funny: {
     art: 'tee',
-    text: 'Powered by pasta',
+    text: 'Honk if you’re jealous of my calves',
     color: '#1b1b1b',
     ink: '#e8f525',
     className: 'bg-white text-ink',
