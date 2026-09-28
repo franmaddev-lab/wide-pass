@@ -246,9 +246,10 @@ const photo = (
 // A key can list several models; each slogan always gets the same one, so the
 // gallery shows a mix of people. Add more photos as extra entries in an array.
 const PHOTOS: Record<string, Photo | Photo[]> = {
+  // no fitted vest: women's slogans use the same straight-cut vests
   'vest:#e8f525:w': [
-    photo('p-vest-yellow-b', 464, 674, 224, 210, 240, 205),
-    photo('p-vest-yellow-d', 446, 674, 214, 210, 226, 205),
+    photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
+    photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
   ],
   'jacket:#e8f525': [
     photo('m-jacket-yellow-m1', 543, 669, 289, 321, 250, 201),
@@ -318,9 +319,7 @@ const PHOTOS: Record<string, Photo | Photo[]> = {
   'tee:#f4f4f0:w': [photo('p-tee-white-w', 582, 658, 314, 237, 254, 214)],
   'vest:#e8f525': [
     photo('p-vest-yellow-a', 506, 674, 244, 213, 266, 203),
-    photo('p-vest-yellow-b', 464, 674, 224, 210, 240, 205),
     photo('p-vest-yellow-c', 514, 674, 244, 210, 268, 203),
-    photo('p-vest-yellow-d', 446, 674, 214, 210, 226, 205),
   ],
   'vest:#ff7a1a': [
     photo('m-vest-orange-w1', 441, 669, 223, 361, 176, 187),
