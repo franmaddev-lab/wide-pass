@@ -22,8 +22,8 @@ export const street: StreetPost[] = [
   },
   {
     type: 'photo',
-    src: '/street/somebodys-dad-black-tee.webp',
-    alt: 'A man cycling past a red London bus in a black t-shirt reading “I am somebody’s dad” in yellow',
+    src: '/street/somebodys-dad-black-tee.webp?v=2',
+    alt: 'A man with a backpack cycling in a London bike lane, black t-shirt reading “I am somebody’s dad” in yellow',
     credit: 'Saturday ride, London',
     example: true,
   },
