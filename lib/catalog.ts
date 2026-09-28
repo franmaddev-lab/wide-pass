@@ -877,14 +877,6 @@ export function printText(slogan: Slogan, custom?: string) {
   return markCustom(before, custom || slogan.personalise.default, after)
 }
 
-// Colours in order of preference for a slogan: funny slogans start on white print,
-// the rest on the yellow print
-export function colorsFor(garment: Garment, slogan: Slogan) {
-  const white = garment.colors.find((c) => c.name === 'Black, white print')
-  if (slogan.collection !== 'funny' || !white) return garment.colors
-  return [white, ...garment.colors.filter((c) => c !== white)]
-}
-
 export function sloganText(slogan: Slogan, custom?: string) {
   return slogan.personalise
     ? slogan.text.replace('{}', custom || slogan.personalise.default)

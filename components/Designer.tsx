@@ -9,7 +9,6 @@ import SizeChart from './SizeChart'
 import { addToCart } from '@/lib/cart'
 import {
   cleanCustom,
-  colorsFor,
   fitLabel,
   isWomanWearer,
   formatPrice,
@@ -55,11 +54,7 @@ export default function Designer({
   const [colorName, setColorName] = useState(() => {
     const g = getGarment(initialGarment)!
     const s = getSlogan(sloganId)!
-    return photoColor(
-      g.art,
-      colorsFor(g, s),
-      sloganText(s, cleanCustom(s, initialText) ?? undefined)
-    ).name
+    return photoColor(g.art, g.colors, sloganText(s, cleanCustom(s, initialText) ?? undefined)).name
   })
   const [size, setSize] = useState('')
   const [status, setStatus] = useState<'idle' | 'added' | 'no-size'>('idle')
@@ -209,7 +204,7 @@ export default function Designer({
                   change(() => {
                     setGarmentId(g.id)
                     if (!g.colors.some((c) => c.name === colorName))
-                      setColorName(photoColor(g.art, colorsFor(g, slogan), text).name)
+                      setColorName(photoColor(g.art, g.colors, text).name)
                   })
                 }
                 className={`flex flex-col items-center gap-0.5 rounded-xl border-2 border-ink px-1 py-1 text-center md:gap-1 md:py-2 ${

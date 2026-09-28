@@ -8,7 +8,6 @@ import ShareButton from './ShareButton'
 import {
   collections,
   collectionTag,
-  colorsFor,
   designHref,
   formatPrice,
   garments,
@@ -44,7 +43,7 @@ export default function SloganCard({
   const [index, setIndex] = useState(0)
   const track = useRef<HTMLDivElement>(null)
   const garment = slides[index]
-  const shown = photoColor(garment.art, colorsFor(garment, slogan), sloganText(slogan))
+  const shown = photoColor(garment.art, garment.colors, sloganText(slogan))
   const boxBg = photoBg(garment.art, shown.hex, sloganText(slogan))
   const title = `“${sloganTemplate(slogan)}”`
 
@@ -67,7 +66,7 @@ export default function SloganCard({
         style={{ background: boxBg }}
       >
         {slides.map((g) => {
-          const c = photoColor(g.art, colorsFor(g, slogan), sloganText(slogan))
+          const c = photoColor(g.art, g.colors, sloganText(slogan))
           return (
             <Link
               key={g.id}
