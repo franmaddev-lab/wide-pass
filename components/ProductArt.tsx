@@ -65,7 +65,7 @@ export const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w
 const SIGN_RED = '#c8102e'
 const SIGN_BLUE = '#1d4f91'
 const INK = '#1b1b1b'
-const FONT = 'var(--font-archivo), system-ui, sans-serif'
+export const FONT = 'var(--font-archivo), system-ui, sans-serif'
 
 type SignKind = Exclude<SignPrint, 'set'>
 
@@ -456,7 +456,7 @@ function balance(words: string[], n: number) {
 
 // Picks the number of lines that lets the slogan print biggest in the area,
 // so it spreads across the back and reads from a distance
-function layout(text: string, width: number, height: number, maxSize: number) {
+export function layout(text: string, width: number, height: number, maxSize: number) {
   const words = text.toUpperCase().split(' ')
   let pick = { lines: [text.toUpperCase()], size: 0 }
   for (let n = 1; n <= Math.min(words.length, 6); n++) {

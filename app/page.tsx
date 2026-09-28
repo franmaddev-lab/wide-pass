@@ -3,7 +3,7 @@ import { connection } from 'next/server'
 import ItemCard from '@/components/ItemCard'
 import ProductArt from '@/components/ProductArt'
 import HeroSlogan from '@/components/HeroSlogan'
-import RealPhotos from '@/components/RealPhotos'
+import RoadScenes from '@/components/RoadScenes'
 import {
   COLLECTIONS,
   collections,
@@ -184,7 +184,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <RealPhotos className="mx-auto max-w-6xl px-4 pt-14" />
+      <RoadScenes className="mx-auto max-w-6xl px-4 pt-14" />
 
       <section className="mx-auto max-w-6xl px-4 pt-14">
         <h2 className="font-display text-2xl whitespace-nowrap uppercase sm:text-3xl">
