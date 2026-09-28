@@ -25,7 +25,7 @@ export const SHAPES: Record<Art, { path: string; text: { x: number; y: number; w
     text: { x: 100, y: 105, w: 12 },
   },
   vest: {
-    path: 'M65 16 L57 18 Q56 56 43 74 Q40 79 40 86 L40 178 Q40 184 46 184 L154 184 Q160 184 160 178 L160 86 Q160 79 157 74 Q144 56 143 18 L135 16 Q120 60 100 60 Q80 60 65 16 Z',
+    path: 'M66 18 L56 22 Q58 60 44 76 L44 182 L156 182 L156 76 Q142 60 144 22 L134 18 Q118 64 100 64 Q82 64 66 18 Z',
     text: { x: 100, y: 118, w: 12 },
   },
   tank: {
@@ -454,7 +454,7 @@ export default function ProductArt({
         d={shape.path}
         fill={color}
         stroke={INK}
-        strokeWidth={art === 'vest' ? 2.5 : 2}
+        strokeWidth="2"
         strokeLinejoin="round"
         fillRule="evenodd"
       />
@@ -481,9 +481,8 @@ export default function ProductArt({
       )}
       {art === 'vest' && (
         <g>
-          {/* reflective bands */}
-          <rect x="41.5" y="152" width="117" height="8" rx="2" fill="#dfe3e8" />
-          <rect x="41.5" y="166" width="117" height="8" rx="2" fill="#dfe3e8" />
+          <line x1="46" y1="158" x2="154" y2="158" stroke="#cfd3d8" strokeWidth="5" opacity="0.9" />
+          <line x1="46" y1="170" x2="154" y2="170" stroke="#cfd3d8" strokeWidth="5" opacity="0.9" />
         </g>
       )}
       {sign === 'set' ? (
