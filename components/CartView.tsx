@@ -3,14 +3,7 @@
 import Link from 'next/link'
 import ProductArt from './ProductArt'
 import { setQty, useCart } from '@/lib/cart'
-import {
-  FREE_SHIPPING_FROM,
-  formatPounds,
-  formatPrice,
-  nextBundle,
-  resolveLine,
-  totals,
-} from '@/lib/catalog'
+import { FREE_SHIPPING_FROM, formatPrice, nextBundle, resolveLine, totals } from '@/lib/catalog'
 import { charityAmount, charityName } from '@/lib/site'
 
 export default function CartView() {
@@ -120,8 +113,8 @@ export default function CartView() {
         </p>
         {next && (
           <p className="mt-3 rounded-lg bg-volt px-3 py-2 text-sm font-semibold">
-            Add {next.more} more item{next.more > 1 ? 's' : ''} and save {formatPounds(next.off)}
-            {discount ? ' in total' : ''}.
+            Add {next.more} more item{next.more > 1 ? 's' : ''} and save {next.pct}% on your whole
+            order.
           </p>
         )}
         {shipping > 0 && (

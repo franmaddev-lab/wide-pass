@@ -1074,16 +1074,16 @@ export function shippingFor(subtotal: number) {
   return subtotal === 0 || subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING
 }
 
-// Bundle deal: any 2 items save £3, 3 or more save £8
+// Bundle deal: 3 or more items save 5%, 5 or more save 10%
 export const BUNDLE = [
-  { items: 3, off: 800 },
-  { items: 2, off: 300 },
+  { items: 5, pct: 10 },
+  { items: 3, pct: 5 },
 ]
-export const BUNDLE_TEXT = 'Buy 2, save £3 · Buy 3+, save £8'
+export const BUNDLE_TEXT = 'Buy 3, save 5% · Buy 5+, save 10%'
 
 export function bundleDiscount(items: number, subtotal: number) {
-  const off = BUNDLE.find((b) => items >= b.items)?.off ?? 0
-  return Math.min(off, subtotal)
+  const pct = BUNDLE.find((b) => items >= b.items)?.pct ?? 0
+  return Math.round((subtotal * pct) / 100)
 }
 
 // Money for a cart: free delivery is worked out after the bundle saving
@@ -1095,10 +1095,10 @@ export function totals(lines: { unit: number; qty: number }[]) {
   return { subtotal, items, discount, shipping, total: subtotal - discount + shipping }
 }
 
-// What one more item would save, for the cart nudge ("Add 1 more item and save £8")
+// The next tier up, for the cart nudge ("Add 1 more item and save 5%")
 export function nextBundle(items: number) {
   const next = [...BUNDLE].reverse().find((b) => b.items > items)
-  return next ? { more: next.items - items, off: next.off } : null
+  return next ? { more: next.items - items, pct: next.pct } : null
 }
 
 export const collections: Record<Collection, { label: string; blurb: string }> = {
